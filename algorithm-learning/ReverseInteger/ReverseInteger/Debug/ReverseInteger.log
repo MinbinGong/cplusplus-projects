@@ -1,0 +1,3 @@
+﻿  Source.cpp
+d:\workspace\visualstudioprojects\reverseinteger\reverseinteger\source.cpp(17): error C2397: conversion from '__int64' to 'int' requires a narrowing conversion
+d:\workspace\visualstudioprojects\reverseinteger\reverseinteger\source.cpp(17): warning C4309: 'initializing': truncation of constant value

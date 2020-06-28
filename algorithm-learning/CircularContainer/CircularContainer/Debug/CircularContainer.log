@@ -1,0 +1,22 @@
+﻿  Source.cpp
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(8): error C2061: syntax error: identifier 'CircularContainerIterator'
+  d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(64): note: see reference to class template instantiation 'CircularContainer<T>' being compiled
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(8): error C2238: unexpected token(s) preceding ';'
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(24): error C2059: syntax error: '<'
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(24): error C2238: unexpected token(s) preceding ';'
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(55): error C3646: 'begin': unknown override specifier
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(55): error C2059: syntax error: '('
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(56): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(60): error C3646: 'end': unknown override specifier
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(60): error C2059: syntax error: '('
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(61): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(126): error C2989: 'CircularContainerIterator': class template has already been declared as a non-class template
+  d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(24): note: see declaration of 'CircularContainerIterator'
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(66): error C3857: 'CircularContainerIterator': multiple template parameter lists are not allowed
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(8): error C2143: syntax error: missing ';' before '<'
+  d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\source.cpp(7): note: see reference to class template instantiation 'CircularContainer<int>' being compiled
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(8): error C2059: syntax error: '<'
+d:\workspace\visualstudioprojects\circularcontainer\circularcontainer\circularcontainer.h(56): fatal error C1903: unable to recover from previous error(s); stopping compilation
+  INTERNAL COMPILER ERROR in 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe'
+      Please choose the Technical Support command on the Visual C++
+      Help menu, or open the Technical Support help file for more information

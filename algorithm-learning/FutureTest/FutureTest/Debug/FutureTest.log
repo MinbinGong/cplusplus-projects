@@ -1,0 +1,24 @@
+﻿  Source.cpp
+d:\workspace\visualstudioprojects\futuretest\futuretest\source.cpp(23): error C2664: 'void std::vector<std::shared_future<_Ty>,std::allocator<std::shared_future<_Ty>>>::push_back(const std::shared_future<_Ty> &)': cannot convert argument 1 from 'std::future<_Ret>' to 'std::shared_future<_Ty> &&'
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ret=int
+          ]
+          and
+          [
+              _Ty=int
+          ]
+  d:\workspace\visualstudioprojects\futuretest\futuretest\source.cpp(23): note: Reason: cannot convert from 'std::future<_Ret>' to 'std::shared_future<_Ty>'
+          with
+          [
+              _Ret=int
+          ]
+          and
+          [
+              _Ty=int
+          ]
+  d:\workspace\visualstudioprojects\futuretest\futuretest\source.cpp(23): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called

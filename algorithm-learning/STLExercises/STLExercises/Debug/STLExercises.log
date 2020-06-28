@@ -1,0 +1,75 @@
+﻿  main.cpp
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\type_traits(1376): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\type_traits(1444): note: see reference to function template instantiation 'T1 std::_Invoker_functor::_Call<_Cv_FD&,int&,int&>(_Callable,int &,int &)' being compiled
+          with
+          [
+              T1=float,
+              _Cv_FD=fopow<float,int>,
+              _Callable=fopow<float,int> &
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\type_traits(1475): note: see reference to function template instantiation 'T1 std::invoke<_Cv_FD&,int&,int&>(_Callable,int &,int &)' being compiled
+          with
+          [
+              T1=float,
+              _Cv_FD=fopow<float,int>,
+              _Callable=fopow<float,int> &
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\functional(826): note: see reference to function template instantiation 'T1 std::_Invoke_ret<_Cv_FD&,_Cv_TiD&,int&>(std::_Forced<std::_Unforced,false>,_Cv_FD &,_Cv_TiD &,int &)' being compiled
+          with
+          [
+              T1=float,
+              _Cv_FD=fopow<float,int>,
+              _Cv_TiD=int
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\functional(881): note: see reference to function template instantiation 'T1 std::_Call_binder<std::_Unforced,0,1,_Ty1,_Ty2,std::tuple<int &>>(std::_Forced<std::_Unforced,false>,std::integer_sequence<std::_Ty,0,1>,_Cv_FD &,_Cv_tuple_TiD &,_Untuple &&)' being compiled
+          with
+          [
+              T1=float,
+              _Ty1=fopow<float,int>,
+              _Ty2=std::tuple<int,std::_Ph<1>>,
+              _Ty=std::size_t,
+              _Cv_FD=fopow<float,int>,
+              _Cv_tuple_TiD=std::tuple<int,std::_Ph<1>>,
+              _Untuple=std::tuple<int &>
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(914): note: see reference to function template instantiation 'T1 std::_Binder<std::_Unforced,fopow<T1,int>,int,const std::_Ph<1> &>::operator ()<int&>(int &)' being compiled
+          with
+          [
+              T1=float
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(914): note: see reference to function template instantiation 'T1 std::_Binder<std::_Unforced,fopow<T1,int>,int,const std::_Ph<1> &>::operator ()<int&>(int &)' being compiled
+          with
+          [
+              T1=float
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(926): note: see reference to function template instantiation '_OutIt std::_Transform_unchecked<_InIt,_Iter,_Fn1>(_InIt,_InIt,_OutIt,_Fn1 &)' being compiled
+          with
+          [
+              _OutIt=std::ostream_iterator<float,char,std::char_traits<char>>,
+              _InIt=int *,
+              _Iter=std::ostream_iterator<float,char,std::char_traits<char>>,
+              _Fn1=std::_Binder<std::_Unforced,fopow<float,int>,int,const std::_Ph<1> &>
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(950): note: see reference to function template instantiation '_OutIt std::_Transform_no_deprecate1<int*,_OutIt,_Fn1>(_InIt,_InIt,_OutIt,_Fn1 &,std::input_iterator_tag,std::_Any_tag)' being compiled
+          with
+          [
+              _OutIt=std::ostream_iterator<float,char,std::char_traits<char>>,
+              _Fn1=std::_Binder<std::_Unforced,fopow<float,int>,int,const std::_Ph<1> &>,
+              _InIt=int *
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(960): note: see reference to function template instantiation '_OutIt std::_Transform_no_deprecate<_InIt,_OutIt,_Fn1>(_InIt,_InIt,_OutIt,_Fn1 &)' being compiled
+          with
+          [
+              _OutIt=std::ostream_iterator<float,char,std::char_traits<char>>,
+              _InIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<int>>>,
+              _Fn1=std::_Binder<std::_Unforced,fopow<float,int>,int,const std::_Ph<1> &>
+          ]
+  d:\workspace\visualstudioprojects\stlexercises\stlexercises\main.cpp(18): note: see reference to function template instantiation '_OutIt std::transform<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<int>>>,std::ostream_iterator<float,char,std::char_traits<char>>,std::_Binder<std::_Unforced,fopow<float,int>,int,const std::_Ph<1> &>>(_InIt,_InIt,_OutIt,_Fn1)' being compiled
+          with
+          [
+              _OutIt=std::ostream_iterator<float,char,std::char_traits<char>>,
+              _InIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<int>>>,
+              _Fn1=std::_Binder<std::_Unforced,fopow<float,int>,int,const std::_Ph<1> &>
+          ]
+  STLExercises.vcxproj -> D:\Workspace\VisualStudioProjects\STLExercises\Debug\STLExercises.exe
+  STLExercises.vcxproj -> D:\Workspace\VisualStudioProjects\STLExercises\Debug\STLExercises.pdb (Full PDB)

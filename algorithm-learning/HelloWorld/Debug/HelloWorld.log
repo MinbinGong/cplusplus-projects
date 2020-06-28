@@ -1,0 +1,9 @@
+﻿  stdafx.cpp
+  MainFrm.cpp
+  HelloWorldView.cpp
+  HelloWorldDoc.cpp
+  HelloWorld.cpp
+  ChildFrm.cpp
+  Generating Code...
+  HelloWorld.vcxproj -> D:\Workspace\VisualStudioProjects\HelloWorld\Debug\HelloWorld.exe
+  HelloWorld.vcxproj -> D:\Workspace\VisualStudioProjects\HelloWorld\Debug\HelloWorld.pdb (Full PDB)
