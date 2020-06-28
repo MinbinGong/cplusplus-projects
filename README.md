@@ -1,1 +1,1 @@
-# modern_c-_exercises
+# This repository holds all my practices when learning C++
