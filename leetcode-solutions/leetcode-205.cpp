@@ -1,3 +1,7 @@
+#include <string>
+#include <vector>
+using namespace std;
+
 bool isIsomorphic(string s, string t) {
     vector<int> mp_s(CHAR_MAX+1), mp_t(CHAR_MAX+1);
     for(int i = 0, ns = 0, nt = 0; i < s.length(); ++i)
