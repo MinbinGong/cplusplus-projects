@@ -1,3 +1,6 @@
+#include <vector>
+using namespace std;
+
 vector<int> singleNumber(vector<int>& nums)
 {
     int diff{0};
