@@ -1,6 +1,0 @@
-﻿  Source.cpp
-d:\workspace\visualstudioprojects\unicodestringtest\unicodestringtest\source.cpp(8): warning C4566: character represented by universal-character-name '\u4E2D' cannot be represented in the current code page (1252)
-d:\workspace\visualstudioprojects\unicodestringtest\unicodestringtest\source.cpp(8): warning C4566: character represented by universal-character-name '\u56FD' cannot be represented in the current code page (1252)
-d:\workspace\visualstudioprojects\unicodestringtest\unicodestringtest\source.cpp(8): warning C4566: character represented by universal-character-name '\u4EBA' cannot be represented in the current code page (1252)
-  UnicodeStringTest.vcxproj -> D:\Workspace\VisualStudioProjects\UnicodeStringTest\Debug\UnicodeStringTest.exe
-  UnicodeStringTest.vcxproj -> D:\Workspace\VisualStudioProjects\UnicodeStringTest\Debug\UnicodeStringTest.pdb (Full PDB)
