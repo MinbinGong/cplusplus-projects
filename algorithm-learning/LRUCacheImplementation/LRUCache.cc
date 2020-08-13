@@ -9,7 +9,7 @@
 
 class LRUCache {
 	int m_capacity;
-	std::unordered_map<int, std::pair<int, int>::iterator> m_map;
+	std::unordered_map<int, std::pair<int, int>>::iterator m_map;
 	std::list<std::pair<int, int>> m_list;
 public:
 	LRUCache(int capacity): m_capacity(capacity) {}
