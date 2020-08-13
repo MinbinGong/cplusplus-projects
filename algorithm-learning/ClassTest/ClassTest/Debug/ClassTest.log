@@ -1,4 +1,0 @@
-﻿  Source.cpp
-d:\workspace\visualstudioprojects\classtest\classtest\source.cpp(32): error C2248: 'C::getData': cannot access private member declared in class 'C'
-  d:\workspace\visualstudioprojects\classtest\classtest\source.cpp(20): note: see declaration of 'C::getData'
-  d:\workspace\visualstudioprojects\classtest\classtest\source.cpp(18): note: see declaration of 'C'
