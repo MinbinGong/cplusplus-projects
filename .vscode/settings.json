@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "utility": "cpp",
-        "climits": "cpp"
+        "climits": "cpp",
+        "string": "cpp"
     }
 }
