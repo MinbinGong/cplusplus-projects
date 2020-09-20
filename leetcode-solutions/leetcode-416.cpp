@@ -1,8 +1,9 @@
 #include <vector>
 #include <numeric>
-bool canPartition(std::vector<int>& nums) {
+bool canPartition(std::vector<int> &nums)
+{
     unsigned long long int sum = std::accumulate(nums.begin(), nums.end(), 0);
-    if (sum%2 != 0)
+    if (sum % 2 != 0)
         return false;
     unsigned long long int size = sum / 2;
     std::vector<unsigned long long int> dp(size + 1, 0);
