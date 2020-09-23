@@ -8,7 +8,7 @@ struct TrieNode
     TrieNode() : child(2, NULL), last(false){};
 };
 
-void insert(int val)
+void insert(TrieNode* root, int val)
 {
     TrieNode *cur = root;
     for (int i = 31; i >= 0; i--)
@@ -21,9 +21,8 @@ void insert(int val)
     cur->last = true;
 }
 
-int search(int val)
+int search(TrieNode* root, int val)
 {
-    cout << val << endl;
     TrieNode *cur = root;
     int res = 0;
     for (int i = 31; i >= 0; i--)
@@ -43,17 +42,16 @@ int search(int val)
     return res;
 }
 
-TrieNode *root;
-
 int findMaximumXOR(vector<int> &nums)
 {
-    root = new TrieNode();
+    TrieNode *root = new TrieNode();
     int mx = 0;
     for (auto num : nums)
-        insert(num);
+        insert(root, num);
+
     for (auto num : nums)
     {
-        mx = max(num ^ search(num), mx);
+        mx = max(num ^ search(root, num), mx);
     }
     return mx;
 }
