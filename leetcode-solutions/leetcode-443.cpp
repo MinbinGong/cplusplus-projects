@@ -1,4 +1,6 @@
 #include <vector>
+// #include <algorithm>
+#include <string>
 using namespace std;
 
 int compress(vector<char> &chars)
