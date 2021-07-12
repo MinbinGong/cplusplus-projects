@@ -4,6 +4,7 @@
         "climits": "cpp",
         "string": "cpp",
         "vector": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "shared_mutex": "cpp"
     }
 }

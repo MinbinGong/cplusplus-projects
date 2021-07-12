@@ -12,5 +12,26 @@ public:
     shared_mutex_counter() = default;
     ~shared_mutex_counter() = default;
 
-    unsigned int
+    unsigned int get() const
+    {
+        std::shared_lock<std::shared_mutex> lock(m_mutex);
+        return m_value;
+    }
+
+    void increment()
+    {
+        std::unique_lock<std::shared_mutex> lock(m_mutex);
+        ++m_value;
+    }
+
+    void reset()
+    {
+        std::unique_lock<std::shared_mutex> lock(m_mutex);
+        m_value = 0;
+    }
+
+    private:
+    mutable std::shared_mutex   m_mutex;
+    unsigned int                m_value;
 };
+
