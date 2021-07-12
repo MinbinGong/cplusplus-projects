@@ -29,5 +29,15 @@ void on_double_click_friend_item3(long userid)
     auto dialog1 = std::make_unique<chat_dialog>();
 
     auto [iter, inserted] = m_chat_dialogs.try_emplace(userid, std::move(dialog1));
-    
+    if (inserted)
+    {
+        iter->second->activate();
+    }
+}
+
+int main()
+{
+    on_double_click_friend_item3(96123413245L);
+
+    return 0;
 }
