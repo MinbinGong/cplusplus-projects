@@ -5,6 +5,7 @@
         "string": "cpp",
         "vector": "cpp",
         "ostream": "cpp",
-        "shared_mutex": "cpp"
+        "shared_mutex": "cpp",
+        "thread": "cpp"
     }
 }
