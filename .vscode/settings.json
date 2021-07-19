@@ -7,5 +7,6 @@
         "ostream": "cpp",
         "shared_mutex": "cpp",
         "thread": "cpp"
+        "mutex": "cpp"
     }
 }

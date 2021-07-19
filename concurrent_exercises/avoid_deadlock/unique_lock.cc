@@ -20,7 +20,7 @@ public:
         {
             return;
         }
-        
+
         std::unique_lock<std::mutex> lock_a(lhs.m, std::defer_lock);
         std::unique_lock<std::mutex> lock_b(rhs.m, std::defer_lock);
         std::lock(lock_a, lock_b);
