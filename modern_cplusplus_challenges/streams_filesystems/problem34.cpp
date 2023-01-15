@@ -32,6 +32,6 @@ void remove_empty_lines(fs::path filepath)
     file_in.close();
     file_out.close();
 
-    fs::remove(file_path);
+    fs::remove(filepath);
     fs::rename(temp_path, filepath);
 }
