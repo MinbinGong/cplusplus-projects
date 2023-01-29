@@ -1,4 +1,0 @@
-﻿  2Sum.cpp
-C:\Users\gongw\source\repos\2Sum\2Sum.cpp(15,36): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\gongw\source\repos\2Sum\2Sum.cpp(17,28): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-  2Sum.vcxproj -> C:\Users\gongw\source\repos\2Sum\x64\Debug\2Sum.exe
