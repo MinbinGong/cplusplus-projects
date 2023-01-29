@@ -25,7 +25,7 @@ ListNode *cutAtMiddle(ListNode *head)
 
     while (fast != nullptr && fast->next != nullptr)
     {
-        pre_slow = slow;
+        prev_slow = slow;
         slow = slow->next;
         fast = fast->next->next;
     }
