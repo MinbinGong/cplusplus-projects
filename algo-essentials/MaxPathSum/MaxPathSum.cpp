@@ -9,7 +9,7 @@ struct TreeNode
     TreeNode(int x = 0, TreeNode *l = nullptr, TreeNode *r = nullptr) : val(x), left(l), right(r) {}
 };
 
-int dfs(TreeNode const *root, int& max_sum)
+int dfs(TreeNode const *root, int &max_sum)
 {
     if (root == nullptr)
     {
@@ -19,11 +19,11 @@ int dfs(TreeNode const *root, int& max_sum)
     int left = dfs(root->left, max_sum);
     int right = dfs(root->right, max_sum);
     int sum = root->val;
-    if (left>0)
+    if (left > 0)
     {
         sum += left;
     }
-    if (right>0)
+    if (right > 0)
     {
         sum += right;
     }
