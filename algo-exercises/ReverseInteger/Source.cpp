@@ -1,36 +1,22 @@
 #include <iostream>
-#include <stdlib.h>
-
-int reverse(int x);
-
-int main()
-{
-	int a{ 0 };
-	std::cout << "Enter the value: " << std::endl;
-	std::cin >> a;
-
-	std::cout << "Original: " << a << std::endl;
-	//std::cout << "Abs: " << (~a) << std::endl;
-	std::cout << "Reversed: " << reverse(a) << std::endl;
-
-	return 0;
-}
+using namespace std;
 
 int reverse(int x)
 {
-	bool negative = x < 0 ? true : false;
-
-	//if (negative)
-	//{
-	//	x = abs(x);
-	//}
-
-	int ret{ 0 };
-	while (x)
+	int ret = 0;
+	while (x != 0)
 	{
-		ret = ret * 10 + x % 10;
-		x = x / 10;
+		ret = x % 10 + ret * 10;
+		x /= 10;
 	}
-
 	return ret;
+}
+
+int main()
+{
+	int a{ 123 }, b{ -123 }, c{ 120 }/*, d{ 123412341234125 }*/;
+
+	cout << reverse(a) << endl << reverse(b) << endl << reverse(c) << endl/* << reverse(d) << endl*/;
+
+	return 0;
 }
