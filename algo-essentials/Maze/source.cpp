@@ -41,6 +41,6 @@ bool hasPath(std::vector<std::vector<int>>& maze, std::vector<int>& start, std::
 {
     unsigned int m = maze.size();
     unsigned int n = maze[0].size();
-    std::vector<std::vector<bool>> visited(m, std::vector<boo>(n));
+    std::vector<std::vector<bool>> visited(m, std::vector<bool>(n));
     return dfs(maze, dest, start, visited);
 }
