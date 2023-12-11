@@ -6,10 +6,13 @@ string intToRoman(int num)
     if (num == 0)
         return "";
 
-    if (num == 9)
-        return "IX" + intToRoman(num - 9);
+    if (num <= 3)
+        return "I" + intToRoman(num - 1);
+
     if (num == 4)
-        return "IV" + intToRoman(num - 4);
+        return "IV";
+    if (num == 9)
+        return "IX";
     if (num >= 40 && num < 50)
         return "XL" + intToRoman(num - 40);
     if (num >= 90 && num < 100)
@@ -19,8 +22,6 @@ string intToRoman(int num)
     if (num >= 900 && num < 1000)
         return "CM" + intToRoman(num - 900);
 
-    if (num <= 3)
-        return "I" + intToRoman(num - 1);
     if (num < 10)
         return "V" + intToRoman(num - 5);
     if (num < 40)
