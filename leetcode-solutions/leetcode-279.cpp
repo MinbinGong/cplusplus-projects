@@ -1,3 +1,7 @@
+/*
+ Perfect squares
+ */
+
 #include <vector>
 #include <algorithm>
 int numSquares(int n) {
