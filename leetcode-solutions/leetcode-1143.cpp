@@ -13,6 +13,7 @@
     两个位置对应的字母相同与不同的情况了。
  */
 #include <string>
+#include <vector>
 using namespace std;
 
 int longestCommonSubsequence(string text1, string text2) {
@@ -50,8 +51,4 @@ int longestCommonSubsequence1(string text1, string text2) {
         }
     }
     return dp[m][n];
-}
-
-int longestCommonSubsequence1(string text1, string text2) {
-    
 }
