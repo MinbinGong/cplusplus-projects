@@ -6,7 +6,6 @@
 #include <algorithm>
 using namespace std;
 
-#if DEBUG
 vector<string> findItinerary(vector<vector<string>> &tickets)
 {
     unordered_map<string, multiset<string>> graph;
@@ -35,7 +34,6 @@ vector<string> findItinerary(vector<vector<string>> &tickets)
     reverse(res.begin(), res.end());
     return res;
 }
-#else
 
 bool dfs(unordered_map<string, vector<string>> &m, string cur, vector<string> &res, size_t size)
 {
@@ -56,7 +54,7 @@ bool dfs(unordered_map<string, vector<string>> &m, string cur, vector<string> &r
     return false;
 }
 
-vector<string> findItinerary(vector<vector<string>> &tickets)
+vector<string> findItinerary1(vector<vector<string>> &tickets)
 {
     unordered_map<string, vector<string>> m;
     for (const auto &v : tickets)
@@ -67,4 +65,4 @@ vector<string> findItinerary(vector<vector<string>> &tickets)
     dfs(m, "JFK", res, tickets.size() + 1);
     return res;
 }
-#endif
+
