@@ -12,23 +12,23 @@ Linked List Random Node
 using namespace std;
 
 struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode* n) : val(x), next(n) {}
+  int val;
+  ListNode* next;
+  ListNode() : val(0), next(nullptr) {}
+  ListNode(int x) : val(x), next(nullptr) {}
+  ListNode(int x, ListNode* n) : val(x), next(n) {}
 };
 
 int getRandom(ListNode* head) {
-    int ans = head->val;
-    ListNode* node = head->next;
-    int i = 2;
-    while (node) {
-        if ((rand() % i) == 0) {
-            ans = node->val;
-        }
-        ++i;
-        node = node->next;
+  int ans = head->val;
+  ListNode* node = head->next;
+  int i = 2;
+  while (node) {
+    if ((rand() % i) == 0) {
+      ans = node->val;
     }
-    return ans;
+    ++i;
+    node = node->next;
+  }
+  return ans;
 }

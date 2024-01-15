@@ -33,59 +33,59 @@
 using namespace std;
 
 int jump1(vector<int>& nums) {
-    int left = 0, right = 0, farthest = 0, jump = 0;
-    while (right < nums.size() - 1) {
-        for (int i = left; i <= right; i++) {
-            farthest = max(farthest, i + nums[i]);
-        }
-
-        left = right + 1;
-        right = farthest;
-        jump++;
+  int left = 0, right = 0, farthest = 0, jump = 0;
+  while (right < nums.size() - 1) {
+    for (int i = left; i <= right; i++) {
+      farthest = max(farthest, i + nums[i]);
     }
-    return jump;
+
+    left = right + 1;
+    right = farthest;
+    jump++;
+  }
+  return jump;
 }
 
 void solve(vector<int>& nums, int& ans, int count, int index) {
-    if (index >= nums.size() - 1) {
-        ans = min(ans, count);
-        return;
-    }
-
-    if (count > ans) {
-        return;
-    }
-
-    for (int i = 1; i <= nums[index]; i++) {
-        solve(nums, ans, count + 1, index + i);
-    }
+  if (index >= nums.size() - 1) {
+    ans = min(ans, count);
     return;
+  }
+
+  if (count > ans) {
+    return;
+  }
+
+  for (int i = 1; i <= nums[index]; i++) {
+    solve(nums, ans, count + 1, index + i);
+  }
+  return;
 }
 
 int jump2(vector<int>& nums) {
-    int ans = INT_MAX, count = 0;
-    solve(nums, ans, count, 0);
+  int ans = INT_MAX, count = 0;
+  solve(nums, ans, count, 0);
 
-    return ans;
+  return ans;
 }
 
 int solve2(vector<int>& nums, int index, vector<int>& dp) {
-    if (index >= nums.size() - 1) {
-        return 0;
-    }
+  if (index >= nums.size() - 1) {
+    return 0;
+  }
 
-    if (dp[index] != INT_MAX - 1) {
-        return dp[index];
-    }
-
-    for (int i = 1; i <= nums[index]; i++) {
-        dp[index] = min(dp[index], 1 + solve2(nums, index + i, dp));
-    }
-
+  if (dp[index] != INT_MAX - 1) {
     return dp[index];
+  }
+
+  for (int i = 1; i <= nums[index]; i++) {
+    dp[index] = min(dp[index], 1 + solve2(nums, index + i, dp));
+  }
+
+  return dp[index];
 }
 
 int jump3(vector<int>& nums) {
-    vector<int> dp(nums.size(), INT_MAX - 1);
-    return solve2(nums, 0, dp);
+  vector<int> dp(nums.size(), INT_MAX - 1);
+  return solve2(nums, 0, dp);
 }

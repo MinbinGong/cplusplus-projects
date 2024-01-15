@@ -8,14 +8,14 @@ Return true if you can reach the last index, or false otherwise.
 using namespace std;
 
 bool canJump(vector<int>& nums) {
-    int n = nums.size();
-    int maxReach = 0;
-    for (int i = 0; i < n; i++) {
-        if (i > maxReach) {
-            return false;
-        }
-
-        maxReach = max(maxReach, i + nums[i]);
+  int n = nums.size();
+  int maxReach = 0;
+  for (int i = 0; i < n; i++) {
+    if (i > maxReach) {
+      return false;
     }
-    return true;
+
+    maxReach = max(maxReach, i + nums[i]);
+  }
+  return true;
 }

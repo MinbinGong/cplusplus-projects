@@ -24,33 +24,33 @@
 #include <vector>
 
 int first_missing_positive(std::vector<int>& nums) {
-    int n = nums.size();
+  int n = nums.size();
 
-    for (int i = 0; i < n; i++) {
-        if (nums[i] < 0 || nums[i] > n) {
-            nums[i] = 0;
-        }
+  for (int i = 0; i < n; i++) {
+    if (nums[i] < 0 || nums[i] > n) {
+      nums[i] = 0;
+    }
+  }
+
+  for (int i = 0; i < n; i++) {
+    if (nums[i] == 0 || nums[i] == -1) {
+      continue;
     }
 
-    for (int i = 0; i < n; i++) {
-        if (nums[i] == 0 || nums[i] == -1) {
-            continue;
-        }
-
-        int index = nums[i] - 1;
-        nums[i] = 0;
-        int temp;
-        while (nums[index] > 0) {
-            temp = nums[index];
-            nums[index] = -1;
-            index = temp - 1;
-        }
-        nums[index] = -1;
+    int index = nums[i] - 1;
+    nums[i] = 0;
+    int temp;
+    while (nums[index] > 0) {
+      temp = nums[index];
+      nums[index] = -1;
+      index = temp - 1;
     }
+    nums[index] = -1;
+  }
 
-    for (int i = 0; i < n; i++) {
-        if (nums[i] != -1) {
-            return i + 1;
-        }
+  for (int i = 0; i < n; i++) {
+    if (nums[i] != -1) {
+      return i + 1;
     }
+  }
 }

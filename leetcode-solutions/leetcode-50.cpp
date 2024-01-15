@@ -25,24 +25,24 @@
     5. -104 <= xn <= 104
  */
 double my_pow(double x, int n) {
-    double ans = 1;
-    long long m = n;
-    if (n < 0) {
-        m = (-1) * m;
-    }
+  double ans = 1;
+  long long m = n;
+  if (n < 0) {
+    m = (-1) * m;
+  }
 
-    while (m > 0) {
-        if (m % 2 == 1) {
-            ans = ans * x;
-            m -= 1;
-        } else {
-            x = x*x;
-            m /= 2;
-        }
+  while (m > 0) {
+    if (m % 2 == 1) {
+      ans = ans * x;
+      m -= 1;
+    } else {
+      x = x * x;
+      m /= 2;
     }
+  }
 
-    if (n < 0) {
-        ans = 1/ans;
-    }
-    return ans;
+  if (n < 0) {
+    ans = 1 / ans;
+  }
+  return ans;
 }

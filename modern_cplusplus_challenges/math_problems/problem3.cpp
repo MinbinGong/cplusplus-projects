@@ -10,8 +10,7 @@ unsigned int gcd(unsigned int a, unsigned int b) {
   return a;
 }
 
-int lcm(int const a, int const b)
-{
+int lcm(int const a, int const b) {
   int h = gcd(a, b);
   return h ? (a * (b / h)) : 0;
 }

@@ -1,8 +1,7 @@
-#include <random>
 #include <cmath>
+#include <random>
 
-template <typename E = std::mt19937,
-          typename D = std::uniform_real_distribution<>>
+template <typename E = std::mt19937, typename D = std::uniform_real_distribution<>>
 double compute_pi(E &engine, D &dist, int const samples = 1000000) {
   auto hit = 0;
   for (auto i = 0; i < samples; i++) {

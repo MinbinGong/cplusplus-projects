@@ -12,20 +12,20 @@ Base 7
 using namespace std;
 
 string convertToBase7(int n) {
-    if (n == 0) {
-        return "0";
-    }
+  if (n == 0) {
+    return "0";
+  }
 
-    bool is_negative = n < 0;
-    if (is_negative) {
-        n = -n;
-    }
+  bool is_negative = n < 0;
+  if (is_negative) {
+    n = -n;
+  }
 
-    string ans;
-    while (n) {
-        int a = n / 7, b = n % 7;
-        ans = to_string(b) + ans;
-        n = a;
-    }
-    return is_negative ? "-" + ans : ans;
+  string ans;
+  while (n) {
+    int a = n / 7, b = n % 7;
+    ans = to_string(b) + ans;
+    n = a;
+  }
+  return is_negative ? "-" + ans : ans;
 }

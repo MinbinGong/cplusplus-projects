@@ -35,34 +35,34 @@
 using namespace std;
 
 void combinationSumRec(vector<int>& candidates, int target, int begin, vector<vector<int>>& result, vector<int>& t) {
-    if (target == 0) {
-        result.push_back(t);
-        return;
+  if (target == 0) {
+    result.push_back(t);
+    return;
+  }
+
+  int x = begin;
+  while (begin < candidates.size() && target - candidates[begin] >= 0) {
+    if (begin > x && candidates[begin] == candidates[begin - 1]) {
+      begin++;
+      continue;
     }
 
-    int x = begin;
-    while (begin < candidates.size() && target - candidates[begin] >= 0) {
-        if (begin > x && candidates[begin] == candidates[begin - 1]) {
-            begin++;
-            continue;
-        }
+    t.push_back(candidates[begin]);
 
-        t.push_back(candidates[begin]);
+    combinationSumRec(candidates, target - candidates[begin], begin + 1, result, t);
 
-        combinationSumRec(candidates, target - candidates[begin], begin + 1, result, t);
-
-        t.pop_back();
-        begin++;
-    }
+    t.pop_back();
+    begin++;
+  }
 }
 
 vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-    vector<vector<int>> result;
-    vector<int> t;
+  vector<vector<int>> result;
+  vector<int> t;
 
-    sort(candidates.begin(), candidates.end());
+  sort(candidates.begin(), candidates.end());
 
-    combinationSumRec(candidates, target, 0, result, t);
+  combinationSumRec(candidates, target, 0, result, t);
 
-    return result;
+  return result;
 }

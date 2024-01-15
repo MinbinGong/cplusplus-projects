@@ -22,9 +22,9 @@ using namespace std;
 
 int pickIndex(vector<int>& weights) {
   vector<int> sums(weights);
-  
+
   partial_sum(sums.begin(), sums.end(), sums.begin());
-  
+
   int pos = (rand() % sums.back()) + 1;
   return lower_bound(sums.begin(), sums.end(), pos) - sums.begin();
 }

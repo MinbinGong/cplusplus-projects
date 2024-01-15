@@ -12,34 +12,34 @@ Implement Queue using Stacks
 using namespace std;
 
 class my_queue {
-    stack<int> in, out;
+  stack<int> in, out;
 
-    void in_to_out() {
-        if (out.empty()) {
-            while (!in.empty()) {
-                int x = in.top();
-                in.pop();
-                out.push(x);
-            }
-        }
+  void in_to_out() {
+    if (out.empty()) {
+      while (!in.empty()) {
+        int x = in.top();
+        in.pop();
+        out.push(x);
+      }
     }
+  }
 
-   public:
-    my_queue() = default;
+ public:
+  my_queue() = default;
 
-    void push(int x) { in.push(x); }
+  void push(int x) { in.push(x); }
 
-    int pop() {
-        in_to_out();
-        int x = out.top();
-        out.pop();
-        return x;
-    }
+  int pop() {
+    in_to_out();
+    int x = out.top();
+    out.pop();
+    return x;
+  }
 
-    int peek() {
-        in_to_out();
-        return out.top();
-    }
+  int peek() {
+    in_to_out();
+    return out.top();
+  }
 
-    bool empty() { return in.empty() && out.empty(); }
+  bool empty() { return in.empty() && out.empty(); }
 };

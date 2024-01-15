@@ -9,29 +9,27 @@ Reverse Linked List
 建议你同时掌握这两种写法。
  */
 struct ListNode {
-    int val = 0;
-    ListNode *next = nullptr;
-    explicit ListNode(int x, ListNode* n = nullptr) : val(x), next(n) {}
+  int val = 0;
+  ListNode *next = nullptr;
+  explicit ListNode(int x, ListNode *n = nullptr) : val(x), next(n) {}
 };
 
-ListNode* reverseListRecursive(ListNode *head, ListNode *prev = nullptr) {
-    if (head == nullptr)
-    {
-        return prev;
-    }
-    ListNode *next = head->next;
-    head->next = prev;
-    return reverseListRecursive(next, head);
+ListNode *reverseListRecursive(ListNode *head, ListNode *prev = nullptr) {
+  if (head == nullptr) {
+    return prev;
+  }
+  ListNode *next = head->next;
+  head->next = prev;
+  return reverseListRecursive(next, head);
 }
 
-ListNode* reverseListIterative(ListNode *head) {
-    ListNode* prev = nullptr, *next;
-    while (head)
-    {
-        next = head->next;
-        head->next = prev;
-        prev = head;
-        head = next;
-    }
-    return prev;
+ListNode *reverseListIterative(ListNode *head) {
+  ListNode *prev = nullptr, *next;
+  while (head) {
+    next = head->next;
+    head->next = prev;
+    prev = head;
+    head = next;
+  }
+  return prev;
 }

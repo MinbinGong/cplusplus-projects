@@ -16,50 +16,50 @@
 using namespace std;
 
 int candy(vector<int>& ratings) {
-    vector<int> candies(ratings.size(), 1);
-    for (size_t i = 0; i < ratings.size(); ++i) {
-        if (ratings[i] > ratings[i - 1] && candies[i] <= candies[i - 1]) {
-            candies[i] = candies[i - 1] + 1;
-        } else if (ratings[i] < ratings[i - 1] && candies[i] >= candies[i - 1]) {
-            candies[i - 1] = candies[i] + 1;
-        }
+  vector<int> candies(ratings.size(), 1);
+  for (size_t i = 0; i < ratings.size(); ++i) {
+    if (ratings[i] > ratings[i - 1] && candies[i] <= candies[i - 1]) {
+      candies[i] = candies[i - 1] + 1;
+    } else if (ratings[i] < ratings[i - 1] && candies[i] >= candies[i - 1]) {
+      candies[i - 1] = candies[i] + 1;
     }
+  }
 
-    for (int j = ratings.size() - 2; j >= 0; --j) {
-        if (ratings[j] > ratings[j + 1] && candies[j] <= candies[j + 1]) {
-            candies[j] = candies[j + 1] + 1;
-        } else if (ratings[j] < ratings[j + 1] && candies[j] >= candies[j + 1]) {
-            candies[j + 1] = candies[j] + 1;
-        }
+  for (int j = ratings.size() - 2; j >= 0; --j) {
+    if (ratings[j] > ratings[j + 1] && candies[j] <= candies[j + 1]) {
+      candies[j] = candies[j + 1] + 1;
+    } else if (ratings[j] < ratings[j + 1] && candies[j] >= candies[j + 1]) {
+      candies[j + 1] = candies[j] + 1;
     }
+  }
 
-    int ans = 0;
-    for (const auto i : candies) ans += i;
-    return ans;
+  int ans = 0;
+  for (const auto i : candies) ans += i;
+  return ans;
 }
 
 int candy2(vector<int>& ratings) {
-    int size = ratings.size();
-    if (size < 2) {
-        return size;
-    }
+  int size = ratings.size();
+  if (size < 2) {
+    return size;
+  }
 
-    vector<int> num(size, 1);
-    for (int i = 1; i < size; i++) {
-        if (ratings[i] > ratings[i - 1]) {
-            nums[i] = nums[i - 1] + 1;
-        }
+  vector<int> num(size, 1);
+  for (int i = 1; i < size; i++) {
+    if (ratings[i] > ratings[i - 1]) {
+      nums[i] = nums[i - 1] + 1;
     }
-    for (int i = size - 1; i > 0; i--) {
-        if (ratings[i] < ratings[i - 1]) {
-            num[i - 1] = max(num[i - 1], num[i] + 1);
-        }
+  }
+  for (int i = size - 1; i > 0; i--) {
+    if (ratings[i] < ratings[i - 1]) {
+      num[i - 1] = max(num[i - 1], num[i] + 1);
     }
+  }
 
-    int res = 0;
-    for (auto item : num) {
-        res += item;
-    }
+  int res = 0;
+  for (auto item : num) {
+    res += item;
+  }
 
-    return res;
+  return res;
 }

@@ -1,8 +1,7 @@
 #include <utility>
 #include <vector>
 
-std::pair<unsigned long long, long>
-longest_collatz(unsigned long long const limit) {
+std::pair<unsigned long long, long> longest_collatz(unsigned long long const limit) {
   long length = 0;
   unsigned long long number = 0;
   std::vector<int> cache(limit + 1, 0);

@@ -14,22 +14,22 @@ Diameter of Binary tree
 using namespace std;
 
 struct TreeNode {
-    int val;
-    TreeNode *left, *right;
-    explicit TreeNode(int x = 0, TreeNode *l = nullptr, TreeNode *r = nullptr) : val(x), left(l), right(r) {}
+  int val;
+  TreeNode *left, *right;
+  explicit TreeNode(int x = 0, TreeNode *l = nullptr, TreeNode *r = nullptr) : val(x), left(l), right(r) {}
 };
 
 int helper(TreeNode *node, int &diameter) {
-    if (node == nullptr) {
-        return 0;
-    }
-    int l = helper(node->left, diameter), r = helper(node->right, diameter);
-    diameter = max(l + r, diameter);
-    return max(l, r) + 1;
+  if (node == nullptr) {
+    return 0;
+  }
+  int l = helper(node->left, diameter), r = helper(node->right, diameter);
+  diameter = max(l + r, diameter);
+  return max(l, r) + 1;
 }
 
 int diameterOfBT(TreeNode *root) {
-    int diameter = 0;
-    helper(root, diameter);
-    return diameter;
+  int diameter = 0;
+  helper(root, diameter);
+  return diameter;
 }

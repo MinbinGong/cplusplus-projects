@@ -15,28 +15,28 @@ The Skyline Problem
 using namespace std;
 
 vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
-    vector<vector<int>> ans;
-    priority_queue<pair<int, int>> maxHeap;
-    int i = 0, len = buildings.size();
-    int curX, curH;
-    while (i < len || !maxHeap.empty()) {
-        if (maxHeap.empty() || i < len && buildings[i][0] <= maxHeap.top().second) {
-            curX = buildings[i][0];
-            while (i < len && curX == buildings[i][0]) {
-                maxHeap.emplace(buildings[i][2], buildings[i][1]);
-                ++i;
-            }
+  vector<vector<int>> ans;
+  priority_queue<pair<int, int>> maxHeap;
+  int i = 0, len = buildings.size();
+  int curX, curH;
+  while (i < len || !maxHeap.empty()) {
+    if (maxHeap.empty() || i < len && buildings[i][0] <= maxHeap.top().second) {
+      curX = buildings[i][0];
+      while (i < len && curX == buildings[i][0]) {
+        maxHeap.emplace(buildings[i][2], buildings[i][1]);
+        ++i;
+      }
 
-        } else {
-            curX = maxHeap.top().second;
-            while (!maxHeap.empty() && curX >= maxHeap.top.second) {
-                maxHeap.pop();
-            }
-        }
-        curH = (maxHeap.empty()) ? 0 : maxHeap.top().first;
-        if (ans.empty() || curH != ans.back()[i]) {
-            ans.push_back({curX, curH});
-        }
+    } else {
+      curX = maxHeap.top().second;
+      while (!maxHeap.empty() && curX >= maxHeap.top.second) {
+        maxHeap.pop();
+      }
     }
-    return ans;
+    curH = (maxHeap.empty()) ? 0 : maxHeap.top().first;
+    if (ans.empty() || curH != ans.back()[i]) {
+      ans.push_back({curX, curH});
+    }
+  }
+  return ans;
 }

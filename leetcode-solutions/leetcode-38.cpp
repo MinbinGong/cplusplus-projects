@@ -10,29 +10,28 @@
 #include <string>
 
 std::string fun(std::string str1) {
-    str1 += " ";
-    int len = str1.size();
-    int count = 1;
-    std::string ans = "";
+  str1 += " ";
+  int len = str1.size();
+  int count = 1;
+  std::string ans = "";
 
-    for (int i = 0; i < len - 1; i++) {
-        if (str1[i + 1] == str1[i]) {
-            count++;
-            continue;
-        }
-
-        ans += ('0' + count);
-        ans += str1[i];
-        count = 1;
+  for (int i = 0; i < len - 1; i++) {
+    if (str1[i + 1] == str1[i]) {
+      count++;
+      continue;
     }
 
-    return ans;
+    ans += ('0' + count);
+    ans += str1[i];
+    count = 1;
+  }
+
+  return ans;
 }
 
 std::string countAndSay(int n) {
-    if (n == 1) return "1";
+  if (n == 1) return "1";
 
-    std::string x = func(countAndSay(n-1));
-    return x;
+  std::string x = func(countAndSay(n - 1));
+  return x;
 }
-

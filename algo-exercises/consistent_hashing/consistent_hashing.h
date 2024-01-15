@@ -22,15 +22,17 @@
 
 #pragma once
 #ifdef HAVE_SWITCH
+#include <experimental/optional>
+
 #include "switch.h"
 #include "switch_vector.h"
-#include <experimental/optional>
 #else
+#include <stdint.h>
+#include <string.h>
+
 #include <algorithm>
 #include <experimental/optional>
 #include <limits>
-#include <stdint.h>
-#include <string.h>
 #include <vector>
 #endif
 
@@ -41,8 +43,7 @@ namespace consistent_hashing {
 // if it returns cnt, use 0 (because tokens[0] owns (tokens[cnt - 1],
 // tokens[0]))
 template <typename T>
-static uint32_t search(const T *const tokens, const uint32_t cnt,
-                       const T token) {
+static uint32_t search(const T *const tokens, const uint32_t cnt, const T token) {
   int32_t h{cnt - 1}, l{0};
 
   while (l <= h) {
@@ -72,37 +73,23 @@ struct token128 {
 
   constexpr token128(const uint64_t m, const uint64_t l) : ms{m}, ls{l} {}
 
-  constexpr bool is_minimum() const noexcept {
-    return ((ms == 0) && (ls == 0));
-  }
+  constexpr bool is_minimum() const noexcept { return ((ms == 0) && (ls == 0)); }
 
   constexpr operator bool() const noexcept { return is_valid(); }
 
   constexpr bool is_valid() const noexcept { return ms || ls; }
 
-  constexpr bool operator==(const token128 &o) const noexcept {
-    return ms == o.ms && ls == o.ls;
-  }
+  constexpr bool operator==(const token128 &o) const noexcept { return ms == o.ms && ls == o.ls; }
 
-  constexpr bool operator!=(const token128 &o) const noexcept {
-    return ms != o.ms && ls != o.ls;
-  }
+  constexpr bool operator!=(const token128 &o) const noexcept { return ms != o.ms && ls != o.ls; }
 
-  constexpr bool operator>(const token128 &o) const noexcept {
-    return ms > o.ms || (ms == o.ms && ls > o.ls);
-  }
+  constexpr bool operator>(const token128 &o) const noexcept { return ms > o.ms || (ms == o.ms && ls > o.ls); }
 
-  constexpr bool operator<(const token128 &o) const noexcept {
-    return ms < o.ms || (ms == o.ms && ls <= o.ls);
-  }
+  constexpr bool operator<(const token128 &o) const noexcept { return ms < o.ms || (ms == o.ms && ls <= o.ls); }
 
-  constexpr bool operator>=(const token128 &o) const noexcept {
-    return ms >= o.ms || (ms == o.ms && ls >= o.ls);
-  }
+  constexpr bool operator>=(const token128 &o) const noexcept { return ms >= o.ms || (ms == o.ms && ls >= o.ls); }
 
-  constexpr bool operator<=(const token128 &o) const noexcept {
-    return ms < o.ms || (ms == o.ms && ls <= o.ls);
-  }
+  constexpr bool operator<=(const token128 &o) const noexcept { return ms < o.ms || (ms == o.ms && ls <= o.ls); }
 
   constexpr auto &operator=(const token128 &o) noexcept {
     ms = o.ms;
@@ -119,7 +106,8 @@ struct token128 {
 // A segment in a ring. The segment is responsible (owns) the token range (left,
 // right] whereas left is the token of the predecessor segment and right is the
 // token of this segment
-template <typename token_t> struct ring_segment {
+template <typename token_t>
+struct ring_segment {
   token_t left;
   token_t right;
 
@@ -135,8 +123,7 @@ template <typename token_t> struct ring_segment {
 
   constexpr ring_segment() {}
 
-  constexpr ring_segment(const token_t l, const token_t r)
-      : left{l}, right{r} {}
+  constexpr ring_segment(const token_t l, const token_t r) : left{l}, right{r} {}
 
   constexpr void set(const token_t l, const token_t r) {
     left = l;
@@ -145,13 +132,9 @@ template <typename token_t> struct ring_segment {
 
   constexpr auto token() const noexcept { return right; }
 
-  constexpr bool operator==(const ring_segment &o) const noexcept {
-    return left == o.left && right == o.right;
-  }
+  constexpr bool operator==(const ring_segment &o) const noexcept { return left == o.left && right == o.right; }
 
-  constexpr bool operator!=(const ring_segment &o) const noexcept {
-    return left != o.left || right != o.right;
-  }
+  constexpr bool operator!=(const ring_segment &o) const noexcept { return left != o.left || right != o.right; }
 
   constexpr bool operator<(const ring_segment &o) const noexcept {
     return left < o.left || (left == o.left && right < o.right);
@@ -177,10 +160,7 @@ template <typename token_t> struct ring_segment {
     }
   }
 
-  static constexpr bool tokens_wrap_around(const token_t &l,
-                                           const token_t &r) noexcept {
-    return l >= r;
-  }
+  static constexpr bool tokens_wrap_around(const token_t &l, const token_t &r) noexcept { return l >= r; }
 
   bool contains(const ring_segment &that) const noexcept {
     if (left == right) {
@@ -199,8 +179,7 @@ template <typename token_t> struct ring_segment {
     }
   }
 
-  std::pair<bool, uint8_t> mask(const ring_segment mask,
-                                ring_segment *const out) const noexcept {
+  std::pair<bool, uint8_t> mask(const ring_segment mask, ring_segment *const out) const noexcept {
     if (false == intersects(mask)) {
       return {false, 0};
     } else if (mask.contains(*this)) {
@@ -222,10 +201,8 @@ template <typename token_t> struct ring_segment {
     }
   }
 
-  static void mask_segments_impl(const ring_segment *it,
-                                 const ring_segment *const end,
-                                 const std::vector<ring_segment> &toExclude,
-                                 std::vector<ring_segment> *const out) {
+  static void mask_segments_impl(const ring_segment *it, const ring_segment *const end,
+                                 const std::vector<ring_segment> &toExclude, std::vector<ring_segment> *const out) {
     ring_segment list[2];
     for (auto i{it}; i != end; i++) {
       const auto in = *i;
@@ -244,10 +221,8 @@ template <typename token_t> struct ring_segment {
     }
   }
 
-  static void mask_segments(const ring_segment *it,
-                            const ring_segment *const end,
-                            const std::vector<ring_segment> &toExclude,
-                            std::vector<ring_segment> *const out) {
+  static void mask_segments(const ring_segment *it, const ring_segment *const end,
+                            const std::vector<ring_segment> &toExclude, std::vector<ring_segment> *const out) {
     if (toExclude.size()) {
       mask_segments_impl(it, end, toExclude, out);
       sort_and_deoverlap(out);
@@ -256,14 +231,12 @@ template <typename token_t> struct ring_segment {
     }
   }
 
-  static void mask_segments(const std::vector<ring_segment> &in,
-                            const std::vector<ring_segment> &toExclude,
+  static void mask_segments(const std::vector<ring_segment> &in, const std::vector<ring_segment> &toExclude,
                             std::vector<ring_segment> *const out) {
     mask_segments(in.data(), in.data() + in.size(), toExclude, out);
   }
 
-  static auto mask_segments(const std::vector<ring_segment> &in,
-                            const std::vector<ring_segment> &toExclude) {
+  static auto mask_segments(const std::vector<ring_segment> &in, const std::vector<ring_segment> &toExclude) {
     std::vector<ring_segment> out;
     mask_segments(in.begin(), in.end(), &out);
     return out;
@@ -272,8 +245,7 @@ template <typename token_t> struct ring_segment {
   static void deoverlap(std::vector<ring_segment> *const segments) {
     auto out = segments->data();
 
-    for (auto *it = segments->data(), *const end = it + segments->size();
-         it != end;) {
+    for (auto *it = segments->data(), *const end = it + segments->size(); it != end;) {
       auto s = *it;
       if (it->right <= it->left) {
         const auto wrappedSegmentIt = it;
@@ -283,8 +255,7 @@ template <typename token_t> struct ring_segment {
           }
         }
 
-        if (wrappedSegmentIt != (it = segments->data()) &&
-            s.right >= it->right) {
+        if (wrappedSegmentIt != (it = segments->data()) && s.right >= it->right) {
           s.right = it->right;
           memmove(it, it + 1, (out - it) * sizeof(ring_segment));
           --out;
@@ -293,9 +264,7 @@ template <typename token_t> struct ring_segment {
         *out++ = s;
         break;
       } else {
-        for (++it; it != end &&
-                   ((*it == s) || (it->left >= s.left && s.right > it->left));
-             ++it) {
+        for (++it; it != end && ((*it == s) || (it->left >= s.left && s.right > it->left)); ++it) {
           s.right = it->right;
         }
 
@@ -306,8 +275,7 @@ template <typename token_t> struct ring_segment {
     }
 
     segments->resize(out - segments->data());
-    if (segments->size() == 1 &&
-        segments->back().left == segments->back().right) {
+    if (segments->size() == 1 && segments->back().left == segments->back().right) {
       const auto MinTokenValue = std::numeric_limits<token_t>::min();
 
       segments->pop_back();
@@ -316,15 +284,12 @@ template <typename token_t> struct ring_segment {
   }
 
   static void sort_and_deoverlap(std::vector<ring_segment> *const segments) {
-    std::sort(
-        segments->begin(), segments->end(), [](const auto &a, const auto &b) {
-          return a.left < b.left || (a.left == b.left && a.right < b.right);
-        });
+    std::sort(segments->begin(), segments->end(),
+              [](const auto &a, const auto &b) { return a.left < b.left || (a.left == b.left && a.right < b.right); });
     deoverlap(segments);
   }
 
-  static void normalize(const ring_segment *const segments,
-                        const uint32_t segmentsCnt,
+  static void normalize(const ring_segment *const segments, const uint32_t segmentsCnt,
                         std::vector<ring_segment> *const out) {
     ring_segment res[2];
 
@@ -336,8 +301,7 @@ template <typename token_t> struct ring_segment {
     sort_and_deoverlap(out);
   }
 
-  static auto normalize(const ring_segment *const segments,
-                        const uint32_t segmentsCnt) {
+  static auto normalize(const ring_segment *const segments, const uint32_t segmentsCnt) {
     std::vector<ring_segment> res;
     normalize(segments, segmentsCnt, &res);
     return res;
@@ -351,19 +315,15 @@ template <typename token_t> struct ring_segment {
     }
   }
 
-  constexpr bool wraps() const noexcept {
-    return tokens_wrap_around(left, right);
-  }
+  constexpr bool wraps() const noexcept { return tokens_wrap_around(left, right); }
 
   inline bool intersects(const ring_segment that) const noexcept {
     ring_segment out[2];
     return intersection(that, out);
   }
 
-  static uint8_t
-  _intersection_of_two_wrapping_segments(const ring_segment &first,
-                                         const ring_segment &that,
-                                         ring_segment *intersection) noexcept {
+  static uint8_t _intersection_of_two_wrapping_segments(const ring_segment &first, const ring_segment &that,
+                                                        ring_segment *intersection) noexcept {
     if (that.right > first.left) {
       intersection[0] = ring_segment(first.left, that.right);
       intersection[1] = ring_segment(that.left, first.right);
@@ -374,9 +334,8 @@ template <typename token_t> struct ring_segment {
     }
   }
 
-  static uint8_t _intersection_of_single_wrapping_segment(
-      const ring_segment &wrapping, const ring_segment &other,
-      ring_segment *intersection) noexcept {
+  static uint8_t _intersection_of_single_wrapping_segment(const ring_segment &wrapping, const ring_segment &other,
+                                                          ring_segment *intersection) noexcept {
     uint8_t size{0};
     if (other.contains(wrapping.right)) {
       intersection[size++] = ring_segment(other.left, wrapping.right);
@@ -389,8 +348,7 @@ template <typename token_t> struct ring_segment {
     return size;
   }
 
-  uint8_t intersection(const ring_segment &that,
-                       ring_segment *out) const noexcept {
+  uint8_t intersection(const ring_segment &that, ring_segment *out) const noexcept {
     if (that.contains(*this)) {
       *out = *this;
       return 1;
@@ -406,8 +364,7 @@ template <typename token_t> struct ring_segment {
           return 0;
         }
 
-        *out = ring_segment(std::max<token_t>(left, that.left),
-                            std::min<token_t>(right, that.right));
+        *out = ring_segment(std::max<token_t>(left, that.left), std::min<token_t>(right, that.right));
         return 1;
       } else if (thisWraps && thatWraps) {
         if (left < that.left) {
@@ -423,8 +380,7 @@ template <typename token_t> struct ring_segment {
     }
   }
 
-  uint8_t subdivide(const ring_segment &contained,
-                    ring_segment *const out) const noexcept {
+  uint8_t subdivide(const ring_segment &contained, ring_segment *const out) const noexcept {
     if (contained.contains(*this)) {
       return 0;
     }
@@ -454,39 +410,38 @@ template <typename token_t> struct ring_segment {
     }
   }
 
-  uint8_t difference(const ring_segment &rhs,
-                     ring_segment *const result) const {
+  uint8_t difference(const ring_segment &rhs, ring_segment *const result) const {
     ring_segment intersectionSet[2];
     switch (intersection(rhs, intersectionSet)) {
-    case 0: {
-      *result = rhs;
-      return 1;
-    }
+      case 0:
+        {
+          *result = rhs;
+          return 1;
+        }
 
-    case 1: {
-      *result = rhs;
-      return rhs.subdivide(intersectionSet[0].result);
-    }
+      case 1:
+        {
+          *result = rhs;
+          return rhs.subdivide(intersectionSet[0].result);
+        }
 
-    default: {
-      const auto first = intersectionSet[0], second = intersectionSet[1];
-      ring_segment tmp[2];
+      default:
+        {
+          const auto first = intersectionSet[0], second = intersectionSet[1];
+          ring_segment tmp[2];
 
-      rhs.subdivide(first, tmp);
-      return tmp[0].subdivide(second, result);
-    }
+          rhs.subdivide(first, tmp);
+          return tmp[0].subdivide(second, result);
+        }
     }
   }
 
-  std::experimental::optional<std::pair<ring_segment, ring_segment>>
-  split(const token_t segmentToken) const noexcept {
-    if (left == segmentToken || right == segmentToken ||
-        !contains(segmentToken)) {
+  std::experimental::optional<std::pair<ring_segment, ring_segment>> split(const token_t segmentToken) const noexcept {
+    if (left == segmentToken || right == segmentToken || !contains(segmentToken)) {
       return {};
     }
 
-    return {
-        {ring_segment(left, segmentToken), ring_segment(segmentToken, right)}};
+    return {{ring_segment(left, segmentToken), ring_segment(segmentToken, right)}};
   }
 
 #ifdef HAVE_SWITCH
@@ -501,9 +456,7 @@ template <typename token_t> struct ring_segment {
   }
 #endif
 
-  static bool segments_contain(const token_t token,
-                               const ring_segment *const segments,
-                               const uint32_t cnt) {
+  static bool segments_contain(const token_t token, const ring_segment *const segments, const uint32_t cnt) {
     if (!cnt) {
       return false;
     }
@@ -531,7 +484,8 @@ template <typename token_t> struct ring_segment {
   }
 };
 
-template <typename T> struct Ring {
+template <typename T>
+struct Ring {
   using token_t = T;
   using segment_t = ring_segment<T>;
 
@@ -562,24 +516,15 @@ template <typename T> struct Ring {
     return UINT32_MAX;
   }
 
-  inline bool is_set(const T token) const noexcept {
-    return index_of(token) != UINT32_MAX;
-  }
+  inline bool is_set(const T token) const noexcept { return index_of(token) != UINT32_MAX; }
 
-  inline uint32_t search(const T token) const noexcept {
-    return consistent_hashing::search(tokens, cnt, token);
-  }
+  inline uint32_t search(const T token) const noexcept { return consistent_hashing::search(tokens, cnt, token); }
 
-  inline uint32_t index_owner_of(const T token) const noexcept {
-    return search(token) % cnt;
-  }
+  inline uint32_t index_owner_of(const T token) const noexcept { return search(token) % cnt; }
 
-  inline auto token_owner_of(const T token) const noexcept {
-    return tokens[index_owner_of(token)];
-  }
+  inline auto token_owner_of(const T token) const noexcept { return tokens[index_owner_of(token)]; }
 
-  constexpr const T &
-  token_predecessor_by_index(const uint32_t idx) const noexcept {
+  constexpr const T &token_predecessor_by_index(const uint32_t idx) const noexcept {
     return tokens[(idx + (cnt - 1)) % cnt];
   }
 
@@ -587,22 +532,15 @@ template <typename T> struct Ring {
     return token_predecessor_by_index(index_of(token));
   }
 
-  constexpr const T &
-  token_successor_by_index(const uint32_t idx) const noexcept {
-    return tokens[(idx + 1) % cnt];
-  }
+  constexpr const T &token_successor_by_index(const uint32_t idx) const noexcept { return tokens[(idx + 1) % cnt]; }
 
-  constexpr const T &token_successor(const T token) const noexcept {
-    return token_successor_by_index(index_of(token));
-  }
+  constexpr const T &token_successor(const T token) const noexcept { return token_successor_by_index(index_of(token)); }
 
   constexpr auto index_segment(const uint32_t idx) const noexcept {
     return ring_segment<T>(tokens[(idx + (cnt - 1)) % cnt], tokens[idx]);
   }
 
-  constexpr auto token_segment(const T token) const noexcept {
-    return index_segment(index_of(token));
-  }
+  constexpr auto token_segment(const T token) const noexcept { return index_segment(index_of(token)); }
 
   void segments(std::vector<ring_segment<T>> *const res) const {
     if (cnt) {
@@ -628,16 +566,13 @@ template <typename T> struct Ring {
       res.push_back({token_predecessor_by_index(idx), token});
     }
 
-    std::sort(res.begin(), res.end(),
-              [](const auto &a, const auto &b) { return a.left < b.left; });
+    std::sort(res.begin(), res.end(), [](const auto &a, const auto &b) { return a.left < b.left; });
     return res;
   }
 
-  static auto compute_segments_ownership_updates(
-      const std::vector<segment_t> &currentSegmentsInput,
-      const std::vector<segment_t> &updateSegmentsInput) {
-    std::vector<segment_t> toFetch, toStream, current, updated, toFetchFinal,
-        toStreamFinal;
+  static auto compute_segments_ownership_updates(const std::vector<segment_t> &currentSegmentsInput,
+                                                 const std::vector<segment_t> &updateSegmentsInput) {
+    std::vector<segment_t> toFetch, toStream, current, updated, toFetchFinal, toStreamFinal;
     segment_t segmentsList[2];
 
     current = currentSegmentsInput;
@@ -651,8 +586,7 @@ template <typename T> struct Ring {
       for (const auto updateSegment : updated) {
         if (curSegment.intersects(updateSegment)) {
           toStream.insert(toStream.end(), segmentsList,
-                          segmentsList + updateSegment.difference(
-                                             curSegment, segmentsList));
+                          segmentsList + updateSegment.difference(curSegment, segmentsList));
         }
       }
 
@@ -667,8 +601,7 @@ template <typename T> struct Ring {
       for (const auto curSegment : current) {
         if (updatedSegment.intersects(curSegment)) {
           toFetch.insert(toFetch.end(), segmentsList,
-                         segmentsList + curSegment.difference(updatedSegment,
-                                                              segmentsList));
+                         segmentsList + curSegment.difference(updatedSegment, segmentsList));
         }
       }
 
@@ -687,9 +620,7 @@ template <typename T> struct Ring {
   }
 
   template <typename L>
-  auto token_replicas_basic(const token_t token,
-                            const uint8_t replicationFactor,
-                            L &&endpoint_token) const {
+  auto token_replicas_basic(const token_t token, const uint8_t replicationFactor, L &&endpoint_token) const {
     using node_t typename std::result_of<L(uint32_t)>::type;
     std::vector<node_t> nodes;
     const auto base = index_owner_of(token);
@@ -712,18 +643,16 @@ template <typename T> struct Ring {
     return nodes;
   }
 
-  std::pair<std::vector<token_t>, std::vector<node_t>>
-  new_topology(const node_t *const ringTokensNodes,
-               const std::unordered_map<node_t, std::vector<token_t>>
-                   &futureNodesTokens) const {
+  std::pair<std::vector<token_t>, std::vector<node_t>> new_topology(
+    const node_t *const ringTokensNodes,
+    const std::unordered_map<node_t, std::vector<token_t>> &futureNodesTokens) const {
     std::vector<token_t> transientRingTokens;
     std::vector<node_t> transientRingTokensNodes;
     std::unordered_map<token_t, node_t> map;
 
     for (uint32_t i{0}; i != cnt; ++i) {
       const auto token = tokens[i];
-      if (futureNodesTokens.find(ringTokensNodes[i]) ==
-          futureNodesTokens.end()) {
+      if (futureNodesTokens.find(ringTokensNodes[i]) == futureNodesTokens.end()) {
         transientRingTokens.push_back(tokens[i]);
         map.insert(({tokens[i], ringTokensNodes[i]}));
       }
@@ -731,8 +660,7 @@ template <typename T> struct Ring {
 
     for (const auto &it : futureNodesTokens) {
       const auto node = it.first;
-      transientRingTokens.insert(transientRingTokens.end(), it.second.data(),
-                                 it.second.data() + it.send.size());
+      transientRingTokens.insert(transientRingTokens.end(), it.second.data(), it.second.data() + it.send.size());
       for (const auto token : it.second) {
         map.insert({token, node});
       }
@@ -745,13 +673,11 @@ template <typename T> struct Ring {
       transientRingTokensNodes.push_back(map[token]);
     }
 
-    return {std::move(transientRingTokens),
-            std::move(transientRingTokensNodes)};
+    return {std::move(transientRingTokens), std::move(transientRingTokensNodes)};
   }
 
   template <typename node_t, typename L>
-  static node_t *filter_by_distance(node_t *const nodes,
-                                    const node_t *const end, L &&l) {
+  static node_t *filter_by_distance(node_t *const nodes, const node_t *const end, L &&l) {
     using dist_t = typename std::result_of<L(node_t)>::type;
     dist_t min;
     uint32_t out{0};
@@ -772,44 +698,34 @@ template <typename T> struct Ring {
   }
 
   template <typename node_t, typename L>
-  auto transition(const node_t *const ringTokensNodes,
-                  const std::unordered_map < node_t,
-                  std::vector<token_t> &futureNodesTokens,
-                  L &&replicas_for) const {
+  auto transition(const node_t *const ringTokensNodes, const std::unordered_map < node_t,
+                  std::vector<token_t> &futureNodesTokens, L &&replicas_for) const {
     static constexpr size_t maxReplicasCnt{16};
-    const auto segments_of =
-        [&replicas_for](const Ring &ring, const node_t *const ringTokensNodes,
-                        const node_t node, std::vector<segment_t> *const res) {
-          node_t replicas[maxReplication];
+    const auto segments_of = [&replicas_for](const Ring &ring, const node_t *const ringTokensNodes, const node_t node,
+                                             std::vector<segment_t> *const res) {
+      node_t replicas[maxReplication];
 
-          for (uint32_t i{0}; i != ring.cnt; ++i) {
-            const auto token = ring.tokens[i];
-            const auto replicasCnt =
-                replicas_for(ring, ringTokensNodes, token, repolicas);
+      for (uint32_t i{0}; i != ring.cnt; ++i) {
+        const auto token = ring.tokens[i];
+        const auto replicasCnt = replicas_for(ring, ringTokensNodes, token, repolicas);
 
-            if (std::find(replicas, replicas + replicasCnt, node) !=
-                replicas + replicasCnt) {
-              res->push_back({ring.token_predecessor_by_index(i), token});
-            }
-          }
+        if (std::find(replicas, replicas + replicasCnt, node) != replicas + replicasCnt) {
+          res->push_back({ring.token_predecessor_by_index(i), token});
+        }
+      }
 
-          std::sort(res->begin(), res->end(), [](const auto &a, const auto &b) {
-            return a.left < b.left
-          });
-        };
+      std::sort(res->begin(), res->end(), [](const auto &a, const auto &b) { return a.left < b.left });
+    };
 
-    const auto transientRingTopology =
-        new_topology(ringTokensNodes, futureNodesTokens);
+    const auto transientRingTopology = new_topology(ringTokensNodes, futureNodesTokens);
     const auto &transientRingTokens = transientRingTopology.first;
     const auto &transientRingTokensNodes = transientRingTopology.second;
-    const Ring transientRing(transientRingTokens.data(),
-                             transientRingTokens.size());
+    const Ring transientRing(transientRingTokens.data(), transientRingTokens.size());
     const auto transientRingSegments = transientRing.segments();
     const auto currentRingSegments = segments();
     std::vector<segment_t> outSegments;
     segment_t segmentsList[2];
-    std::vector<std::pair<segment_t, std::pair<node_t, std::vector<node_t>>>>
-        plan;
+    std::vector<std::pair<segment_t, std::pair<node_t, std::vector<node_t>>>> plan;
     std::unordered_map<node_t, std::vector<segment_t>> curRingServeMap;
     std::vector<node_t> replicas;
     node_t tokenReplicas[maxReplicasCnt], futureReplicas[maxReplicasCnt];
@@ -818,16 +734,14 @@ template <typename T> struct Ring {
     {
       std::vector<std::pair<node_t, segment_t>> v;
       for (const auto segment : currentRingSegments) {
-        const auto n =
-            replicas_for(*this, ringTokensNodes, segment.right, tokenReplicas);
+        const auto n = replicas_for(*this, ringTokensNodes, segment.right, tokenReplicas);
 
         for (uint32_t i{0}; i < n; i++) {
           v.push_back({tokenReplicas[i], segment});
         }
       }
 
-      std::sort(v.begin(), v.end(),
-                [](const auto &a, const auto &b) { return a.first < b.first });
+      std::sort(v.begin(), v.end(), [](const auto &a, const auto &b) { return a.first < b.first });
 
       const auto n = v.size();
       const auto all = v.data();
@@ -850,16 +764,14 @@ template <typename T> struct Ring {
       replicaForSegmentsFuture.clear();
       replicaForSegmentsNow.clear();
 
-      segments_of(transientRing, transientRingTokensNodes.data(), node,
-                  &replicaForSegmentsFuture);
+      segments_of(transientRing, transientRingTokensNodes.data(), node, &replicaForSegmentsFuture);
       segments_of(*this, ringTokensNodes, node, &replicaForSegmentsNow);
 
       for (const auto futureSegment : replicaForSegmentsFuture) {
         const auto futureSegmentWraps = futureSegment.wraps();
 
         outSegments.clear();
-        segment_t::mask_segments(&futureSegment, (&futureSegment) + 1,
-                                 replicaForSegmentsNow, &outSegments);
+        segment_t::mask_segments(&futureSegment, (&futureSegment) + 1, replicaForSegmentsNow, &outSegments);
 
         if (outSegments.empty()) {
           continue;
@@ -868,8 +780,7 @@ template <typename T> struct Ring {
         for (const auto it : currentRingSegments) {
           if (it.right <= futureSegment.left) {
             continue;
-          } else if (it.left > futureSegment.right && !futureSegmentWraps &&
-                     !it.wraps()) {
+          } else if (it.left > futureSegment.right && !futureSegmentWraps && !it.wraps()) {
             break;
           }
 
@@ -880,9 +791,7 @@ template <typename T> struct Ring {
           }
 
           const std::vector<node_t> replicas(
-              tokenReplicas,
-              tokenReplicas + replicas_for(*this, ringTokensNodes, it.right,
-                                           tokenReplicas));
+            tokenReplicas, tokenReplicas + replicas_for(*this, ringTokensNodes, it.right, tokenReplicas));
 
           for (uint8_t i{0}; i != cnt; ++i) {
             plan.push_back({segmentsList[i], {node, replicas}});
@@ -897,35 +806,29 @@ template <typename T> struct Ring {
         for (const auto futureSegment : transientRingSegments) {
           if (futureSegment.right <= currentSegment.left) {
             continue;
-          } else if (futureSegment.left > currentSegment.right &&
-                     !currentSegmentWraps && !futureSegment.wraps()) {
+          } else if (futureSegment.left > currentSegment.right && !currentSegmentWraps && !futureSegment.wraps()) {
             break;
           }
 
-          const auto cnt =
-              futureSegment.intersection(currentSegment, segmentsList);
+          const auto cnt = futureSegment.intersection(currentSegment, segmentsList);
           if (!cnt) {
             continue;
           }
 
           const auto futureReplicasCnt =
-              std::remove_if(futureReplicas,
-                             futureReplicas +
-                                 replicas_for(transientRing,
-                                              transientRingTokensNodes.data(),
-                                              futureSegment.right,
-                                              futureReplicas),
-                             [node, &futureNodesTokens](const node_t target) {
-                               if (target == node) {
-                                 return true;
-                               } else if (futureNodesTokens.find(target) !=
-                                          futureNodesTokens.end()) {
-                                 return true;
-                               } else {
-                                 return false;
-                               }
-                             }) -
-              futureReplicas;
+            std::remove_if(futureReplicas,
+                           futureReplicas + replicas_for(transientRing, transientRingTokensNodes.data(),
+                                                         futureSegment.right, futureReplicas),
+                           [node, &futureNodesTokens](const node_t target) {
+                             if (target == node) {
+                               return true;
+                             } else if (futureNodesTokens.find(target) != futureNodesTokens.end()) {
+                               return true;
+                             } else {
+                               return false;
+                             }
+                           }) -
+            futureReplicas;
 
           for (uint8_t i{0}; i != cnt; i++) {
             const auto subSegment = segmentsList[i];
@@ -936,17 +839,13 @@ template <typename T> struct Ring {
               if (!haveSources) {
                 replicas.clear();
                 replicas.insert(replicas.end(), tokenReplicas,
-                                tokenReplicas +
-                                    replicas_for(*this, ringTokensNodes, token,
-                                                 tokenReplicas));
+                                tokenReplicas + replicas_for(*this, ringTokensNodes, token, tokenReplicas));
                 haveSources = true;
               }
 
-              if (auto s = curRingServeMap.find(target);
-                  s != curRingServeMap.end()) {
+              if (auto s = curRingServeMap.find(target); s != curRingServeMap.end()) {
                 outSegments.clear();
-                segment_t::mask_segments(&subSegment, (&subSegment) + 1,
-                                         s->second, &outSegmets);
+                segment_t::mask_segments(&subSegment, (&subSegment) + 1, s->second, &outSegmets);
 
                 for (const auto s : outSegments) {
                   plan.push_back({s, {target, replicas}});
@@ -963,27 +862,23 @@ template <typename T> struct Ring {
     return plan;
   }
 };
-} // namespace consistent_hashing
+}  // namespace consistent_hashing
 
 #ifdef HAVE_SWITCH
 template <typename token_t>
-static inline void
-PrintImpl(Buffer &b, const consistent_hashing::ring_segment<token_t> &segment) {
+static inline void PrintImpl(Buffer &b, const consistent_hashing::ring_segment<token_t> &segment) {
   b.append("(", segment.left, ", ", segment.right, "]");
 }
 
 template <typename T>
-static inline void PrintImpl(Buffer &b,
-                             const consistent_hashing::Ring<T> &ring) {
+static inline void PrintImpl(Buffer &b, const consistent_hashing::Ring<T> &ring) {
   b.append(_S32("(( "));
   if (const auto cnt = ring.cnt) {
     for (uint32_t i{0}; i != cnt; i++) {
-      b.append(consistent_hashing::ring_segment<T>(ring.tokens[i - 1],
-                                                   ring.tokens[i], ","));
+      b.append(consistent_hashing::ring_segment<T>(ring.tokens[i - 1], ring.tokens[i], ","));
     }
 
-    b.append(consistent_hashing::ring_segment<T>(ring.tokens[cnt - 1],
-                                                 ring.tokens[0]));
+    b.append(consistent_hashing::ring_segment<T>(ring.tokens[cnt - 1], ring.tokens[0]));
   }
 
   b.append(_S32(" ))"));

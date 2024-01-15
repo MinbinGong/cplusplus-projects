@@ -1,5 +1,5 @@
-#include <iostream>
 #include <bitset>
+#include <iostream>
 #include <string>
 
 unsigned int gray_encode(unsigned int const num) { return num ^ (num >> 1); }

@@ -18,28 +18,28 @@ Min Stack
 using namespace std;
 
 class min_stack {
-   private:
-    stack<int> s, min_s;
+ private:
+  stack<int> s, min_s;
 
-   public:
-    min_stack() = default;
-    ~min_stack() = default;
+ public:
+  min_stack() = default;
+  ~min_stack() = default;
 
-    void push(int x) {
-        s.push(x);
-        if (min_s.empty() || min_s.top() >= x) {
-            min_s.push(x);
-        }
+  void push(int x) {
+    s.push(x);
+    if (min_s.empty() || min_s.top() >= x) {
+      min_s.push(x);
     }
+  }
 
-    void pop() {
-        if (!min_s.empty() && min_s.top() == s.top()) {
-            min_s.pop();
-        }
-        s.pop();
+  void pop() {
+    if (!min_s.empty() && min_s.top() == s.top()) {
+      min_s.pop();
     }
+    s.pop();
+  }
 
-    int top() { return s.top(); }
+  int top() { return s.top(); }
 
-    int get_min() { return min_s.top(); }
+  int get_min() { return min_s.top(); }
 };

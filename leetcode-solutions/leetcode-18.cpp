@@ -23,26 +23,26 @@
 
 */
 std::vector<std::vector<int>> fourSum(std::vector<int>& nums, int target) {
-    int n = nums.size();
-    std::sort(nums.begin(), nums.end());
-    std::set<std::vector<int>> set;
-    std::vector<std::vector<int>> output;
+  int n = nums.size();
+  std::sort(nums.begin(), nums.end());
+  std::set<std::vector<int>> set;
+  std::vector<std::vector<int>> output;
 
-    for (int i = 0; i < n - 3; i++) {
-        for (int j = i + 1; j < n - 2; j++) {
-            for (int k = j + 1; k < n - 1; k++) {
-                for (int l = k + 1; l < n; l++) {
-                    if ((long long)nums[i] + (long long)nums[j] + (long long)nums[k] + (long long)nums[l] == target) {
-                        set.insert({nums[i], nums[j], nums[k], nums[l]});
-                    }
-                }
-            }
+  for (int i = 0; i < n - 3; i++) {
+    for (int j = i + 1; j < n - 2; j++) {
+      for (int k = j + 1; k < n - 1; k++) {
+        for (int l = k + 1; l < n; l++) {
+          if ((long long)nums[i] + (long long)nums[j] + (long long)nums[k] + (long long)nums[l] == target) {
+            set.insert({nums[i], nums[j], nums[k], nums[l]});
+          }
         }
+      }
     }
+  }
 
-    for (auto it : set) {
-        output.push_back(it);
-    }
+  for (auto it : set) {
+    output.push_back(it);
+  }
 
-    return output;
+  return output;
 }

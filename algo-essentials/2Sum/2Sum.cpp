@@ -8,31 +8,31 @@
 using namespace std;
 
 vector<int> twoSum(vector<int>& nums, int target) {
-    unordered_map<int, int> num_map;
-    for (unsigned int i = 0; i < nums.size(); i++) {
-        auto complement = num_map.find(target - nums[i]);
-        if (complement != num_map.end() && complement->second > i) {
-            return {i, complement->second};
-        }
-        num_map[nums[i]] = i;
+  unordered_map<int, int> num_map;
+  for (unsigned int i = 0; i < nums.size(); i++) {
+    auto complement = num_map.find(target - nums[i]);
+    if (complement != num_map.end() && complement->second > i) {
+      return {i, complement->second};
     }
+    num_map[nums[i]] = i;
+  }
 
-    return {-1, -1};
+  return {-1, -1};
 }
 
 vector<int> twoSum2(vector<int>& nums, int target) {
-    unsigned int left{0}, right{nums.size() - 1};
-    while (left < right) {
-        int sum = nums[left] + nums[right];
-        if (sum < target) {
-            ++left;
-        } else if (sum > target) {
-            --right;
-        } else {
-            return {left + 1, right + 1};
-        }
+  unsigned int left{0}, right{nums.size() - 1};
+  while (left < right) {
+    int sum = nums[left] + nums[right];
+    if (sum < target) {
+      ++left;
+    } else if (sum > target) {
+      --right;
+    } else {
+      return {left + 1, right + 1};
     }
-    return {-1, -1};
+  }
+  return {-1, -1};
 }
 
 int main() { return 0; }

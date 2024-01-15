@@ -17,12 +17,12 @@ Max Chunks To Make Sorted
 using namespace std;
 
 int maxChunkToSorted(vector<int>& arr) {
-    int chunks = 0, cur_max = 0;
-    for (int i = 0; i < arr.size(); ++i) {
-        cur_max = max(cur_max, arr[i]);
-        if (cur_max == i) {
-            ++chunks;
-        }
+  int chunks = 0, cur_max = 0;
+  for (int i = 0; i < arr.size(); ++i) {
+    cur_max = max(cur_max, arr[i]);
+    if (cur_max == i) {
+      ++chunks;
     }
-    return chunks;
+  }
+  return chunks;
 }

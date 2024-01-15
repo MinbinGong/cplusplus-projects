@@ -11,16 +11,16 @@
     的条件。因此 dp[i] 可以取的最小值即为 1 + min(dp[i-1], dp[i-4], dp[i-9] · · · )。
  */
 
-#include <vector>
 #include <algorithm>
+#include <vector>
 int numSquares(int n) {
-    std::vector<int> dp(n + 1, n);
-    dp[0] = 0;
-    dp[1] = 1;
-    for (int i = 2; i <= n; ++i) {
-        for (int j = 1; j*j <= i; ++j) {
-            dp[i] = std::min(dp[i], dp[i - j * j] + 1);
-        }
+  std::vector<int> dp(n + 1, n);
+  dp[0] = 0;
+  dp[1] = 1;
+  for (int i = 2; i <= n; ++i) {
+    for (int j = 1; j * j <= i; ++j) {
+      dp[i] = std::min(dp[i], dp[i - j * j] + 1);
     }
-    return dp[n]
+  }
+  return dp[n]
 }

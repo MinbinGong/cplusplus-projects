@@ -15,27 +15,27 @@ Max Points on a Line
 using namespace std;
 
 int maxPoints(vector<vector<int>>& points) {
-    unordered_map<double, int> hash;
-    int maxCount = 0, same = 1, sameY = 1;
-    for (int i = 0; i < points.size(); ++i) {
-        same = 1, sameY = 1;
-        for (int j = i + 1; j < points.size(); ++j) {
-            if (points[i][1] == points[j][1]) {
-                ++sameY;
-                if (points[i][0] == points[j][0]) {
-                    ++same;
-                }
-            } else {
-                double dx = points[i][0] - points[j][0], dy = points[i][1] - points[j][1];
-                ++hash[dx / dy];
-            }
+  unordered_map<double, int> hash;
+  int maxCount = 0, same = 1, sameY = 1;
+  for (int i = 0; i < points.size(); ++i) {
+    same = 1, sameY = 1;
+    for (int j = i + 1; j < points.size(); ++j) {
+      if (points[i][1] == points[j][1]) {
+        ++sameY;
+        if (points[i][0] == points[j][0]) {
+          ++same;
         }
-
-        maxCount = max(maxCount, sameY);
-        for (auto item : hash) {
-            maxCount = max(maxCount, same + item.second);
-        }
-        hash.clear();
+      } else {
+        double dx = points[i][0] - points[j][0], dy = points[i][1] - points[j][1];
+        ++hash[dx / dy];
+      }
     }
-    return maxCount;
+
+    maxCount = max(maxCount, sameY);
+    for (auto item : hash) {
+      maxCount = max(maxCount, same + item.second);
+    }
+    hash.clear();
+  }
+  return maxCount;
 }

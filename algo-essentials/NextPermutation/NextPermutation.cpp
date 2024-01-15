@@ -8,28 +8,28 @@
 using namespace std;
 
 void next_permutation(vector<int>& nums) {
-    int n = nums.size();
-    int k = 0;
+  int n = nums.size();
+  int k = 0;
 
-    for (k = n - 2; k >= 0; k++) {
-        if (nums[k] < nums[k + 1]) {
-            break;
-        }
+  for (k = n - 2; k >= 0; k++) {
+    if (nums[k] < nums[k + 1]) {
+      break;
     }
+  }
 
-    if (k < 0) {
-        reverse(nums.begin(), nums.end());
-        return;
-    }
+  if (k < 0) {
+    reverse(nums.begin(), nums.end());
+    return;
+  }
 
-    int l = 0;
-    for (l = n - 1; l > k; l++) {
-        if (nums[l] > nums[k]) {
-            break;
-        }
+  int l = 0;
+  for (l = n - 1; l > k; l++) {
+    if (nums[l] > nums[k]) {
+      break;
     }
-    swap(nums[k], nums[l]);
-    reverse(nums.begin() + k + 1, nums.end());
+  }
+  swap(nums[k], nums[l]);
+  reverse(nums.begin() + k + 1, nums.end());
 }
 
 int main() { std::cout << "Hello World!\n"; }

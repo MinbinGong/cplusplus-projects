@@ -10,42 +10,42 @@
 using namespace std;
 
 bool canPlace(vector<int>& flowerbed, int n) {
-    if (flowerbed.empty()) {
-        return false;
+  if (flowerbed.empty()) {
+    return false;
+  }
+
+  if (n == 0) {
+    return true;
+  }
+
+  int sz = flowerbed.size();
+  if (sz == 1 && n == 1 && flowerbed[0] == 0) {
+    return true;
+  }
+
+  for (int i = 0; i < sz; i++) {
+    if (i == 0) {
+      if (flowerbed[0] == 0 && sz > 1 && flowerbed[1] == 0) {
+        flowerbed[0] = 1;
+        n--;
+      }
+
+    } else if (i == sz - 1) {
+      if (flowerbed[i] == 0 && sz > 1 && flowerbed[i - 1] == 0) {
+        flowerbed[i] = 1;
+        n--;
+      }
+
+    } else {
+      if (flowerbed[i] == 0 && flowerbed[i - 1] == 0 && flowerbed[i + 1] == 0) {
+        flowerbed[i] = 1;
+        n--;
+      }
     }
 
     if (n == 0) {
-        return true;
+      return true;
     }
-
-    int sz = flowerbed.size();
-    if (sz == 1 && n == 1 && flowerbed[0] == 0) {
-        return true;
-    }
-
-    for (int i = 0; i < sz; i++) {
-        if (i == 0) {
-            if (flowerbed[0] == 0 && sz > 1 && flowerbed[1] == 0) {
-                flowerbed[0] = 1;
-                n--;
-            }
-
-        } else if (i == sz - 1) {
-            if (flowerbed[i] == 0 && sz > 1 && flowerbed[i - 1] == 0) {
-                flowerbed[i] = 1;
-                n--;
-            }
-
-        } else {
-            if (flowerbed[i] == 0 && flowerbed[i - 1] == 0 && flowerbed[i + 1] == 0) {
-                flowerbed[i] = 1;
-                n--;
-            }
-        }
-
-        if (n == 0) {
-            return true;
-        }
-    }
-    return false;
+  }
+  return false;
 }

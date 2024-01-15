@@ -5,29 +5,28 @@
 #include <string>
 using namespace std;
 
-int main()
-{
-	queue<string> q;
+int main() {
+  queue<string> q;
 
-	q.push("These ");
-	q.push("are ");
-	q.push("more than ");
+  q.push("These ");
+  q.push("are ");
+  q.push("more than ");
 
-	cout << q.front();
-	q.pop();
-	cout << q.front();
-	q.pop();
+  cout << q.front();
+  q.pop();
+  cout << q.front();
+  q.pop();
 
-	q.push("four ");
-	q.push("words");
+  q.push("four ");
+  q.push("words");
 
-	q.pop();
+  q.pop();
 
-	cout << q.front();
+  cout << q.front();
 
-	q.pop();
-	cout << q.front() << endl;
-	q.pop();
+  q.pop();
+  cout << q.front() << endl;
+  q.pop();
 
-	cout << "number of elements in the queue: " << q.size() << endl;
+  cout << "number of elements in the queue: " << q.size() << endl;
 }

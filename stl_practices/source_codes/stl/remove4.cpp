@@ -1,18 +1,17 @@
 // stl/remove4.cpp
 
-#include <list>
 #include <algorithm>
+#include <list>
 using namespace std;
 
-int main()
-{
-	list<int> coll;
+int main() {
+  list<int> coll;
 
-	for (int i = 1; i <= 6; ++i) {
-		coll.push_front(i);
-		coll.push_back(i);
-	}
+  for (int i = 1; i <= 6; ++i) {
+    coll.push_front(i);
+    coll.push_back(i);
+  }
 
-	coll.erase(remove(coll.begin(), coll.end(), 3), coll.end());
-	coll.remove(4);
+  coll.erase(remove(coll.begin(), coll.end(), 3), coll.end());
+  coll.remove(4);
 }

@@ -7,36 +7,36 @@
 #include <vector>
 
 struct TreeNode {
-    int val = 0;
-    TreeNode *left = nullptr, *right = nullptr;
-    TreeNode(int x = 0, TreeNode* l = nullptr, TreeNode* r = nullptr) : val(x), left(l), right(r) {}
+  int val = 0;
+  TreeNode *left = nullptr, *right = nullptr;
+  TreeNode(int x = 0, TreeNode* l = nullptr, TreeNode* r = nullptr) : val(x), left(l), right(r) {}
 };
 
 template <typename InputIt>
 TreeNode* buildTree(InputIt in_first, InputIt in_last, InputIt post_first, InputIt post_last) {
-    if (in_first == in_last) {
-        return nullptr;
-    }
+  if (in_first == in_last) {
+    return nullptr;
+  }
 
-    if (post_first == post_last) {
-        return nullptr;
-    }
+  if (post_first == post_last) {
+    return nullptr;
+  }
 
-    const auto val = *std::prev(post_last);
-    TreeNode* root = new TreeNode(val);
+  const auto val = *std::prev(post_last);
+  TreeNode* root = new TreeNode(val);
 
-    auto in_root_pos = std::find(in_first, in_last, val);
-    auto left_size = std::distance(in_first, in_root_pos);
-    auto post_left_last = std::next(post_first, left_size);
+  auto in_root_pos = std::find(in_first, in_last, val);
+  auto left_size = std::distance(in_first, in_root_pos);
+  auto post_left_last = std::next(post_first, left_size);
 
-    root->left = buildTree(in_first, in_root_pos, post_first, post_left_last);
-    root->right = buildTree(std::next(in_root_pos), in_last, post_left_last, std::prev(post_last));
+  root->left = buildTree(in_first, in_root_pos, post_first, post_left_last);
+  root->right = buildTree(std::next(in_root_pos), in_last, post_left_last, std::prev(post_last));
 
-    return root;
+  return root;
 }
 
 TreeNode* buildTree(std::vector<int>& inorder, std::vector<int>& postorder) {
-    return buildTree(std::begin(inorder), std::end(inorder), std::begin(postorder), std::end(postorder));
+  return buildTree(std::begin(inorder), std::end(inorder), std::begin(postorder), std::end(postorder));
 }
 
 int main() { std::cout << "Hello World!\n"; }

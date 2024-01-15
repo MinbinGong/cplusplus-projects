@@ -36,67 +36,67 @@
 using namespace std;
 
 bool solvetab(string s, string p) {
-    vector<vector<int>> dp(s.length() + 1, vector<int>(p.length() + 1, 0));
-    dp[0][0] = true;
+  vector<vector<int>> dp(s.length() + 1, vector<int>(p.length() + 1, 0));
+  dp[0][0] = true;
 
-    for (int i = 0; i < p.length(); i++) {
-        bool flag = true;
-        for (int j = 0; j <= i; j++) {
-            if (p[j - 1] != '*') {
-                flag = false;
-                break;
-            }
-        }
-        dp[0][i] = flag;
+  for (int i = 0; i < p.length(); i++) {
+    bool flag = true;
+    for (int j = 0; j <= i; j++) {
+      if (p[j - 1] != '*') {
+        flag = false;
+        break;
+      }
     }
+    dp[0][i] = flag;
+  }
 
-    for (int i = 0; i < s.length(); i++) {
-        for (int j = 0; j <= p.length(); j++) {
-            if (p[j - 1] == '?' || p[j - 1] == s[i - 1]) {
-                dp[i][j] = dp[i - 1][j - 1];
-            } else if (p[j - 1] == '*') {
-                dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
-            } else {
-                dp[i][j] = false;
-            }
-        }
+  for (int i = 0; i < s.length(); i++) {
+    for (int j = 0; j <= p.length(); j++) {
+      if (p[j - 1] == '?' || p[j - 1] == s[i - 1]) {
+        dp[i][j] = dp[i - 1][j - 1];
+      } else if (p[j - 1] == '*') {
+        dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
+      } else {
+        dp[i][j] = false;
+      }
     }
+  }
 
-    return dp[s.length()][p.length()];
+  return dp[s.length()][p.length()];
 }
 
 bool isMatch1(string s, string p) { return solvetab(s, p); }
 
 bool solve(string &str, string &pattern, int i, int j, vector<vector<int>> &dp) {
-    if (i < 0 && j < 0) {
-        return true;
-    }
-    if (i >= 0 && j < 0) {
+  if (i < 0 && j < 0) {
+    return true;
+  }
+  if (i >= 0 && j < 0) {
+    return false;
+  }
+  if (j >= 0 && i < 0) {
+    for (int k = 0; k <= j; k++) {
+      if (pattern[k] != '*') {
         return false;
+      }
     }
-    if (j >= 0 && i < 0) {
-        for (int k = 0; k <= j; k++) {
-            if (pattern[k] != '*') {
-                return false;
-            }
-        }
-        return true;
-    }
+    return true;
+  }
 
-    if (dp[i][j] != -1) {
-        return dp[i][j];
-    }
+  if (dp[i][j] != -1) {
+    return dp[i][j];
+  }
 
-    if (pattern[j] == '?' || pattern[j] == str[i]) {
-        return dp[i][j] = solve(str, pattern, i - 1, j - 1, dp);
-    } else if (pattern[j] == '*') {
-        return dp[i][j] = solve(str, pattern, i - 1, j, dp) || solve(str, pattern, i, j - 1, dp);
-    } else {
-        return false;
-    }
+  if (pattern[j] == '?' || pattern[j] == str[i]) {
+    return dp[i][j] = solve(str, pattern, i - 1, j - 1, dp);
+  } else if (pattern[j] == '*') {
+    return dp[i][j] = solve(str, pattern, i - 1, j, dp) || solve(str, pattern, i, j - 1, dp);
+  } else {
+    return false;
+  }
 }
 
 bool isMatch2(string s, string p) {
-    vector<vector<int>> dp(s.length(), vector<int>(p.length(), -1));
-    return solve(s, p, s.length() - 1, p.length() - 1, dp);
+  vector<vector<int>> dp(s.length(), vector<int>(p.length(), -1));
+  return solve(s, p, s.length() - 1, p.length() - 1, dp);
 }

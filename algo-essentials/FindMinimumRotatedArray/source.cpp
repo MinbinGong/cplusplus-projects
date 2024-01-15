@@ -1,19 +1,14 @@
 #include <vector>
 
-int findMin(std::vector<int>& const nums)
-{
-    int left = 0, right = nums.size() - 1;
-    while (left < right)
-    {
-        int mid = left + (right - left) / 2;
-        if (nums[mid] < nums[right])
-        {
-            right = mid;
-        }
-        else
-        {
-            left = mid + 1;
-        }
+int findMin(std::vector<int>& const nums) {
+  int left = 0, right = nums.size() - 1;
+  while (left < right) {
+    int mid = left + (right - left) / 2;
+    if (nums[mid] < nums[right]) {
+      right = mid;
+    } else {
+      left = mid + 1;
     }
-    return nums[left];
+  }
+  return nums[left];
 }

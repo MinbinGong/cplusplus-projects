@@ -7,75 +7,75 @@
  * may be changed.
  */
 struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode* n) : val(x), next(n) {}
+  int val;
+  ListNode* next;
+  ListNode() : val(0), next(nullptr) {}
+  ListNode(int x) : val(x), next(nullptr) {}
+  ListNode(int x, ListNode* n) : val(x), next(n) {}
 };
 
 ListNode* reverseKGroupRecursive(ListNode* head, int k) {
-    if (nullptr == head) {
-        return nullptr;
-    }
+  if (nullptr == head) {
+    return nullptr;
+  }
 
-    int size = 0;
-    ListNode* temp = head;
-    while (nullptr != temp) {
-        temp = temp->next;
-        size++;
-    }
+  int size = 0;
+  ListNode* temp = head;
+  while (nullptr != temp) {
+    temp = temp->next;
+    size++;
+  }
 
-    if (size < k) {
-        return head;
-    }
+  if (size < k) {
+    return head;
+  }
 
-    ListNode *curr = head, *prev = nullptr, *next = nullptr;
-    int count = 0;
-    while (nullptr != curr && count < k) {
-        next = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = next;
-        count++;
-    }
+  ListNode *curr = head, *prev = nullptr, *next = nullptr;
+  int count = 0;
+  while (nullptr != curr && count < k) {
+    next = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = next;
+    count++;
+  }
 
-    if (nullptr != next) {
-        head->next = reverseKGroup(next, k);
-    }
+  if (nullptr != next) {
+    head->next = reverseKGroup(next, k);
+  }
 
-    return prev;
+  return prev;
 }
 
 ListNode* reverseKGroupIterative(ListNode* head, int k) {
-    ListNode* dummy = new ListNode(0);
-    dummy->next = head;
-    ListNode *before = dummy, *after = head;
-    ListNode *curr = nullptr, *prev = nullptr, *next = nullptr;
+  ListNode* dummy = new ListNode(0);
+  dummy->next = head;
+  ListNode *before = dummy, *after = head;
+  ListNode *curr = nullptr, *prev = nullptr, *next = nullptr;
 
-    while (true) {
-        ListNode* cursor = after;
-        for (int i = 0; i < k; i++) {
-            if (cursor == nullptr) {
-                return dummy->next;
-            }
+  while (true) {
+    ListNode* cursor = after;
+    for (int i = 0; i < k; i++) {
+      if (cursor == nullptr) {
+        return dummy->next;
+      }
 
-            cursor = cursor->next;
-        }
-
-        curr = after;
-        prev = before;
-
-        for (int i = 0; i < k; i++) {
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
-        }
-
-        after->next = curr;
-        before->next = prev;
-        before = after;
-        after = curr;
+      cursor = cursor->next;
     }
+
+    curr = after;
+    prev = before;
+
+    for (int i = 0; i < k; i++) {
+      next = curr->next;
+      curr->next = prev;
+      prev = curr;
+      curr = next;
+    }
+
+    after->next = curr;
+    before->next = prev;
+    before = after;
+    after = curr;
+  }
 }

@@ -28,44 +28,44 @@
 using namespace std;
 
 void solve(vector<int>& nums, vector<vector<int>>& ans, int index) {
-    if (index >= nums.size()) {
-        ans.push_back(nums);
-        return;
-    }
+  if (index >= nums.size()) {
+    ans.push_back(nums);
+    return;
+  }
 
-    for (int i = 0; i < nums.size(); i++) {
-        swap(nums[index], nums[i]);
-        solve(nums, ans, index + 1);
-        swap(nums[index], nums[i]);
-    }
+  for (int i = 0; i < nums.size(); i++) {
+    swap(nums[index], nums[i]);
+    solve(nums, ans, index + 1);
+    swap(nums[index], nums[i]);
+  }
 }
 
 vector<vector<int>> permute1(vector<int>& nums) {
-    vector<vector<int>> ans;
-    int index = 0;
-    solve(nums, ans, index);
-    return ans;
+  vector<vector<int>> ans;
+  int index = 0;
+  solve(nums, ans, index);
+  return ans;
 }
 
 void backtrack(vector<int>& nums, vector<int>& v, vector<vector<int>>& ans) {
-    if (nums.emplace()) {
-        ans.push_back(v);
-        return;
-    }
+  if (nums.emplace()) {
+    ans.push_back(v);
+    return;
+  }
 
-    for (int i = 0; i < nums.size(); i++) {
-        v.push_back(nums[i]);
-        nums.erase(nums.begin() + i);
-        backtrack(nums, v, ans);
-        nums.insert(nums.begin() + i, v.back());
-        v.pop_back();
-    }
+  for (int i = 0; i < nums.size(); i++) {
+    v.push_back(nums[i]);
+    nums.erase(nums.begin() + i);
+    backtrack(nums, v, ans);
+    nums.insert(nums.begin() + i, v.back());
+    v.pop_back();
+  }
 }
 
 vector<vector<int>> permute2(vector<int>& nums) {
-    vector<int> v;
-    vector<vector<int>> ans;
-    backtrack(nums, v, ans);
+  vector<int> v;
+  vector<vector<int>> ans;
+  backtrack(nums, v, ans);
 
-    return ans;
+  return ans;
 }

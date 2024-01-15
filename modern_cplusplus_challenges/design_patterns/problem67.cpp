@@ -1,112 +1,93 @@
-#include <string_view>
-#include <memory>
-#include <cctype>
 #include <cassert>
+#include <cctype>
+#include <memory>
+#include <string_view>
 
-class password_validator
-{
-public:
-    virtual bool validate(std::string_view passowrd) = 0;
-    virtual ~password_validator() {}
+class password_validator {
+ public:
+  virtual bool validate(std::string_view passowrd) = 0;
+  virtual ~password_validator() {}
 };
 
-class length_validator final : public password_validator
-{
-private:
-    unsigned int length;
+class length_validator final : public password_validator {
+ private:
+  unsigned int length;
 
-public:
-    length_validator(unsigned int min_length) : length(min_length) {}
-    virtual bool validate(std::string_view password) override
-    {
-        return password.length() >= length;
+ public:
+  length_validator(unsigned int min_length) : length(min_length) {}
+  virtual bool validate(std::string_view password) override { return password.length() >= length; }
+};
+
+class password_validator_decorator : public password_validator {
+ private:
+  std::unique_ptr<password_validator> inner;
+
+ public:
+  explicit password_validator_decorator(std::unique_ptr<password_validator> validator) : inner(std::move(validator)) {}
+
+  virtual bool validate(std::string_view password) override { return inner->validate(password); }
+};
+
+class digit_password_validator final : public password_validator_decorator {
+ public:
+  explicit digit_password_validator(std::unique_ptr<password_validator> validator)
+    : password_validator_decorator(std::move(validator)) {}
+
+  virtual bool validate(std::string_view password) override {
+    if (!password_validator_decorator::validate(password)) {
+      return false;
     }
+    return password.find_first_of("0123456789") != std::string::npos;
+  }
 };
 
-class password_validator_decorator : public password_validator
-{
-private:
-    std::unique_ptr<password_validator> inner;
+class case_password_validator final : public password_validator_decorator {
+ public:
+  explicit case_password_validator(std::unique_ptr<password_validator> validator)
+    : password_validator_decorator(std::move(validator)) {}
 
-public:
-    explicit password_validator_decorator(std::unique_ptr<password_validator> validator) : inner(std::move(validator)) {}
-
-    virtual bool validate(std::string_view password) override
-    {
-        return inner->validate(password);
+  virtual bool validate(std::string_view password) override {
+    if (!password_validator_decorator::validate(password)) {
+      return false;
     }
-};
 
-class digit_password_validator final : public password_validator_decorator
-{
-public:
-    explicit digit_password_validator(std::unique_ptr<password_validator> validator) : password_validator_decorator(std::move(validator)) {}
+    bool haslower = false, hasupper = false;
 
-    virtual bool validate(std::string_view password) override
-    {
-        if (!password_validator_decorator::validate(password))
-        {
-            return false;
-        }
-        return password.find_first_of("0123456789") != std::string::npos;
+    for (size_t i = 0; i < password.length() && !(hasupper && haslower); i++) {
+      if (islower(password[i])) {
+        haslower = true;
+      } else if (isupper(password[i])) {
+        hasupper = true;
+      }
     }
+  }
 };
 
-class case_password_validator final : public password_validator_decorator
-{
-public:
-    explicit case_password_validator(std::unique_ptr<password_validator> validator) : password_validator_decorator(std::move(validator)) {}
+class symbol_password_validator final : public password_validator_decorator {
+ public:
+  explicit symbol_password_validator(std::unique_ptr<password_validator> validator)
+    : password_validator_decorator(std::move(validator)) {}
 
-    virtual bool validate(std::string_view password) override
-    {
-        if (!password_validator_decorator::validate(password))
-        {
-            return false;
-        }
-
-        bool haslower = false, hasupper = false;
-
-        for (size_t i = 0; i < password.length() && !(hasupper && haslower); i++)
-        {
-            if (islower(password[i]))
-            {
-                haslower = true;
-            }
-            else if (isupper(password[i]))
-            {
-                hasupper = true;
-            }
-        }
+  virtual bool validate(std::string_view password) override {
+    if (!password_validator_decorator::validate(password)) {
+      return false;
     }
+
+    return password.find_first_of("!@#$%^&*(){}[]?<>") != std::string::npos;
+  }
 };
 
-class symbol_password_validator final : public password_validator_decorator
-{
-public:
-    explicit symbol_password_validator(std::unique_ptr<password_validator> validator) : password_validator_decorator(std::move(validator)) {}
+int main() {
+  auto validator1 = std::make_unique<digit_password_validator>(std::make_unique<length_validator>(8));
 
-    virtual bool validate(std::string_view password) override
-    {
-        if (!password_validator_decorator::validate(password))
-        {
-            return false;
-        }
+  assert(validator1->validate("abc123!@#"));
+  assert(!validator1->validate("abcde!@#"));
 
-        return password.find_first_of("!@#$%^&*(){}[]?<>") != std::string::npos;
-    }
-};
+  auto validator2 = std::make_unique<symbol_password_validator>(std::make_unique<case_password_validator>(
+    std::make_unique<digit_password_validator>(std::make_unique<length_validator>(8))));
 
-int main()
-{
-    auto validator1 = std::make_unique<digit_password_validator>(std::make_unique<length_validator>(8));
+  assert(validator2->validate("Abc123!@#"));
+  assert(!validator2->validate("Abc1234567"));
 
-    assert(validator1->validate("abc123!@#"));
-    assert(!validator1->validate("abcde!@#"));
-
-    auto validator2 = std::make_unique<symbol_password_validator>(std::make_unique<case_password_validator>(std::make_unique<digit_password_validator>(std::make_unique<length_validator>(8))));
-
-    assert(validator2->validate("Abc123!@#"));
-    assert(!validator2->validate("Abc1234567"));
-
-    return 0;
+  return 0;
 }

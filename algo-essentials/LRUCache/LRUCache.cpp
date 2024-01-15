@@ -6,46 +6,46 @@
 #include <unordered_map>
 
 class LRUCache {
-   private:
-    struct CacheNode {
-        int key = INT_MIN;
-        int value = INT_MIN;
-        CacheNode(int k = INT_MIN, int v = INT_MIN) : key(k), value(v) {}
-    };
+ private:
+  struct CacheNode {
+    int key = INT_MIN;
+    int value = INT_MIN;
+    CacheNode(int k = INT_MIN, int v = INT_MIN) : key(k), value(v) {}
+  };
 
-   public:
-    LRUCache(int c) : capacity(c) {}
+ public:
+  LRUCache(int c) : capacity(c) {}
 
-    int get(int key) {
-        if (cacheMap.find(key) == cacheMap.end()) {
-            return -1;
-        }
-
-        cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]);
-        cacheMap[key] = cacheList.begin();
-        return cacheMap[key]->value;
+  int get(int key) {
+    if (cacheMap.find(key) == cacheMap.end()) {
+      return -1;
     }
 
-    void put(int key, int value) {
-        if (cacheMap.find(key) == cacheMap.end()) {
-            if (cacheList.size() == capacity) {
-                cacheMap.erase(cacheList.back().key);
-                cacheList.pop_back();
-            }
+    cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]);
+    cacheMap[key] = cacheList.begin();
+    return cacheMap[key]->value;
+  }
 
-            cacheList.push_front(CacheNode(key, value));
-            cacheMap[key] = cacheList.begin();
-        } else {
-            cacheMap[key]->value = value;
-            cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]);
-            cacheMap[key] = cacheList.begin();
-        }
+  void put(int key, int value) {
+    if (cacheMap.find(key) == cacheMap.end()) {
+      if (cacheList.size() == capacity) {
+        cacheMap.erase(cacheList.back().key);
+        cacheList.pop_back();
+      }
+
+      cacheList.push_front(CacheNode(key, value));
+      cacheMap[key] = cacheList.begin();
+    } else {
+      cacheMap[key]->value = value;
+      cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]);
+      cacheMap[key] = cacheList.begin();
     }
+  }
 
-   private:
-    std::list<CacheNode> cacheList;
-    std::unordered_map<int, std::list<CacheNode>::iterator> cacheMap;
-    int capacity;
+ private:
+  std::list<CacheNode> cacheList;
+  std::unordered_map<int, std::list<CacheNode>::iterator> cacheMap;
+  int capacity;
 };
 
 int main() { std::cout << "Hello World!\n"; }

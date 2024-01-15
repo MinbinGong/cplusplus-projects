@@ -26,44 +26,44 @@
 
 void backtrack(std::string combination, std::string next_digits, std::vector<std::string>& phone_map,
                std::vector<std::string>& output) {
-    if (next_digits.empty()) {
-        output.push_back(combination);
-        return;
-    }
+  if (next_digits.empty()) {
+    output.push_back(combination);
+    return;
+  }
 
-    std::string letters = phone_map[next_digits[0] - '2'];
-    for (char letter : letters) {
-        backtrack(combination + letter, next_digits.substr(1), phone_map, output);
-    }
+  std::string letters = phone_map[next_digits[0] - '2'];
+  for (char letter : letters) {
+    backtrack(combination + letter, next_digits.substr(1), phone_map, output);
+  }
 }
 
 std::vector<std::string> letterCombinations1(std::string digits) {
-    if (digits.empty()) {
-        return {};
-    }
+  if (digits.empty()) {
+    return {};
+  }
 
-    std::vector<std::string> phone_map{"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-    std::vector<std::string> output;
-    backtrack("", digits, phone_map, output);
-    return output;
+  std::vector<std::string> phone_map{"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+  std::vector<std::string> output;
+  backtrack("", digits, phone_map, output);
+  return output;
 }
 
 std::vector<std::string> letterCombinations2(std::string digits) {
-    if (digits.empty()) {
-        return {};
-    }
-    std::vector<std::string> phone_map = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-    std::vector<std::string> combinations = {""};
+  if (digits.empty()) {
+    return {};
+  }
+  std::vector<std::string> phone_map = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+  std::vector<std::string> combinations = {""};
 
-    for (char digit : digits) {
-        std::vector<std::string> new_combinations;
-        for (std::string combination : combinations) {
-            for (char letter : phone_map[digit - '2']) {
-                new_combinations.push_back(combination + letter);
-            }
-        }
-        combinations = new_combinations;
+  for (char digit : digits) {
+    std::vector<std::string> new_combinations;
+    for (std::string combination : combinations) {
+      for (char letter : phone_map[digit - '2']) {
+        new_combinations.push_back(combination + letter);
+      }
     }
+    combinations = new_combinations;
+  }
 
-    return combinations;
+  return combinations;
 }

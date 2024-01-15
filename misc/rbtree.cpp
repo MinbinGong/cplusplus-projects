@@ -1,4 +1,5 @@
 #include "rbtree.hpp"
+
 #include <bits/stdc++.h>
 
 RBtree::RBtree() : root{nullptr} {}
@@ -90,8 +91,7 @@ void RBtree::rotate_right(node *&ptr) {
 void RBtree::fix_insert(node *&ptr) {
   node *parent{nullptr}, *grand_parent{nullptr};
 
-  while (ptr != root && get_color(ptr) == Color::RED &&
-         get_color(ptr->parent) == Color::RED) {
+  while (ptr != root && get_color(ptr) == Color::RED && get_color(ptr->parent) == Color::RED) {
     parent = ptr->parent;
     grand_parent = parent->parent;
 
@@ -146,8 +146,7 @@ void RBtree::fix_delete(node *&node) {
     return;
   }
 
-  if (get_color(node) == Color::RED || get_color(node->left) == Color::RED ||
-      get_color(node->right) == Color::RED) {
+  if (get_color(node) == Color::RED || get_color(node->left) == Color::RED || get_color(node->right) == Color::RED) {
     node *child = node->left != nullptr ? node->left : node->right;
 
     if (node == node->parent->left) {
@@ -180,8 +179,7 @@ void RBtree::fix_delete(node *&node) {
           set_color(parent, Color::RED);
           rotate_left(parent);
         } else {
-          if (get_color(sibling->left) == Color::BLACK &&
-              get_color(sibling->right) == Color::BLACK) {
+          if (get_color(sibling->left) == Color::BLACK && get_color(sibling->right) == Color::BLACK) {
             set_color(sibling, Color::RED);
             if (get_color(parent) == Color::RED) {
               set_color(parent, Color::BLACK);
@@ -211,8 +209,7 @@ void RBtree::fix_delete(node *&node) {
           set_color(parent, Color::RED);
           rotate_right(parent);
         } else {
-          if (get_color(sibling->left) == Color::BLACK &&
-              get_color(sibling->right) == Color::BLACK) {
+          if (get_color(sibling->left) == Color::BLACK && get_color(sibling->right) == Color::BLACK) {
             set_color(sibling, Color::RED);
             if (get_color(parent) == Color::RED) {
               set_color(parent, Color::BLACK);

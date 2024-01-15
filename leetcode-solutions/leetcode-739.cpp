@@ -18,23 +18,23 @@ Daily Temperatures
 using namespace std;
 
 vector<int> dailyTemperatures(vector<int>& temperatures) {
-    int n = temperatures.size();
-    if (n == 0) {
-        return {};
-    }
+  int n = temperatures.size();
+  if (n == 0) {
+    return {};
+  }
 
-    vector<int> ans(n);
-    stack<int> indices;
-    for (int i = 0; i < n; ++i) {
-        while (!indices.empty()) {
-            int preIndex = indices.top();
-            if (temperatures[i] <= temperatures[preIndex]) {
-                break;
-            }
-            indices.pop();
-            ans[preIndex] = i - preIndex;
-        }
-        indices.push(i);
+  vector<int> ans(n);
+  stack<int> indices;
+  for (int i = 0; i < n; ++i) {
+    while (!indices.empty()) {
+      int preIndex = indices.top();
+      if (temperatures[i] <= temperatures[preIndex]) {
+        break;
+      }
+      indices.pop();
+      ans[preIndex] = i - preIndex;
     }
-    return ans;
+    indices.push(i);
+  }
+  return ans;
 }

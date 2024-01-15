@@ -1,40 +1,37 @@
 ListNode* sortedMerge(ListNode* l, ListNode* r) {
-	if (!l || !r)
-		return !l ? r : l;
+  if (!l || !r) return !l ? r : l;
 
-	ListNode* m;
+  ListNode* m;
 
-	if (l->val < r->val) {
-		m = l;
-		m->next = sortedMerge(l->next, r);
-	}
-	else {
-		m = r;
-		m->next = sortedMerge(l, r->next);
-	}
+  if (l->val < r->val) {
+    m = l;
+    m->next = sortedMerge(l->next, r);
+  } else {
+    m = r;
+    m->next = sortedMerge(l, r->next);
+  }
 
-	return m;
+  return m;
 }
 
 ListNode* frontBackSplit(ListNode* head) {
-	ListNode* slow = head, * fast = head->next->next;
+  ListNode *slow = head, *fast = head->next->next;
 
-	while (fast && fast->next) {
-		slow = slow->next;
-		fast = fast->next->next;
-	}
+  while (fast && fast->next) {
+    slow = slow->next;
+    fast = fast->next->next;
+  }
 
-	return slow;
+  return slow;
 }
 
 ListNode* sortList(ListNode* head) {
-	if (!head || !head->next)
-		return head;
+  if (!head || !head->next) return head;
 
-	ListNode* m = frontBackSplit(head);
-	ListNode* r = sortList(m->next);
-	m->next = nullptr;
-	ListNode* l = sortList(head);
+  ListNode* m = frontBackSplit(head);
+  ListNode* r = sortList(m->next);
+  m->next = nullptr;
+  ListNode* l = sortList(head);
 
-	return sortedMerge(l, r);
+  return sortedMerge(l, r);
 }

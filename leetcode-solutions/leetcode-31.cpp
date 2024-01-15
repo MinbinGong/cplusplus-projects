@@ -4,7 +4,7 @@
  *
  * For example, for arr = [1,2,3], the following are all the permutations of
  * arr: [1,2,3], [1,3,2], [2, 1, 3], [2, 3, 1], [3,1,2], [3,2,1].
- * 
+ *
  * The next permutation of an array of integers is the next lexicographically
  * greater permutation of its integer. More formally, if all the permutations
  * of the array are sorted in one container according to their lexicographical
@@ -20,35 +20,35 @@
  * permutation of nums.
  * The replacement must be in place and use only constant extra memory.
  */
-#include <vector>
 #include <algorithm>
+#include <vector>
 
 void next_permutation(std::vector<int>& nums) {
-    int n = nums.size();
-    int imp = n - 1;
+  int n = nums.size();
+  int imp = n - 1;
 
-    while (imp >= 0) {
-        if (imp == 0) {
-            break;
-        }
-
-        if (nums[imp] <= nums[imp - 1]) {
-            imp--;
-        } else {
-            break;
-        }
+  while (imp >= 0) {
+    if (imp == 0) {
+      break;
     }
 
-    if (imp != 0) {
-        int greater = -1;
-        for (int i = imp; i < n; i++) {
-            if (greater == -1 || nums[greater] > nums[i]) {
-                if (nums[imp - 1] < nums[i]) {
-                    greater = i;
-                }
-            }
-        }
-
-        std::swap(nums[greater], nums[imp - 1]);
+    if (nums[imp] <= nums[imp - 1]) {
+      imp--;
+    } else {
+      break;
     }
+  }
+
+  if (imp != 0) {
+    int greater = -1;
+    for (int i = imp; i < n; i++) {
+      if (greater == -1 || nums[greater] > nums[i]) {
+        if (nums[imp - 1] < nums[i]) {
+          greater = i;
+        }
+      }
+    }
+
+    std::swap(nums[greater], nums[imp - 1]);
+  }
 }

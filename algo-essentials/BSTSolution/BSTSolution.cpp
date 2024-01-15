@@ -5,70 +5,70 @@
 #include <vector>
 
 struct TreeNode {
-    int val = 0;
-    TreeNode* left = nullptr;
-    TreeNode* right = nullptr;
-    TreeNode(int x = 0, TreeNode* l = nullptr, TreeNode* r = nullptr) : val(x), left(l), right(r) {}
+  int val = 0;
+  TreeNode* left = nullptr;
+  TreeNode* right = nullptr;
+  TreeNode(int x = 0, TreeNode* l = nullptr, TreeNode* r = nullptr) : val(x), left(l), right(r) {}
 };
 
 std::vector<int> preorderTraversal(TreeNode* root) {
-    std::vector<int> result;
-    TreeNode *cur = root, *prev = nullptr;
+  std::vector<int> result;
+  TreeNode *cur = root, *prev = nullptr;
 
-    while (cur != nullptr) {
-        if (cur->left == nullptr) {
-            result.push_back(cur->val);
-            prev = cur;
-            cur = cur->right;
-        } else {
-            TreeNode* node = cur->left;
-            while (node->right != nullptr && node->right != cur) {
-                node = node->right;
-            }
+  while (cur != nullptr) {
+    if (cur->left == nullptr) {
+      result.push_back(cur->val);
+      prev = cur;
+      cur = cur->right;
+    } else {
+      TreeNode* node = cur->left;
+      while (node->right != nullptr && node->right != cur) {
+        node = node->right;
+      }
 
-            if (node->right == nullptr) {
-                result.push_back(cur->val);
-                node->right = cur;
-                prev = cur;
-                cur = cur->left;
-            } else {
-                node->right = nullptr;
-                cur = cur->right;
-            }
-        }
+      if (node->right == nullptr) {
+        result.push_back(cur->val);
+        node->right = cur;
+        prev = cur;
+        cur = cur->left;
+      } else {
+        node->right = nullptr;
+        cur = cur->right;
+      }
     }
+  }
 
-    return result;
+  return result;
 }
 
 std::vector<int> inorderTraversal(TreeNode* root) {
-    std::vector<int> result;
-    TreeNode *cur = root, *prev = nullptr;
+  std::vector<int> result;
+  TreeNode *cur = root, *prev = nullptr;
 
-    while (cur != nullptr) {
-        if (cur->left == nullptr) {
-            result.push_back(cur->val);
-            prev = cur;
-            cur = cur->right;
-        } else {
-            TreeNode* node = cur->left;
-            while (node->right != nullptr && node->right != cur) {
-                node = node->right;
-            }
+  while (cur != nullptr) {
+    if (cur->left == nullptr) {
+      result.push_back(cur->val);
+      prev = cur;
+      cur = cur->right;
+    } else {
+      TreeNode* node = cur->left;
+      while (node->right != nullptr && node->right != cur) {
+        node = node->right;
+      }
 
-            if (node->right == nullptr) {
-                node->right = cur;
-                cur = cur->left;
-            } else {
-                result.push_back(cur->val);
-                node->right = nullptr;
-                prev = cur;
-                cur = cur->right;
-            }
-        }
+      if (node->right == nullptr) {
+        node->right = cur;
+        cur = cur->left;
+      } else {
+        result.push_back(cur->val);
+        node->right = nullptr;
+        prev = cur;
+        cur = cur->right;
+      }
     }
+  }
 
-    return result;
+  return result;
 }
 int main() { std::cout << "Hello World!\n"; }
 

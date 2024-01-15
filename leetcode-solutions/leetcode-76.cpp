@@ -13,34 +13,34 @@
 using namespace std;
 
 string minWindow(string& src, string& target) {
-    vector<int> chars(128, 0);
-    vector<bool> flag(128, false);
+  vector<int> chars(128, 0);
+  vector<bool> flag(128, false);
 
-    // 先统计target中字符的情况
-    for (int i = 0; i < target.size(); i++) {
-        flag[target[i]] = true;
-        ++chars[target[i]];
-    }
+  // 先统计target中字符的情况
+  for (int i = 0; i < target.size(); i++) {
+    flag[target[i]] = true;
+    ++chars[target[i]];
+  }
 
-    int cnt = 0, l = 0, minLeft = 0, minSize = src.size() + 1;
-    for (int r = 0; r < src.size(); r++) {
-        if (flag[src[r]]) {
-            if (--chars[src[r]] >= 0) {
-                ++cnt;
-            }
-            // 若目前滑动窗口已包含target中全部字符
-            // 则尝试将l右移，在不影响结果的情况下获得最短子字符串
-            while (cnt == target.size()) {
-                if (r - l + 1 < minSize) {
-                    minLeft = l;
-                    minSize = r - l + 1;
-                }
-                if (flag[src[l]] && ++chars[src[l]] > 0) {
-                    --cnt;
-                }
-                ++l;
-            }
+  int cnt = 0, l = 0, minLeft = 0, minSize = src.size() + 1;
+  for (int r = 0; r < src.size(); r++) {
+    if (flag[src[r]]) {
+      if (--chars[src[r]] >= 0) {
+        ++cnt;
+      }
+      // 若目前滑动窗口已包含target中全部字符
+      // 则尝试将l右移，在不影响结果的情况下获得最短子字符串
+      while (cnt == target.size()) {
+        if (r - l + 1 < minSize) {
+          minLeft = l;
+          minSize = r - l + 1;
         }
+        if (flag[src[l]] && ++chars[src[l]] > 0) {
+          --cnt;
+        }
+        ++l;
+      }
     }
-    return minSize > src.size() ? "" : src.substr(minLeft, minSize);
+  }
+  return minSize > src.size() ? "" : src.substr(minLeft, minSize);
 }

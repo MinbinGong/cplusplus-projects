@@ -12,16 +12,16 @@ a + b + c 次前进后同时到达相交节点
 */
 
 struct ListNode {
-    int val = 0;
-    ListNode* next = nullptr;
-    explicit ListNode(int x = 0, ListNode* n = nullptr) : val(x), next(n) {}
+  int val = 0;
+  ListNode* next = nullptr;
+  explicit ListNode(int x = 0, ListNode* n = nullptr) : val(x), next(n) {}
 };
 
 ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
-    ListNode *l1 = headA, *l2 = headB;
-    while (l1 != l2) {
-        l1 = l1 ? l1->next : headB;
-        l2 = l2 ? l2->next : headA;
-    }
-    return l1;
+  ListNode *l1 = headA, *l2 = headB;
+  while (l1 != l2) {
+    l1 = l1 ? l1->next : headB;
+    l2 = l2 ? l2->next : headA;
+  }
+  return l1;
 }

@@ -16,10 +16,10 @@ partial_sum 函数建立，也可以直接遍历一遍 nums 数组，并利用�
 using namespace std;
 
 class NumArr {
-    vector<int> psum;
+  vector<int> psum;
 
-   public:
-    NumArr(vector<int> &nums) : psum(nums.size() + 1, 0) { partial_sum(nums.begin(), nums.end(), psum.begin() + 1); }
+ public:
+  NumArr(vector<int> &nums) : psum(nums.size() + 1, 0) { partial_sum(nums.begin(), nums.end(), psum.begin() + 1); }
 
-    int sumRange(int i, int j) { return psum[j + 1] - psum[i]; }
+  int sumRange(int i, int j) { return psum[j + 1] - psum[i]; }
 };

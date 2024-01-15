@@ -13,25 +13,22 @@
 至于具体实现，因为我们需要获得大小关系，一个便捷的方法就是把孩子和饼干分别排序。
 这样我们就可以从饥饿度最小的孩子和大小最小的饼干出发，计算有多少个对子可以满足条件。
  */
-#include <vector>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
-int findContentChildren(vector<int> &g, vector<int> &s)
-{
-    int gSz = g.size();
-    int sSz = s.size();
-    sort(g.begin(), g.end());
-    sort(s.begin(), s.end());
-    int i = 0, j = 0, ans = 0;
-    while (i < gSz && j < sSz)
-    {
-        if (s[j] >= g[i])
-        {
-            ans++;
-            i++;
-        }
-        j++;
+int findContentChildren(vector<int> &g, vector<int> &s) {
+  int gSz = g.size();
+  int sSz = s.size();
+  sort(g.begin(), g.end());
+  sort(s.begin(), s.end());
+  int i = 0, j = 0, ans = 0;
+  while (i < gSz && j < sSz) {
+    if (s[j] >= g[i]) {
+      ans++;
+      i++;
     }
-    return ans;
+    j++;
+  }
+  return ans;
 }

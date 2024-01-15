@@ -21,28 +21,28 @@
 using namespace std;
 
 void rotate(vector<int>& nums, int k) {
-    int n = nums.size();
-    vector<int> v(n);
-    for (int i = 0; i < n; i++) {
-        v[(i + k) % n] = nums[i];
-    }
-    nums = v;
+  int n = nums.size();
+  vector<int> v(n);
+  for (int i = 0; i < n; i++) {
+    v[(i + k) % n] = nums[i];
+  }
+  nums = v;
 }
 
 void reverse(vector<int>& nums, int i, int j) {
-    while (i < j) {
-        swap(nums[i], nums[j]);
-        i++;
-        j--;
-    }
+  while (i < j) {
+    swap(nums[i], nums[j]);
+    i++;
+    j--;
+  }
 }
 
 void rotate2(vector<int>& nums, int k) {
-    int n = nums.size();
-    k = k % n;
+  int n = nums.size();
+  k = k % n;
 
-    reverse(nums, 0, n - 1);
-    reverse(nums, k, n - 1);
+  reverse(nums, 0, n - 1);
+  reverse(nums, k, n - 1);
 
-    reverse(nums, 0, k - 1);
+  reverse(nums, 0, k - 1);
 }

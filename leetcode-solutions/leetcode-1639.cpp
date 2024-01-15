@@ -5,12 +5,12 @@
 using namespace std;
 
 class Solution1 {
-private:
+ private:
   int dp[1001][1001];
   long long M = 1e9 + 7;
   vector<map<int, int>> chIdx;
 
-private:
+ private:
   long long dfs(string &t, int i, int j) {
     if (i >= chIdx.size()) {
       return j == t.size();
@@ -30,7 +30,7 @@ private:
     return dp[i][j] = res;
   }
 
-public:
+ public:
   int numWays(vector<string> &words, string target) {
     memset(dp, -1, sizeof(dp));
     chIdx.resize(words[0].size());
@@ -44,7 +44,7 @@ public:
 };
 
 class Solution2 {
-public:
+ public:
   int numWays(vector<string> &dict, string target) {
     long mod = 1e9 + 7, M = dict.size(), L = dict[0].size(), N = target.size();
     if (L < N) {

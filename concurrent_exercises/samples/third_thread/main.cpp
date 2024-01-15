@@ -1,13 +1,13 @@
-#include <chrono>
-#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include <chrono>
+#include <iostream>
 #include <thread>
 
 void thread_task(int n) {
   std::this_thread::sleep_for(std::chrono::seconds(n));
-  std::cout << "Hello thread " << std::this_thread::get_id() << " paused " << n
-            << " seconds" << std::endl;
+  std::cout << "Hello thread " << std::this_thread::get_id() << " paused " << n << " seconds" << std::endl;
 }
 
 int main(int argc, const char *argv[]) {

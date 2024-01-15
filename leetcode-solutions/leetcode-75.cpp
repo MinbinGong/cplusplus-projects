@@ -5,31 +5,24 @@
 // respectively.
 // You must solve this problem without using the library's sort function.
 
-#include <vector>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
-void sort_colors(vector<int> &nums)
-{
-    unsigned int low{0}, mid{0}, high{nums.size() - 1};
+void sort_colors(vector<int> &nums) {
+  unsigned int low{0}, mid{0}, high{nums.size() - 1};
 
-    int blue = 0, white = 1, red = 2;
-    while (mid <= high)
-    {
-        if (nums[mid] == blue)
-        {
-            swap(nums[mid], nums[low]);
-            low++;
-            mid++;
-        }
-        else if (nums[mid] == red)
-        {
-            swap(nums[mid], nums[high]);
-            high--;
-        }
-        else
-        {
-            mid++;
-        }
+  int blue = 0, white = 1, red = 2;
+  while (mid <= high) {
+    if (nums[mid] == blue) {
+      swap(nums[mid], nums[low]);
+      low++;
+      mid++;
+    } else if (nums[mid] == red) {
+      swap(nums[mid], nums[high]);
+      high--;
+    } else {
+      mid++;
     }
+  }
 }

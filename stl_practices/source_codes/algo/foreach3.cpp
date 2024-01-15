@@ -4,28 +4,26 @@
 using namespace std;
 
 class MeanValue {
-private:
-	long num;
-	long sum;
-public:
-	MeanValue() :num(0), sum(0) {}
+ private:
+  long num;
+  long sum;
 
-	void operator()(int elem) {
-		++num;
-		sum += elem;
-	}
+ public:
+  MeanValue() : num(0), sum(0) {}
 
-	operator double() {
-		return static_cast<double>(sum) / static_cast<double>(num);
-	}
+  void operator()(int elem) {
+    ++num;
+    sum += elem;
+  }
+
+  operator double() { return static_cast<double>(sum) / static_cast<double>(num); }
 };
 
-int main()
-{
-	vector<int> coll;
+int main() {
+  vector<int> coll;
 
-	INSERT_ELEMENTS(coll, 1, 8);
+  INSERT_ELEMENTS(coll, 1, 8);
 
-	double mv = for_each(coll.begin(), coll.end(), MeanValue());
-	cout << "mean value: " << mv << endl;
+  double mv = for_each(coll.begin(), coll.end(), MeanValue());
+  cout << "mean value: " << mv << endl;
 }

@@ -16,21 +16,21 @@ Maximum Product of Word Lengths
 using namespace std;
 
 int maxProduct(vector<string>& words) {
-    unordered_map<int, int> hash;
-    int ans = 0;
-    for (const string& word : words) {
-        int mask = 0, size = word.size();
-        for (const char& c : word) {
-            mask |= 1 << (c - 'a');
-        }
-
-        hash[mask] = max(hash[mask], size);
-        for (const auto& [hmask, hlen] : hash) {
-            if (!(mask & hmask)) {
-                ans = max(ans, size * hlen);
-            }
-        }
+  unordered_map<int, int> hash;
+  int ans = 0;
+  for (const string& word : words) {
+    int mask = 0, size = word.size();
+    for (const char& c : word) {
+      mask |= 1 << (c - 'a');
     }
 
-    return ans;
+    hash[mask] = max(hash[mask], size);
+    for (const auto& [hmask, hlen] : hash) {
+      if (!(mask & hmask)) {
+        ans = max(ans, size * hlen);
+      }
+    }
+  }
+
+  return ans;
 }

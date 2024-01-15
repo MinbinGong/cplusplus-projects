@@ -5,16 +5,13 @@
 class ipv4 {
   std::array<unsigned char, 4> data;
 
-public:
+ public:
   constexpr ipv4() : data{{0}} {}
-  constexpr ipv4(unsigned char const a, unsigned char const b,
-                 unsigned char const c, unsigned char const d)
-      : data{{a, b, c, d}} {}
+  constexpr ipv4(unsigned char const a, unsigned char const b, unsigned char const c, unsigned char const d)
+    : data{{a, b, c, d}} {}
   explicit constexpr ipv4(unsigned long a)
-      : data{{static_cast<unsigned char>((a >> 24) & 0xFF),
-              static_cast<unsigned char>((a >> 16) & 0xFF),
-              static_cast<unsigned char>((a >> 8) & 0xFF),
-              static_cast<unsigned char>(a & 0xFF)}} {}
+    : data{{static_cast<unsigned char>((a >> 24) & 0xFF), static_cast<unsigned char>((a >> 16) & 0xFF),
+            static_cast<unsigned char>((a >> 8) & 0xFF), static_cast<unsigned char>(a & 0xFF)}} {}
   ipv4(ipv4 const &other) noexcept : data(other.data) {}
   ipv4 &operator=(ipv4 const &other) noexcept {
     data = other.data;
@@ -28,15 +25,12 @@ public:
   }
 
   constexpr unsigned long to_ulong() const noexcept {
-    return (static_cast<unsigned long>(data[0]) << 24) |
-           (static_cast<unsigned long>(data[1]) << 16) |
-           (static_cast<unsigned long>(data[2]) << 8) |
-           static_cast<unsigned long>(data[3]);
+    return (static_cast<unsigned long>(data[0]) << 24) | (static_cast<unsigned long>(data[1]) << 16) |
+           (static_cast<unsigned long>(data[2]) << 8) | static_cast<unsigned long>(data[3]);
   }
 
   friend std::ostream &operator<<(std::ostream &os, const ipv4 &a) {
-    os << static_cast<int>(a.data[0]) << '.' << static_cast<int>(a.data[1])
-       << '.' << static_cast<int>(a.data[2]) << '.'
+    os << static_cast<int>(a.data[0]) << '.' << static_cast<int>(a.data[1]) << '.' << static_cast<int>(a.data[2]) << '.'
        << static_cast<int>(a.data[3]);
     return os;
   }

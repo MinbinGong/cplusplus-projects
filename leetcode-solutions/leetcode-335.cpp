@@ -24,32 +24,26 @@ bool isSelfCrossing(vector<int>& x) {
 #else
 
 bool isSelfCrossing(vector<int>& x) {
-	size_t i = 2;
-	int a = 0;
+  size_t i = 2;
+  int a = 0;
 
-	if (x.size() < 4)
-		return false;
+  if (x.size() < 4) return false;
 
-	while (x[i] > x[i - 2])
-		if (++i == x.size() - 1)
-			return false;
+  while (x[i] > x[i - 2])
+    if (++i == x.size() - 1) return false;
 
-	if (++i > 4)
-		if (x[i - 1] >= (x[i - 3] - x[i - 5]))
-			a = x[i - 4];
+  if (++i > 4)
+    if (x[i - 1] >= (x[i - 3] - x[i - 5])) a = x[i - 4];
 
-	if (i > 3)
-		if (x[i - 1] == x[i - 3] && (x[i - 4] + x[i]) >= x[i - 2])
-			return true;
+  if (i > 3)
+    if (x[i - 1] == x[i - 3] && (x[i - 4] + x[i]) >= x[i - 2]) return true;
 
-	if (x[i] >= (x[i - 2] - a))
-		return true;
+  if (x[i] >= (x[i - 2] - a)) return true;
 
-	while (++i < x.size())
-		if (x[i] >= x[i - 2])
-			return true;
+  while (++i < x.size())
+    if (x[i] >= x[i - 2]) return true;
 
-	return false;
+  return false;
 }
 
 #endif

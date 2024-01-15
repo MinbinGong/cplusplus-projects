@@ -14,45 +14,45 @@ Basic Calculator
 using namespace std;
 
 long parseNum(const string& s, int& i) {
-    long n = 0;
-    while (i < s.length() && isdigit(s[i])) {
-        n = 10 * n + (s[i++] - '0');
-    }
-    return n;
+  long n = 0;
+  while (i < s.length() && isdigit(s[i])) {
+    n = 10 * n + (s[i++] - '0');
+  }
+  return n;
 }
 
 int parseExpr(const string& s, int& i) {
-    char op = '+';
-    long left = 0, right = 0;
-    while (i < s.length()) {
-        if (s[i] != ' ') {
-            long n = parseNum(s, i);
-            switch (op) {
-                case '+':
-                    left += right;
-                    right = n;
-                    break;
-                case '-':
-                    left += right;
-                    right = -n;
-                    break;
-                case '*':
-                    right *= n;
-                    break;
-                default:
-                    break;
-            }
+  char op = '+';
+  long left = 0, right = 0;
+  while (i < s.length()) {
+    if (s[i] != ' ') {
+      long n = parseNum(s, i);
+      switch (op) {
+        case '+':
+          left += right;
+          right = n;
+          break;
+        case '-':
+          left += right;
+          right = -n;
+          break;
+        case '*':
+          right *= n;
+          break;
+        default:
+          break;
+      }
 
-            if (i < s.length()) {
-                op = s[i];
-            }
-        }
-        ++i;
+      if (i < s.length()) {
+        op = s[i];
+      }
     }
-    return left + right;
+    ++i;
+  }
+  return left + right;
 }
 
 int calculate(string s) {
-    int i = 0;
-    return parseExpr(s, i);
+  int i = 0;
+  return parseExpr(s, i);
 }

@@ -14,14 +14,14 @@ Shuffle an Array
 using namespace std;
 
 vector<int> shuffle(vector<int>& origin) {
-    if (origin.empty()) {
-        return {};
-    }
+  if (origin.empty()) {
+    return {};
+  }
 
-    vector<int> shuffled(origin);
-    int n = shuffled.size();
-    for (int i = n - 1; i >= 0; --i) {
-        swap(shuffled[i], shuffled[rand() % (i + 1)]);
-    }
-    return shuffled;
+  vector<int> shuffled(origin);
+  int n = shuffled.size();
+  for (int i = n - 1; i >= 0; --i) {
+    swap(shuffled[i], shuffled[rand() % (i + 1)]);
+  }
+  return shuffled;
 }

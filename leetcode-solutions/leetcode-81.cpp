@@ -12,45 +12,31 @@
 #include <vector>
 using namespace std;
 
-bool search(vector<int> &nums, int target)
-{
-    unsigned int l{0}, r{nums.size() - 1};
+bool search(vector<int> &nums, int target) {
+  unsigned int l{0}, r{nums.size() - 1};
 
-    while (l <= r)
-    {
-        unsigned int mid = l + (r - l) >> 1;
-        if (nums[mid] == target)
-        {
-            return true;
-        }
-
-        if ((nums[l] == nums[mid]) && (nums[mid] == nums[r]))
-        {
-            l++;
-            r--;
-        }
-        else if (nums[l] < nums[mid])
-        {
-            if ((nums[l] <= target) && (nums[mid] > target))
-            {
-                r = mid - 1;
-            }
-            else
-            {
-                l = mid + 1;
-            }
-        }
-        else
-        {
-            if ((nums[mid] < target) && (nums[r] >= target))
-            {
-                l = mid + 1;
-            }
-            else
-            {
-                r = mid - 1;
-            }
-        }
+  while (l <= r) {
+    unsigned int mid = l + (r - l) >> 1;
+    if (nums[mid] == target) {
+      return true;
     }
-    return false;
+
+    if ((nums[l] == nums[mid]) && (nums[mid] == nums[r])) {
+      l++;
+      r--;
+    } else if (nums[l] < nums[mid]) {
+      if ((nums[l] <= target) && (nums[mid] > target)) {
+        r = mid - 1;
+      } else {
+        l = mid + 1;
+      }
+    } else {
+      if ((nums[mid] < target) && (nums[r] >= target)) {
+        l = mid + 1;
+      } else {
+        r = mid - 1;
+      }
+    }
+  }
+  return false;
 }

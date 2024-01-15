@@ -1,12 +1,13 @@
 #include <vector>
 
-template <class T, size_t R, size_t C> class array2d {
+template <class T, size_t R, size_t C>
+class array2d {
   typedef T value_type;
   typedef value_type *iterator;
   typedef value_type const *const_iterator;
   std::vector<T> arr;
 
-public:
+ public:
   array2d() : arr(R * C) {}
   explicit array2d(std::initializer_list<T> l) : arr(1) {}
   constexpr T *data() noexcept { return arr.data(); }
@@ -14,17 +15,11 @@ public:
 
   constexpr T &at(size_t const r, size_t const c) { return arr.at(r * C + c); }
 
-  constexpr T const &at(size_t const r, size_t const c) const {
-    return arr.at(r * C + c);
-  }
+  constexpr T const &at(size_t const r, size_t const c) const { return arr.at(r * C + c); }
 
-  constexpr T &operator()(size_t const r, size_t const c) {
-    return arr[r * C + c];
-  }
+  constexpr T &operator()(size_t const r, size_t const c) { return arr[r * C + c]; }
 
-  constexpr T const &operator()(size_t const r, size_t const c) const {
-    return arr[r * C + c];
-  }
+  constexpr T const &operator()(size_t const r, size_t const c) const { return arr[r * C + c]; }
 
   constexpr bool empty() const noexcept { return R == 0 || C == 0; }
 
@@ -37,9 +32,7 @@ public:
     throw std::out_of_range("Rank is out of range!");
   }
 
-  void fill(T const &value) {
-    std::fill(std::begin(arr), std::end(arr), value);
-  }
+  void fill(T const &value) { std::fill(std::begin(arr), std::end(arr), value); }
 
   void swap(array2d &other) noexcept {arr.swap(other.arr)};
 

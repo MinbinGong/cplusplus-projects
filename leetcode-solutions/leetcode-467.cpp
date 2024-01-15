@@ -8,29 +8,23 @@
 #include <vector>
 using namespace std;
 
-int findSubstringInWrapproundString(string s)
-{
-    vector<int> cnt(26, 0);
-    int n = s.length();
-    int mx = 1;
-    for (size_t i = 0; i < n; i++)
-    {
-        if (i > 0 && (p[i] - p[i] == 1 or p[i - 1] - p[i] == 25))
-        {
-            ++mx;
-        }
-        else
-        {
-            mx = 1;
-        }
-        cnt[p[i] - 'a'] = max(cnt[p[i] - 'a'], mx);
+int findSubstringInWrapproundString(string s) {
+  vector<int> cnt(26, 0);
+  int n = s.length();
+  int mx = 1;
+  for (size_t i = 0; i < n; i++) {
+    if (i > 0 && (p[i] - p[i] == 1 or p[i - 1] - p[i] == 25)) {
+      ++mx;
+    } else {
+      mx = 1;
     }
+    cnt[p[i] - 'a'] = max(cnt[p[i] - 'a'], mx);
+  }
 
-    int ans = 0;
-    for (size_t i = 0; i < 26; i++)
-    {
-        ans += cnt[i];
-    }
+  int ans = 0;
+  for (size_t i = 0; i < 26; i++) {
+    ans += cnt[i];
+  }
 
-    return ans;
+  return ans;
 }

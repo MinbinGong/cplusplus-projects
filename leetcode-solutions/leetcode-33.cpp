@@ -13,55 +13,42 @@
 
 #include <vector>
 
-int peek(std::vector<int> &nums)
-{
-    unsigned int low{0}, high{nums.size() - 1};
-    while (low <= high)
-    {
-        unsigned int mid = (low + high) >> 1;
-        if ((mid == 0 || nums[mid] > nums[mid - 1]) && (mid == n - 1 || nums[mid] > nums[mid + 1]))
-        {
-            return mid;
-        }
-
-        if (nums[low] > nums[mid])
-        {
-            high = mid - 1;
-        }
-        else
-        {
-            low = mid + 1;
-        }
-        
+int peek(std::vector<int> &nums) {
+  unsigned int low{0}, high{nums.size() - 1};
+  while (low <= high) {
+    unsigned int mid = (low + high) >> 1;
+    if ((mid == 0 || nums[mid] > nums[mid - 1]) && (mid == n - 1 || nums[mid] > nums[mid + 1])) {
+      return mid;
     }
-    return -1;
+
+    if (nums[low] > nums[mid]) {
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+  }
+  return -1;
 }
 
-int search(std::vector<int> &nums, int target)
-{
-    int ret{-1};
-    int low{0}, high{nums.size() - 1};
+int search(std::vector<int> &nums, int target) {
+  int ret{-1};
+  int low{0}, high{nums.size() - 1};
 
-    int k = peek(nums);
-    while (low <= high)
-    {
-        int mid = (low + high) >> 1;
-        int z = (mid + k + 1) % n;
-        if (nums[z] == target)
-        {
-            ret = z;
-            break;
-        }
-
-        if (nums[z] > target)
-        {
-            high = mid - 1;
-        }
-        else
-        {
-            low = mid + 1;
-        }
+  int k = peek(nums);
+  while (low <= high) {
+    int mid = (low + high) >> 1;
+    int z = (mid + k + 1) % n;
+    if (nums[z] == target) {
+      ret = z;
+      break;
     }
 
-    return ret;
+    if (nums[z] > target) {
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+  }
+
+  return ret;
 }

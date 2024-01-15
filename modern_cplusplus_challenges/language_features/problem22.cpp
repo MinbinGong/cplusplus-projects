@@ -1,117 +1,86 @@
 #include <cmath>
 
-bool are_equal(double const d1, double const d2, double const epsilon = 0.001)
-{
-    return std::fabs(d1 - d2) < epsilon;
+bool are_equal(double const d1, double const d2, double const epsilon = 0.001) { return std::fabs(d1 - d2) < epsilon; }
+
+namespace temperature {
+enum class scale { celsius, fahrenheit, kelvin };
+
+template <scale S>
+class quantity {
+  const double amount;
+
+ public:
+  constexpr explicit quantity(double const a) : amount(a) {}
+  explicit operator double() const { return amount; }
+};
+
+template <scale S>
+inline bool operator==(quantity<S> const &lhs, quantity<S> const &rhs) {
+  return are_equal(static_cast<double>(lhs), static_cast<double>(rhs));
 }
 
-namespace temperature
-{
-    enum class scale
-    {
-        celsius,
-        fahrenheit,
-        kelvin
-    };
+template <scale S>
+inline bool operator!=(quantity<S> const &lhs, quantity<S> const &rhs) {
+  return !(lhs == rhs);
+}
 
-    template <scale S>
-    class quantity
-    {
-        const double amount;
+template <scale S>
+inline bool operator<(quantity<S> const &lhs, quantity<S> const &rhs) {
+  return static_cast<double>(lhs) < static_cast<double>(rhs);
+}
 
-    public:
-        constexpr explicit quantity(double const a) : amount(a) {}
-        explicit operator double() const { return amount; }
-    };
+template <scale S>
+inline bool operator>(quantity<S> const &lhs, quantity<S> const &rhs) {
+  return rhs < lhs;
+}
 
-    template <scale S>
-    inline bool operator==(quantity<S> const &lhs, quantity<S> const &rhs)
-    {
-        return are_equal(static_cast<double>(lhs), static_cast<double>(rhs));
-    }
+template <scale S>
+inline bool operator<=(quantity<S> const &lhs, quantity<S> const &rhs) {
+  return !(lhs > rhs);
+}
 
-    template <scale S>
-    inline bool operator!=(quantity<S> const &lhs, quantity<S> const &rhs)
-    {
-        return !(lhs == rhs);
-    }
+template <scale S>
+inline bool operator>=(quantity<S> const &lhs, quantity<S> const &rhs) {
+  return !(lhs < rhs);
+}
 
-    template <scale S>
-    inline bool operator<(quantity<S> const &lhs, quantity<S> const &rhs)
-    {
-        return static_cast<double>(lhs) < static_cast<double>(rhs);
-    }
+template <scale S>
+constexpr quantity<S> operator+(quantity<S> const &q1, quantity<S> const &q2) {
+  return quantity<S>(static_cast<double>(q1) + static_cast<double>(q2));
+}
 
-    template <scale S>
-    inline bool operator>(quantity<S> const &lhs, quantity<S> const &rhs)
-    {
-        return rhs < lhs;
-    }
+template <scale S>
+constexpr quantity<S> operator-(quantity<S> const &q1, quantity<S> const &q2) {
+  return quantity<S>(static_cast<double>(q1) - static_cast<double>(q2));
+}
 
-    template <scale S>
-    inline bool operator<=(quantity<S> const &lhs, quantity<S> const &rhs)
-    {
-        return !(lhs > rhs);
-    }
+template <scale S, scale R>
+struct conversion_traits {
+  static double convert(double const value) = delete;
+};
 
-    template <scale S>
-    inline bool operator>=(quantity<S> const &lhs, quantity<S> const &rhs)
-    {
-        return !(lhs < rhs);
-    }
+template <>
+struct conversion_traits<scale::celsius, scale::fahrenheit> {
+  static double convert(double const value) { return (value * 9) / 5 + 32; }
+};
 
-    template <scale S>
-    constexpr quantity<S> operator+(quantity<S> const &q1, quantity<S> const &q2)
-    {
-        return quantity<S>(static_cast<double>(q1) + static_cast<double>(q2));
-    }
+template <>
+struct conversion_traits<scale::fahrenheit, scale::celsius> {
+  static double convert(double const value) { return (value - 32) * 5 / 9; }
+};
 
-    template <scale S>
-    constexpr quantity<S> operator-(quantity<S> const &q1, quantity<S> const &q2)
-    {
-        return quantity<S>(static_cast<double>(q1) - static_cast<double>(q2));
-    }
+template <scale R, scale S>
+constexpr quantity<R> temperature_cast(quantity<S> const q) {
+  return quantity<R>(conversion_traits<S, R>::convert(static_cast<double>(q)));
+}
 
-    template <scale S, scale R>
-    struct conversion_traits
-    {
-        static double convert(double const value) = delete;
-    };
+namespace temperature_scale_literals {
+constexpr quantity<scale::celsius> operator"" _deg(long double const amount) {
+  return quantity<scale::celsius>{static_cast<double>(amount)};
+}
 
-    template <>
-    struct conversion_traits<scale::celsius, scale::fahrenheit>
-    {
-        static double convert(double const value)
-        {
-            return (value * 9) / 5 + 32;
-        }
-    };
-
-    template <>
-    struct conversion_traits<scale::fahrenheit, scale::celsius>
-    {
-        static double convert(double const value)
-        {
-            return (value - 32) * 5 / 9;
-        }
-    };
-
-    template <scale R, scale S>
-    constexpr quantity<R> temperature_cast(quantity<S> const q)
-    {
-        return quantity<R>(conversion_traits<S, R>::convert(static_cast<double>(q)));
-    }
-
-    namespace temperature_scale_literals
-    {
-        constexpr quantity<scale::celsius> operator"" _deg(long double const amount)
-        {
-            return quantity<scale::celsius>{static_cast<double>(amount)};
-        }
-
-        constexpr quantity<scale::fahrenheit> operator"" _f(long double const amount)
-        {
-            return quantity<scale::fahrenheit>{static_cast<double>(amount)};
-        }
-    }
-} // namespace temperature
+constexpr quantity<scale::fahrenheit> operator"" _f(long double const amount) {
+  return quantity<scale::fahrenheit>{static_cast<double>(amount)};
+}
+}  // namespace temperature_scale_literals
+}  // namespace temperature

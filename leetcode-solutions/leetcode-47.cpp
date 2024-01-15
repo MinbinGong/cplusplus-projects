@@ -44,76 +44,76 @@
 /* Solution 1: using Array + Backtracking + Hash table */
 
 void permuteUnique1(std::vector<int>& nums, std::set<std::vector<int>>& set, std::vector<int>& temp, int index) {
-    if (index == nums.size()) {
-        set.insert(temp);
-        return;
-    }
+  if (index == nums.size()) {
+    set.insert(temp);
+    return;
+  }
 
-    for (int i = index; i < temp.size(); i++) {
-        std::swap(temp[index], temp[i]);
-        permuteUnique(nums, set, temp, index + 1);
-    }
+  for (int i = index; i < temp.size(); i++) {
+    std::swap(temp[index], temp[i]);
+    permuteUnique(nums, set, temp, index + 1);
+  }
 }
 
 std::vector<std::vector<int>> permuteUnique1(std::vector<int>& nums) {
-    std::vector<std::vector<int>> output;
-    std::vector<int> temp = nums;
+  std::vector<std::vector<int>> output;
+  std::vector<int> temp = nums;
 
-    std::sort(temp.begin(), temp.end());
-    std::set<std::vector<int>> set;
-    permuteUnique(nums, set, temp, 0);
-    for (auto it : set) {
-        output.push_back(it);
-    }
-    return output;
+  std::sort(temp.begin(), temp.end());
+  std::set<std::vector<int>> set;
+  permuteUnique(nums, set, temp, 0);
+  for (auto it : set) {
+    output.push_back(it);
+  }
+  return output;
 }
 
 /* Solution 2: Array + Backtracking */
 void permuteUnique2(std::vector<int>& nums, std::vector<std::vector<int>>& output, std::vector<int>& temp, int index) {
-    if (index == nums.size()) {
-        output.push_back(temp);
-        return;
-    }
+  if (index == nums.size()) {
+    output.push_back(temp);
+    return;
+  }
 
-    for (int i = index; i < temp.size(); i++) {
-        std::swap(temp[index], temp[i]);
-        bool is_present = std::find(output.begin(), output.end(), temp) != output.end();
-        if (is_present) {
-            continue;
-        }
-        permuteUnique(nums, output, temp, index + 1);
+  for (int i = index; i < temp.size(); i++) {
+    std::swap(temp[index], temp[i]);
+    bool is_present = std::find(output.begin(), output.end(), temp) != output.end();
+    if (is_present) {
+      continue;
     }
+    permuteUnique(nums, output, temp, index + 1);
+  }
 }
 
 std::vector<std::vector<int>> permuteUnique2(std::vector<int>& nums) {
-    std::vector<std::vector<int>> output;
-    std::vector<int> temp = nums;
-    std::sort(temp.begin(), temp.end());
-    permuteUnique(nums, output, temp, 0);
-    return output;
+  std::vector<std::vector<int>> output;
+  std::vector<int> temp = nums;
+  std::sort(temp.begin(), temp.end());
+  permuteUnique(nums, output, temp, 0);
+  return output;
 }
 
 /* Solution 3 : Array + BackTracking */
 void permuteUnique3(std::vector<int>& nums, std::vector<std::vector<int>>& output, std::vector<int>& temp, int index) {
-    if (index == nums.size()) {
-        output.push_back(temp);
-        return;
-    }
+  if (index == nums.size()) {
+    output.push_back(temp);
+    return;
+  }
 
-    for (int i = index; i < temp.size(); i++) {
-        std::swap(temp[index], temp[i]);
-        bool is_present = std::find(output.begin(), output.end(), temp) != output.end();
-        if (is_present) {
-            continue;
-        }
-        permuteUnique3(nums, output, temp, index + 1);
+  for (int i = index; i < temp.size(); i++) {
+    std::swap(temp[index], temp[i]);
+    bool is_present = std::find(output.begin(), output.end(), temp) != output.end();
+    if (is_present) {
+      continue;
     }
+    permuteUnique3(nums, output, temp, index + 1);
+  }
 }
 
 std::vector<std::vector<int>> permuteUnique3(std::vector<int>& nums) {
-    std::vector<std::vector<int>> output;
-    std::vector<int> temp = nums;
-    std::sort(temp.begin(), temp.end());
-    permuteUnique3(nums, output, temp, 0);
-    return output;
+  std::vector<std::vector<int>> output;
+  std::vector<int> temp = nums;
+  std::sort(temp.begin(), temp.end());
+  permuteUnique3(nums, output, temp, 0);
+  return output;
 }

@@ -8,60 +8,56 @@ Implement Trie
 using namespace std;
 
 class TrieNode {
-   public:
-    TrieNode* childNode[26];
+ public:
+  TrieNode* childNode[26];
 
-    bool isVal;
+  bool isVal;
 
-    TrieNode() : isVal(false) {
-        for (int i = 0; i < 26; ++i) {
-            childNode[i] = nullptr;
-        }
+  TrieNode() : isVal(false) {
+    for (int i = 0; i < 26; ++i) {
+      childNode[i] = nullptr;
     }
+  }
 };
 
 class Trie {
-    TrieNode* root;
+  TrieNode* root;
 
-   public:
-    Trie() : root(new TrieNode()) {}
+ public:
+  Trie() : root(new TrieNode()) {}
 
-    void insert(string word) {
-        TrieNode* temp = root;
-        for (int i = 0; i < word.size; ++i) {
-            if (!temp->childNode[word[i] - 'a']) {
-                temp->childNode[word[i] - 'a'] = new TrieNode();
-            } else {
-                temp = temp->childNode[word[i] - 'a'];
-            }
-        }
-
-        temp->isVal = true;
-    }
-
-    bool search(string word) {
-      TrieNode* temp = root;
-      for (int i = 0; i < word.size; ++i)
-      {
-        if (temp == nullptr)
-        {
-          break;
-        }
-        temp = temp->childNode[word[i]-'a'];
+  void insert(string word) {
+    TrieNode* temp = root;
+    for (int i = 0; i < word.size; ++i) {
+      if (!temp->childNode[word[i] - 'a']) {
+        temp->childNode[word[i] - 'a'] = new TrieNode();
+      } else {
+        temp = temp->childNode[word[i] - 'a'];
       }
-      return temp == nullptr ? false : temp->isVal;
     }
 
-    bool startsWith(string prefix) {
-      TrieNode* temp = root;
-      for (int i = 0; i < prefix.size; ++i)
-      {
-        if (temp == nullptr)
-        {
-          break;
-        }
-        temp = temp->childNode[prefix[i] - 'a'];
+    temp->isVal = true;
+  }
+
+  bool search(string word) {
+    TrieNode* temp = root;
+    for (int i = 0; i < word.size; ++i) {
+      if (temp == nullptr) {
+        break;
       }
-      return temp;
+      temp = temp->childNode[word[i] - 'a'];
     }
+    return temp == nullptr ? false : temp->isVal;
+  }
+
+  bool startsWith(string prefix) {
+    TrieNode* temp = root;
+    for (int i = 0; i < prefix.size; ++i) {
+      if (temp == nullptr) {
+        break;
+      }
+      temp = temp->childNode[prefix[i] - 'a'];
+    }
+    return temp;
+  }
 };

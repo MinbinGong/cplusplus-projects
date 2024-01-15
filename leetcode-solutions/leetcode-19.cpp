@@ -1,32 +1,28 @@
-struct ListNode
-{
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *n) : val(x), next(n) {}
+struct ListNode {
+  int val;
+  ListNode *next;
+  ListNode() : val(0), next(nullptr) {}
+  ListNode(int x) : val(x), next(nullptr) {}
+  ListNode(int x, ListNode *n) : val(x), next(n) {}
 };
 
-ListNode* removeNthFromEnd(ListNode* head, int n) {
-    ListNode *fast = head, *slow = head;
+ListNode *removeNthFromEnd(ListNode *head, int n) {
+  ListNode *fast = head, *slow = head;
 
-    for (int i = 0; i < n; i++)
-    {
-        fast = fast->next;
-    }
-    
-    if (nullptr == fast)
-    {
-        return head->next;
-    }
-    
-    while (fast->next)
-    {
-        fast = fast->next;
-        slow = slow->next;
-    }
+  for (int i = 0; i < n; i++) {
+    fast = fast->next;
+  }
 
-    slow->next = slow->next->next;
+  if (nullptr == fast) {
+    return head->next;
+  }
 
-    return head;
+  while (fast->next) {
+    fast = fast->next;
+    slow = slow->next;
+  }
+
+  slow->next = slow->next->next;
+
+  return head;
 }
