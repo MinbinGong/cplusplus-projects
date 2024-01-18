@@ -44,3 +44,32 @@ vector<vector<int>> insert(vector<vector<int>> &nums, vector<int> &new_nums) {
   }
   return nums;
 }
+
+vector<vector<int>> merge(vector<vector<int>> &intervals) {
+  if (intervals.empty()) {
+    return {};
+  }
+
+  vector<vector<int>> ans;
+
+  sort(intervals.begin(), intervals.end());
+  int i = 1, prev1 = intervals[0][1], prev0 = intervals[0][0];
+  while (i < intervals.size()) {
+    if (intervals[i][0] >= prev0 && intervals[i][0] < prev1) {
+      prev1 = max(prev1, intervals[i][1]);
+    } else {
+      ans.push_back({prev0, prev1});
+      prev0 = intervals[i][0];
+      prev1 = intervals[i][1];
+    }
+    i++;
+  }
+
+  ans.push_back({prev0, prev1});
+  return ans;
+}
+
+vector<vector<int>> insert1(vector<vector<int>> &intervals, vector<int> &newIntervals) {
+  intervals.push_back(newIntervals);
+  return merge(intervals);
+}
