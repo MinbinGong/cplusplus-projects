@@ -2,6 +2,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <queue>
 using namespace std;
 
 string frequencySort(string s) {
@@ -21,4 +22,26 @@ string frequencySort(string s) {
     result += string(count[i].first, count[i].second);
   }
   return result;
+}
+
+string frequencySort1(string s) {
+  unordered_map<char, int> counts;
+  for (const char c : s) {
+    counts[c]++;
+  }
+
+  priority_queue<pair<int, char>> pq;
+  for (const auto it : counts) {
+    pq.push({it.second, it.first});
+  }
+
+  string ret;
+  while (!pq.empty())
+  {
+    auto it = pq.top();
+    ret += string(it.first, it.second);
+    pq.pop();
+  }
+  
+  return ret;
 }
