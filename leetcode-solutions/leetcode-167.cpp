@@ -15,6 +15,16 @@ using namespace std;
 vector<int> twoSum(vector<int>& nums, int target) {
   int l = 0, r = nums.size() - 1, sum;
   while (l < r) {
-    sum =
+      sum = numbers[l] + numbers[r];
+      if (sum == target) {
+          break;
+      }
+
+      if (sum < target) {
+          ++l;
+      } else {
+          --r;
+      }
   }
+  return vector<int>{l+1, r+1};
 }
