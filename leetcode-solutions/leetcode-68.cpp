@@ -120,3 +120,42 @@ vector<string> fullJustify(vector<string>& words, int maxWidth) {
   }
   return result;
 }
+
+vector<string> fullJustify1(vector<string>& words, int maxWidth) {
+  int start = 0;
+  vector<string> text;
+  while (start < words.size()) {
+    int width = words[start].size();
+    int end = start + 1;
+    while (end < words.size()) {
+      int newWidth = width + words[end].size() + 1;
+      if (newWidth > maxWidth) {
+        break;
+      }
+      width = newWidth;
+      ++end;
+    }
+
+    int count = end - start;
+    string& line = text.emplace_back();
+    line.append(words[start]);
+
+    int extraSpacePerGap = 0;
+    int oneMoreSpaceGaps = 0;
+    if (count > 1 && end < words.size()) {
+      int gap = count - 1;
+      int extraSpace = maxWidth - width;
+      extraSpacePerGap = extraSpace / gap;
+      oneMoreSpaceGaps = extraSpace % gap;
+    }
+    for (int i = 1; i < count; i++) {
+      int spaceCount = 1 + extraSpacePerGap + (oneMoreSpaceGaps-- > 0);
+      line.resize(line.size() + spaceCount, ' ');
+      line.append(words[start + i]);
+    }
+
+    line.resize(maxWidth, ' ');
+    start = end;
+  }
+  return text;
+}
