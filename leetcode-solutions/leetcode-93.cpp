@@ -9,4 +9,19 @@
  * You are not allowed to reorder or remove any digits in s.
  * You may return the valid IP addresses in any order.
  */
+#include <vector>
+using namespace std;
 
+void backtrack(vector<string> &ans, string &s, string path, int index, int count) {
+  if (count > 4)
+  {
+    return;
+  }
+  if (count == 4 && index >= s.length())
+  {
+    path.pop_back();
+    ans.push_back(path);
+    return;
+  }
+  
+}
