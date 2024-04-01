@@ -1,24 +1,37 @@
 /*
-Balanced binary tree
+ * Balanced binary tree
  */
-#include <algorithm>
-#include <cmath>
-using namespace std;
 
 struct TreeNode {
-  int val;
-  TreeNode *left, *right;
-  explicit TreeNode(int x = 0, TreeNode *l = nullptr, TreeNode *r = nullptr) : val(x), left(l), right(r) {}
+  int val = 0;
+  TreeNode *left = nullptr;
+  TreeNode *right = nullptr;
+  TreeNode(int x) : val(0){}
+  TreeNode(int x, TreeNode *l, TreeNode *r) : val(x), left(l), right(r) {}
 };
 
-int helper(TreeNode *root) {
+int height (TreeNode *root) {
   if (root == nullptr) {
     return 0;
   }
 
-  int left = helper(root->left), right = helper(root->right);
-  if (left == -1 || right == -1 || abs(left - right) > 1) {
-    return -1;
+  int left = height(root->left);
+  int right = height(root->right);
+
+  return max(left, right) + 1;
+}
+
+bool isBalanced (TreeNode *root) {
+  if (root == nullptr) {
+    return true;
   }
-  return 1 + max(left, right);
+
+  bool left = isBalanced(root->left);
+  bool right = isBalanced(root->right);
+  bool diff = abs(root->left) - height(root->right) <= 1;
+  if (left & right & diff) {
+    return true;
+  } else {
+    return false;
+  }
 }
