@@ -16,14 +16,39 @@
  *
  * You may assume that next() calls will always be valid. That is, there will
  * be at least a next number in the in-order traversal when next() is called.
- *
  */
-strut TreeNode {
+#include <stack>
+using namespace std;
+
+struct TreeNode {
   int val = 0;
   TreeNode *left = nullptr;
   TreeNode *right = nullptr;
-  TreeNode() = default;
-  TreeNode(int x = 0, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  TreeNode(int x = 0, TreeNode *l = nullptr, TreeNode *r = nullptr) : val(x), left(l), right(r) {}
 };
 
+class BSTIterator {
+  stack<TreeNode *> st;
+public:
+  BSTIterator(TreeNode *root) {
+    partialInorder(root);
+  }
 
+  void partialInorder(TreeNode *root) {
+    while (root != nullptr) {
+      st.push(root);
+      root = root->left;
+    }
+  }
+
+  int next() {
+    TreeNode *top = st.top();
+    st.pop();
+    partialInorder(top->right);
+    return top->val;
+  }
+
+  bool hasNext() {
+    return !st.empty();
+  }
+};
