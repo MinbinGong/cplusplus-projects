@@ -20,8 +20,11 @@ vector<int> shuffle(vector<int>& origin) {
 
   vector<int> shuffled(origin);
   int n = shuffled.size();
-  for (int i = n - 1; i >= 0; --i) {
-    swap(shuffled[i], shuffled[rand() % (i + 1)]);
+  // for (int i = n - 1; i >= 0; --i) {
+  //   swap(shuffled[i], shuffled[rand() % (i + 1)]);
+  // }
+  for (int i = 0; i < n; ++i) {
+    swap(shuffled[i], shuffled[rand() % (n - i) + i]);
   }
   return shuffled;
 }

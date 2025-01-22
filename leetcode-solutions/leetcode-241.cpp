@@ -59,3 +59,35 @@ vector<int> diffWaysToCompute(string &input) {
   }
   return dp[0][n - 1];
 }
+
+vector<int> diffWaysToCompute2(string input) {
+  vector<int> output;
+  for (int i = 0; i < input.length(); i++) {
+    char c = input[i];
+    if (c == '+' || c == '-' || c == '*') {
+      vector<int> left = diffWaysToCompute2(input.substr(0, i));
+      vector<int> right = diffWaysToCompute2(input.substr(i + 1));
+      for (const int &l : left) {
+        for (const int &r : right) {
+          switch (c) {
+            case '+':
+              output.push_back(l + r);
+              break;
+            case '-':
+              output.push_back(l - r);
+              break;
+            case '*':
+              output.push_back(l * r);
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    }
+  }
+  if (output.empty()) {
+    output.push_back(stoi(input));
+  }
+  return output;
+}
