@@ -11,6 +11,7 @@
  */
 #include <unordered_set>
 #include <vector>
+#include <utility>
 using namespace std;
 
 int longestConsecutive(vector<int>& nums) {
@@ -30,7 +31,7 @@ int longestConsecutive(vector<int>& nums) {
     while (hash.count(prev)) {
       hash.erase(prev--);
     }
-    ans = max(ans, nex - prev - 1);
+    ans = max(ans, next - prev - 1);
   }
   return ans;
 }

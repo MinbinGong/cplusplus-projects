@@ -1,25 +1,32 @@
+/*
+ * @lc app=leetcode.cn id=190 lang=cpp
+ * Single Number III
+ * Given an integer array nums, in which exactly two elements appear only once and all the other elements appear exactly twice.
+ * Find the two elements that appear only once. You can return the answer in any order.
+ * 
+ * You must write an algorithm that runs in linear runtime complexity and uses only constant extra space.
+ */
+
 #include <vector>
 using namespace std;
 
-vector<int> singleNumber(vector<int>& nums) {
-  int diff{0};
-  for (const auto e : nums) {
-    diff ^= e;
-  }
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+      int xor_all = 0;
+      for (int num : nums) {
+        xor_all ^= num;
+      }
 
-  int res{1};
-  while (diff % 2 == 0) {
-    res *= 2;
-    diff /= 2;
-  }
-
-  vector<int> res = {0, 0};
-  for (int num : nums) {
-    if ((num & res) == 0) {
-      rets[0] ^= num;
-    } else {
-      rets[1] ^= num;
+      int set_bit = xor_all & (-xor_all);
+      int x = 0, y = 0;
+      for (int num : nums) {
+        if (num & set_bit) {
+          x ^= num;
+        } else {
+          y ^= num;
+        }
+      }
+      return {x, y};
     }
-  }
-  return res;
-}
+};

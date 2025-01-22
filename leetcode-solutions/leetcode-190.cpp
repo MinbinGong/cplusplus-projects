@@ -1,4 +1,4 @@
-/*
+2/*
 Reverse Bits
 
 题目描述
