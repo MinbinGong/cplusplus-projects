@@ -7,22 +7,18 @@ struct ListNode {
 };
 
 ListNode *removeNthFromEnd(ListNode *head, int n) {
-  ListNode *fast = head, *slow = head;
-
-  for (int i = 0; i < n; i++) {
-    fast = fast->next;
+  ListNode *dummy = new ListNode(0, head);
+  ListNode *first = head;
+  ListNode *second = dummy;
+  for (int i = 0; i < n; ++i) {
+    first = first->next;
   }
-
-  if (nullptr == fast) {
-    return head->next;
+  while (first) {
+    first = first->next;
+    second = second->next;
   }
-
-  while (fast->next) {
-    fast = fast->next;
-    slow = slow->next;
-  }
-
-  slow->next = slow->next->next;
-
-  return head;
+  second->next = second->next->next;
+  ListNode *ans = dummy->next;
+  delete dummy;
+  return ans;
 }

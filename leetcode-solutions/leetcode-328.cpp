@@ -1,3 +1,7 @@
+/*
+ * leetcode-328.cpp
+ * Odd Even Linked List
+ */
 struct ListNode {
   int val;
   ListNode *next;
@@ -7,7 +11,7 @@ struct ListNode {
 };
 
 ListNode *oddEvenList(ListNode *head) {
-  if (head == nullptr || head->next == nullptr) return;
+  if (head == nullptr || head->next == nullptr) return head;
   ListNode *oddHead{nullptr}, *evenHead{nullptr}, *oddWalker{nullptr}, *evenWalker{nullptr};
   ListNode *walker{head};
 
