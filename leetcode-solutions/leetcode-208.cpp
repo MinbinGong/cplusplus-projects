@@ -1,8 +1,8 @@
 /*
-Implement Trie
+  Implement Trie
 
-题目描述
-尝试建立一个字典树，支持快速插入单词、查找单词、查找单词前缀的功能。
+  题目描述
+  尝试建立一个字典树，支持快速插入单词、查找单词、查找单词前缀的功能。
  */
 #include <string>
 using namespace std;
