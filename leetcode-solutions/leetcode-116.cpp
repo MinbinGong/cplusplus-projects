@@ -39,3 +39,21 @@ Node *connect(Node *root) {
 
     return r;
 }
+
+Node *connect1(Node *root) {
+    if (root == nullptr) {
+        return nullptr;
+    }
+
+    if (root->left) {
+        root->left->next = root->right;
+    }
+
+    if (root->right) {
+        root->right->next = root->next ? root->next->left : nullptr;
+    }
+
+    connect1(root->left);
+    connect1(root->right);
+    return root;
+}

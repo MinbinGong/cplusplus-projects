@@ -15,6 +15,10 @@
  * If there is no next right node, the next pointer should be set to NULL.
  * Initially, all next pointers are set to NULL.
  */
+#include <queue>
+#include <vector>
+
+using namespace std;
 
 struct Node {
     int val = 0;
@@ -30,14 +34,11 @@ Node *connect(Node *root) {
         return nullptr;
     }
 
-    vector<vector<Node *>> lvl;
     queue<Node *> q;
     q.push(root);
 
     while (!q.empty()) {
         int size = q.size();
-        vector<Node *> temp;
-
         for (int i = 0; i < size; ++i) {
             Node *node = q.front();
             q.pop();
@@ -50,16 +51,9 @@ Node *connect(Node *root) {
                 q.push(node->right);
             }
 
-            temp.push(node);
-        }
-
-        temp.push_back(nullptr);
-        lvl.push_back(temp);
-    }
-
-    for (int i = 0; i < lvl.size(); ++i) {
-        for (int j = 0; j < lvl[i].size() - 1; ++j) {
-            lvl[i][j]->next = lvl[i][j + 1];
+            if (i < size - 1) {
+                node->next = q.front();
+            }
         }
     }
 

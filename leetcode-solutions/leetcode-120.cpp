@@ -2,8 +2,8 @@
  * Triangle
  *
  * Given a triangle array, return the minimum path sum from top to bottom.
- * For each step, you may move to an adjacent number of the row below. More formally, if you are on index i on the
- current row, you may move to either index i or index i + 1 on the next row.
+ * For each step, you may move to an adjacent number of the row below. More formally, 
+ * if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.
  *
  * Example 1:
  * Input: triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]
@@ -39,4 +39,17 @@ int minimumTotal(vector<vector<int>>& triangle) {
     }
   }
   return *min_element(triangle[n - 1].begin(), triangle[n - 1].end());
+}
+
+int minimumTotal1(vector<vector<int>>& triangle) {
+    for (int i = triangle.size() - 2; i >= 0; i--) {
+        for (int j = 0; j < triangle[i].size(); j++) {
+            int below = triangle[i + 1][j];
+            int belowRight = triangle[i + 1][j + 1];
+            
+            triangle[i][j] += min(below, belowRight);
+        }
+    }
+
+    return triangle[0][0];
 }

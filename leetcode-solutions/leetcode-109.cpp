@@ -7,6 +7,12 @@
  * 1. The number of nodes in head is in the range [0, 2 * 104].
  * 2. -105 <= Node.val <= 105
  */
+struct ListNode {
+  int val = 0;
+  ListNode *next = nullptr;
+  explicit ListNode(int x = 0, ListNode *n = nullptr) : val(x), next(n) {}
+};
+
 struct TreeNode {
   int val = 0;
   TreeNode *left = nullptr;

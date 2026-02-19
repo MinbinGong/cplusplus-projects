@@ -48,3 +48,23 @@ void flatten(TreeNode *root) {
     cursor1 = cursor1->right;
   }
 }
+
+void flatten1(TreeNode *root) {
+  if (root == nullptr) {
+    return;
+  }
+
+  TreeNode *cursor = root;
+  while (cursor) {
+    if (cursor->left) {
+      TreeNode *temp = cursor->left;
+      while (temp->right) {
+        temp = temp->right;
+      }
+      temp->right = cursor->right;
+      cursor->right = cursor->left;
+      cursor->left = nullptr;
+    }
+    cursor = cursor->right;
+  }
+}

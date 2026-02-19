@@ -1,15 +1,11 @@
 /*
-  Longest Consecutive Sequence
-
-  题目描述
-  给定一个整数数组，求这个数组中的数字可以组成的最长连续序列有多长。
-
-  题解
-  我们可以把所有数字放到一个哈希表，然后不断地从哈希表中任意取一个值，并删除掉其之
-  前之后的所有连续数字，然后更新目前的最长连续序列长度。重复这一过程，我们就可以找到所
-  有的连续数字序列。
+ * Longest Consecutive Sequence
+ * Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+ *
+ * You must write an algorithm that runs in O(n) time.
  */
 #include <unordered_set>
+#include <unordered_map>
 #include <vector>
 #include <utility>
 using namespace std;
