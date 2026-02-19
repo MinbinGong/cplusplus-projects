@@ -1,16 +1,18 @@
 /*
-Course schedule
-
-题目描述
-给定 N 个课程和这些课程的前置必修课，求可以一次性上完所有课的顺序。
-
-题解
-我们可以先建立一个邻接矩阵表示图，方便进行直接查找。这里注意我们将所有的边反向，使得如果课程 i 指向课程 j，那么课程 i
-需要在课程 j 前面先修完。这样更符合我们的直观理解。
-拓扑排序也可以被看成是广度优先搜索的一种情况：我们先遍历一遍所有节点，把入度为 0
-的节点（即没有前置课程要求）放在队列中。在每次从队列中获得节点时，我们将该节点放在目
-前排序的末尾，并且把它指向的课程的入度各减 1；如果在这个过程中有课程的所有前置必修课都已修完（即入度为 0）
-，我们把这个节点加入队列中。当队列的节点都被处理完时，说明所有的节点都已排好序，或因图中存在循环而无法上完所有课程。
+ * Course schedule II
+ * 
+ * There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
+ * 
+ * For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+ * Return the ordering of courses you should take to finish all courses. If there are many valid answers, return any of them. If it is impossible to finish all courses, return an empty array.
+ * 
+ * Constraints:
+ * 1. 1 <= numCourses <= 2000
+ * 2. 0 <= prerequisites.length <= numCourses * (numCourses - 1)
+ * 3. prerequisites[i].length == 2
+ * 4. 0 <= ai, bi < numCourses
+ * 5. ai != bi
+ * 6. All the pairs [ai, bi] are distinct.
  */
 #include <queue>
 #include <vector>

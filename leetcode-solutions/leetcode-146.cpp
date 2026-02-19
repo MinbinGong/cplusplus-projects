@@ -1,18 +1,33 @@
 /*
-LRU Cache
-
-题目描述
-设计一个固定大小的，最少最近使用缓存 (least recently used cache, LRU)。每次将信息插入未
-满的缓存的时候，以及更新或查找一个缓存内存在的信息的时候，将该信息标为最近使用。在缓
-存满的情况下将一个新信息插入的时候，需要移除最旧的信息，插入新信息，并将该信息标为最
-近使用。
-
-题解
-我们采用一个链表 list<pair<int, int>> 来储存信息的 key 和 value，链表的链接顺序即为最
-近使用的新旧顺序，最新的信息在链表头节点。同时我们需要一个嵌套着链表的迭代器的 un-
-ordered_map<int, list<pair<int, int»::iterator> 进行快速搜索，存迭代器的原因是方便调用链表的
-splice 函数来直接更新查找成功（cash hit）时的信息，即把迭代器对应的节点移动为链表的头节
-点。
+ * LRU Cache
+ * 
+ * Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
+ * 
+ * Implement the LRUCache class:
+ * 
+ * LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
+ * int get(int key) Return the value of the key if the key exists, otherwise return -1.
+ * void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
+ * The functions get and put must each run in O(1) average time complexity.
+ * 
+ * Example 1:
+ * Input
+ * ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
+ * [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
+ * Output
+ * [null, null, null, 1, null, -1, null, -1, 3, 4]
+ * 
+ * Explanation
+ * LRUCache lRUCache = new LRUCache(2);
+ * lRUCache.put(1, 1); // cache is {1=1}
+ * lRUCache.put(2, 2); // cache is {1=1, 2=2}
+ * lRUCache.get(1);    // return 1
+ * lRUCache.put(3, 3); // LRU key was 2, evicts key 2, cache is {1=1, 3=3}
+ * lRUCache.get(2);    // returns -1 (not found)
+ * lRUCache.put(4, 4); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+ * lRUCache.get(1);    // return -1 (not found)
+ * lRUCache.get(3);    // return 3
+ * lRUCache.get(4);    // return 4
  */
 #include <list>
 #include <unordered_map>

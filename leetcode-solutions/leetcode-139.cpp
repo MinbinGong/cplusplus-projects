@@ -1,10 +1,24 @@
 /*
-  题目描述
-    给定一个字符串和一个字符串集合，求是否存在一种分割方式，使得原字符串分割后的子字符串都可以在集合内找到。
-
-  题解
-    类似于完全平方数分割问题，这道题的分割条件由集合内的字符串决定，因此在考虑每个分割位置时，需要遍历字符串集合，
-  以确定当前位置是否可以成功分割。注意对于位置 0，需要初始化值为真。
+ * Word Break
+ * 
+ * Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
+ * 
+ * Note that the same word in the dictionary may be reused multiple times in the segmentation.
+ * 
+ * Example 1:
+ * Input: s = "leetcode", wordDict = ["leet","code"]
+ * Output: true
+ * Explanation: Return true because "leetcode" can be segmented as "leet code".
+ * 
+ * Example 2:
+ * Input: s = "applepenapple", wordDict = ["apple","pen"]
+ * Output: true
+ * Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
+ * Note that you are allowed to reuse a dictionary word.
+ * 
+ * Example 3:
+ * Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
+ * Output: false
  */
 #include <string>
 #include <vector>

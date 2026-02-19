@@ -1,12 +1,9 @@
 /*
-  Valid Anagram
-
-  题目描述
-  判断两个字符串包含的字符是否完全相同。
-
-  题解
-  我们可以利用哈希表或者数组统计两个数组中每个数字出现的频次，若频次相同，则说明它
-  们包含的字符完全相同。
+ *  Valid Anagram
+ *
+ * Constraints:
+ * 1. 1 <= s.length, t.length <= 5 * 10^4
+ * 2. s and t consist of lowercase English letters.
  */
 #include <string>
 #include <vector>

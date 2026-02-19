@@ -1,14 +1,14 @@
 /*
-  Search a 2D matrix
-
-  题目描述
-  给定一个二维矩阵，已知每行和每列都是增序的，尝试设计一个快速搜索一个数字是否在矩
-  阵中存在的算法。
-
-  题解
-  这道题有一个简单的技巧：我们可以从右上角开始查找，若当前值大于待搜索值，我们向左
-  移动一位；若当前值小于待搜索值，我们向下移动一位。如果最终移动到左下角时仍不等于待搜
-  索值，则说明待搜索值不存在于矩阵中。
+ *   Search a 2D matrix II
+ *
+ * Constraints:
+ * 1. m == matrix.length
+ * 2. n == matrix[i].length
+ * 3. 1 <= n, m <= 300
+ * 4. -109 <= matrix[i][j] <= 109
+ * 5. All the integers in each row are sorted in ascending order.
+ * 6. All the integers in each column are sorted in ascending order.
+ * 7. -109 <= target <= 109
  */
 #include <vector>
 using namespace std;

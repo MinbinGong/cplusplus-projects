@@ -7,6 +7,7 @@
  * You must write an algorithm that runs in linear time and uses linear extra
  * space.
  */
+#include <algorithm>
 #include <vector>
 using namespace std;
 
@@ -23,7 +24,7 @@ int maximumGap(vector<int>& nums) {
   vector<int> bucketSmallest(n, INT_MAX);
 
   for (int i = 0; i < n; i++) {
-    int index = (((nums[i] - mini) *(n - 1))/(maxi - mini));
+    int index = (((nums[i] - mini) * (n - 1)) / (maxi - mini));
     bucketLargest[index] = max(bucketLargest[index], nums[i]);
     bucketSmallest[index] = min(bucketSmallest[index], nums[i]);
   }
@@ -40,7 +41,17 @@ int maximumGap(vector<int>& nums) {
       i++;
       j++;
     }
-
   }
   return largestGap;
+}
+
+int maximumGap1(vector<int>& nums) {
+  int n = nums.size();
+  sort(begin(nums), end(nums));
+  int diff = 0, ans = 0;
+  for (int i = 1; i < n; i++) {
+    diff = nums[i] - nums[i - 1];
+    ans = max(diff, ans);
+  }
+  return ans;
 }

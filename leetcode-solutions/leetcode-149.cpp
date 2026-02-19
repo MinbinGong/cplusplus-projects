@@ -1,14 +1,21 @@
 /*
-  Max Points on a Line
-
-  题目描述
-  给定一些二维坐标中的点，求同一条线上最多由多少点。
-
-  题解
-  对于每个点，我们对其它点建立哈希表，统计同一斜率的点一共有多少个。这里利用的原理
-  是，一条线可以由一个点和斜率而唯一确定。另外也要考虑斜率不存在和重复坐标的情况。
-  本题也利用了一个小技巧：在遍历每个点时，对于数组中位置 i 的点，我们只需要考虑 i 之
-  后的点即可，因为 i 之前的点已经考虑过 i 了。
+ * Max Points on a Line
+ * 
+ * Given an array of points where points[i] = [xi, yi] represents a point on the X-Y plane, return the maximum number of points that lie on the same straight line.
+ * 
+ * Example 1: 
+ * Input: points = [[1,1],[2,2],[3,3]]
+ * Output: 3
+ * 
+ * Example 2:
+ * Input: points = [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
+ * Output: 4
+ * 
+ * Constraints:
+ * 1 <= points.length <= 300
+ * points[i].length == 2
+ * -104 <= xi, yi <= 104
+ * All the points are unique.
  */
 #include <unordered_map>
 #include <vector>

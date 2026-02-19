@@ -1,12 +1,11 @@
 /*
-Different ways to add parentheses
-
-题目描述
-给定一个只包含加、减和乘法的数学表达式，求通过加括号可以得到多少种不同的结果。
-
-题解
-利用分治思想，我们可以把加括号转化为，对于每个运算符号，先执行处理两侧的数学表达
-式，再处理此运算符号。注意边界情况，即字符串内无运算符号，只有数字
+ * Different ways to add parentheses
+ *
+ * Constraints:
+ * 1. 1 <= input.length <= 20
+ * 2. input consists of digits and the operator '+', '-', and '*'.
+ * 3. All the integer values in the input expression are in the range [0, 99].
+ * 4. The integer values in the input expression are not zero.
  */
 #include <sstream>
 #include <string>
