@@ -10,6 +10,7 @@
  * 1. The number of nodes in the tree is in the range [1, 104].
  * 2. -231 <= Node.val <= 231 - 1
  */
+#include <climits>
 struct TreeNode {
   int val;
   TreeNode *left;

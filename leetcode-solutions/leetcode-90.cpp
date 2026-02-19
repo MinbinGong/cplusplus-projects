@@ -7,6 +7,7 @@
  * The solution set must not contain duplicate subsets. Return the solution in any order.
  */
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 void subset(int idx, vector<int>& ds, vector<int>& nums, vector<vector<int>>& ans, int n) {
@@ -28,6 +29,6 @@ vector<vector<int>> subsetsWithDup(vector<int>& nums) {
     vector<vector<int>> ans;
 
     sort(nums.begin(), nums.end());
-    subsets(0, ds, nums, ans, n);
+    subset(0, ds, nums, ans, n);
     return ans;
 }
