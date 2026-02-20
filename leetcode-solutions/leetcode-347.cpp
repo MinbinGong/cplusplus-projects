@@ -1,15 +1,21 @@
 /*
-    题目描述
-        给定一个数组，求前 k 个最频繁的数字。
-
-    题解
-        顾名思义，桶排序的意思是为每个值设立一个桶，桶内记录这个值出现的次数（或其它属
-    性），然后对桶进行排序。针对样例来说，我们先通过桶排序得到三个桶 [1,2,3,4]，它们的值分别
-    为 [4,2,1,1]，表示每个数字出现的次数。
-        紧接着，我们对桶的频次进行排序，前 k 大个桶即是前 k 个频繁的数。这里我们可以使用各种
-    排序算法，甚至可以再进行一次桶排序，把每个旧桶根据频次放在不同的新桶内。针对样例来说，
-    因为目前最大的频次是 4，我们建立 [1,2,3,4] 四个新桶，它们分别放入的旧桶为 [[3,4],[2],[],[1]]，
-    表示不同数字出现的频率。最后，我们从后往前遍历，直到找到 k 个旧桶。
+ * Top K Frequent Elements
+ * 
+ * Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
+ * 
+ * Example 1:
+ * Input: nums = [1,1,1,2,2,3], k = 2
+ * Output: [1,2]
+ * 
+ * Example 2:
+ * Input: nums = [1], k = 1
+ * Output: [1]
+ * 
+ * Constraints:
+ * 1 <= nums.length <= 105
+ * k is in the range [1, the number of unique elements in the array].
+ * It is guaranteed that the answer is unique.
+ * 
  */
 
 #include <queue>

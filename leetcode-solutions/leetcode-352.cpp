@@ -1,3 +1,22 @@
+/*
+ * Data Stream as Disjoint Intervals
+ * 
+ * Given a data stream input of non-negative integers a1, a2, ..., an, summarize the numbers seen so far as a list of disjoint intervals.
+ * 
+ * Implement the SummaryRanges class:
+ * 
+ * SummaryRanges() Initializes the object with an empty stream.
+ * void addNum(int val) Adds the integer val to the stream.
+ * int[][] getIntervals() Returns a summary of the integers in the stream currently as a list of disjoint intervals [starti, endi].
+ * 
+ * Example 1:
+ * Input
+ * ["SummaryRanges", "addNum", "getIntervals", "addNum", "getIntervals", "addNum", "getIntervals", "addNum", "getIntervals", "addNum", "getIntervals"]
+ * [[], [1], [], [3], [], [7], [], [2], [], [6], []]
+ * Output
+ * [null, null, [[1, 1]], null, [[1, 1], [3, 3]], null, [[1, 1], [3, 3], [7, 7]], null, [[1, 3], [7, 7]], null, [[1, 3], [6, 7]]]
+ * 
+ */
 #include <set>
 #include <utility>
 #include <vector>

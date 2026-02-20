@@ -1,14 +1,23 @@
 /*
-  Reconstruct Itinerary
-
-  题目描述
-  给定一个人坐过的一些飞机的起止机场，已知这个人从 JFK 起飞，那么这个人是按什么顺序
-  飞的；如果存在多种可能性，返回字母序最小的那种。
-
-  题解
-  本题可以先用哈希表记录起止机场，其中键是起始机场，值是一个多重集合，表示对应的终
-  止机场。因为一个人可能坐过重复的线路，所以我们需要使用多重集合储存重复值。储存完成之
-  后，我们可以利用栈来恢复从终点到起点飞行的顺序，再将结果逆序得到从起点到终点的顺序。
+ *  Reconstruct Itinerary
+ *
+ * Given a list of airline tickets represented by pairs of departure and arrival airports [from, to], reconstruct the itinerary in order. All of the tickets belong to a man who departs from JFK. Thus, the itinerary must begin with JFK.
+ * 
+ * Note:
+ * 
+ * If there are multiple valid itineraries, you should return the itinerary that has the smallest lexical order when read as a single string. For example, the itinerary ["JFK", "LGA"] has a smaller lexical order than ["JFK", "LGB"].
+ * All airports are represented by three capital letters (IATA code).
+ * You may assume all tickets form at least one valid itinerary.
+ * One must use all the tickets once and only once.
+ * 
+ * Example 1:
+ * Input: [["MUC", "LHR"], ["JFK", "MUC"], ["SFO", "SJC"], ["LHR", "SFO"]]
+ * Output: ["JFK", "MUC", "LHR", "SFO", "SJC"]
+ * 
+ * Example 2:
+ * Input: [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
+ * Output: ["JFK","ATL","JFK","SFO","ATL","SFO"]
+ * Explanation: Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","SFO"]. But it is larger in lexical order.
  */
 
 #include <algorithm>

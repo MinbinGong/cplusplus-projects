@@ -1,14 +1,19 @@
 /*
- * leetcode-342
  * Power of Four
- * 给定一个整数，判断它是否是 4 的次方
+ * Given an integer n, return true if it is a power of four. Otherwise, return false.
+ * An integer n is a power of four, if there exists an integer x such that n == 4^x.
  * 
- * 题解
- *     首先我们考虑一个数字是不是 2 的（整数）次方：如果一个数字 n 是 2 的整数次方，那么它
- * 的二进制一定是 0...010...0 这样的形式；考虑到 n − 1 的二进制是 0...001...1，这两个数求按位与
- * 的结果一定是 0。因此如果 n & (n - 1) 为 0，那么这个数是 2 的次方。0
- * 如果这个数也是 4 的次方，那二进制表示中 1 的位置必须为奇数位。我们可以把 n 和二进制
- * 的 10101...101（即十进制下的 1431655765）做按位与，如果结果不为 0，那么说明这个数是 4 的次方。
+ * Example 1:
+ * Input: n = 16
+ * Output: true
+ * 
+ * Example 2:
+ * Input: n = 5
+ * Output: false
+ * 
+ * Example 3:
+ * Input: n = 1
+ * Output: true
  */
 class Solution {
 public:

@@ -1,14 +1,24 @@
 /*
-  Maximum Product of Word Lengths
-
-  题目描述
-  给定多个字母串，求其中任意两个字母串的长度乘积的最大值，且这两个字母串不能含有相同字母
-
-  题解
-  怎样快速判断两个字母串是否含有重复数字呢？可以为每个字母串建立一个长度为 26 的二
-  进制数字，每个位置表示是否存在该字母。如果两个字母串含有重复数字，那它们的二进制表示
-  的按位与不为 0。同时，我们可以建立一个哈希表来存储字母串（在数组的位置）到二进制数字
-  的映射关系，方便查找调用。
+ * Maximum Product of Word Lengths
+ * 
+ * Given a string array words, return the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters.
+ * If no such two words exist, return 0.
+ * 
+ * Example 1:
+ * Input: words = ["abcw","baz","foo","bar","xtfn","abcdef"]
+ * Output: 16
+ * Explanation: The two words can be "abcw", "xtfn".
+ * 
+ * Example 2:
+ * Input: words = ["a","ab","abc","d","cd","bcd","abcd"]
+ * Output: 4
+ * Explanation: The two words can be "ab", "cd".
+ * 
+ * Example 3:
+ * Input: words = ["a","aa","aaa","aaaa"]
+ * Output: 0
+ * Explanation: No such pair of words.
+ * 
  */
 #include <string>
 #include <unordered_map>

@@ -1,14 +1,20 @@
 /*
-Best time to buy and sell stock with cooldown
-
-题目描述
-给定一段时间内每天的股票价格，已知每次卖出之后必须冷却一天，且每次只能拥有一支股
-票，求最大的收益。
-
-题解
-我们可以使用状态机来解决这类复杂的状态转移问题，通过建立多个状态以及它们的转移方
-式，我们可以很容易地推导出各个状态的转移方程。如图所示，我们可以建立四个状态来表示带
-有冷却的股票交易，以及它们的之间的转移方式。
+ * Best time to buy and sell stock with cooldown
+ *
+ * Given a list of daily prices of a stock, design an algorithm to find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times) with the following restrictions:
+ * 
+ * You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+ * After you sell your stock, you cannot buy stock on the next day. (i.e., cooldown 1 day)
+ * 
+ * Example 1:
+ * Input: [1,2,3,0,2]
+ * Output: 3 
+ * Explanation: transactions = [buy, sell, cooldown, buy, sell]
+ * 
+ * Example 2:
+ * Input: [1]
+ * Output: 0
+ * 
  */
 #include <algorithm>
 #include <vector>

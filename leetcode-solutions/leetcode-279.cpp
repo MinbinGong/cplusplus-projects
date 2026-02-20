@@ -1,18 +1,26 @@
 /*
-    Perfect squares
-
-    题目描述
-        给定一个正整数，求其最少可以由几个完全平方数相加构成。
-
-    题解
-        对于分割类型题，动态规划的状态转移方程通常并不依赖相邻的位置，而是依赖于满足分割
-    条件的位置。我们定义一个一维矩阵 dp，其中 dp[i] 表示数字 i 最少可以由几个完全平方数相加
-    构成。在本题中，位置 i 只依赖 i - k 2 的位置，如 i - 1、i - 4、i - 9 等等，才能满足完全平方分割
-    的条件。因此 dp[i] 可以取的最小值即为 1 + min(dp[i-1], dp[i-4], dp[i-9] · · · )。
+ * Perfect squares
+ * Given an integer n, return the least number of perfect square numbers that sum to n.
+ * 
+ * A perfect square is an integer that is the square of an integer; in other words, it is the product of some integer with itself. For example, 1, 4, 9, and 16 are perfect squares while 3 and 11 are not.
+ * 
+ * Example 1:
+ * Input: n = 12
+ * Output: 3
+ * Explanation: 12 = 4 + 4 + 4.
+ * 
+ * Example 2:
+ * Input: n = 13
+ * Output: 2
+ * Explanation: 13 = 4 + 9.
+ * 
+ * Constraints:
+ * 1 <= n <= 104
  */
 
 #include <algorithm>
 #include <vector>
+
 int numSquares(int n) {
   std::vector<int> dp(n + 1, n);
   dp[0] = 0;
@@ -22,5 +30,5 @@ int numSquares(int n) {
       dp[i] = std::min(dp[i], dp[i - j * j] + 1);
     }
   }
-  return dp[n]
+  return dp[n];
 }

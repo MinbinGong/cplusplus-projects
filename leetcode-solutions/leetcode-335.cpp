@@ -1,3 +1,26 @@
+/*
+ * Self Crossing
+ *
+ * You are given an array of integers x. You start at the point (0, 0) and you move x[0] meters to the north, then x[1] meters to the west, x[2] meters to the south, x[3] meters to the east, and so on. In other words, after each move, your direction changes counter-clockwise.
+ * 
+ * Return true if your path crosses itself or false if it does not.
+ * 
+ * Example 1:
+ * Input: x = [2,1,1,2]
+ * Output: true
+ * Explanation: The path crosses itself at the point (0, 1).
+ * 
+ * Example 2:
+ * Input: x = [1,2,3,4]
+ * Output: false
+ * Explanation: The path does not cross itself at any point.
+ * 
+ * Example 3:
+ * Input: x = [1,1,1,2,1]
+ * Output: true
+ * Explanation: The path crosses itself at the point (0, 0).
+ * 
+ */
 #include <vector>
 using namespace std;
 
