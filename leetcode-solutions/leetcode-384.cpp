@@ -1,13 +1,14 @@
 /*
-Shuffle an Array
-
-题目描述
-给定一个数组，要求实现两个指令函数。第一个函数“shuﬄe”可以随机打乱这个数组，第
-二个函数“reset”可以恢复原来的顺序。
-
-题解
-我们采用经典的 Fisher-Yates 洗牌算法，原理是通过随机交换位置来实现随机打乱，有正向
-和反向两种写法，且实现非常方便。注意这里“reset”函数以及类的构造函数的实现细节。
+ * Shuffle an Array
+ *
+ * Given an integer array nums, design an algorithm to randomly shuffle the array. All permutations of the array should be equally likely as a result of the shuffling.
+ * 
+ * Implement the Solution class:
+ * 
+ * Solution(int[] nums) Initializes the object with the integer array nums.
+ * int[] reset() Resets the array to its original configuration and returns it.
+ * int[] shuffle() Returns a random shuffling of the array.
+ * 
  */
 #include <random>
 #include <vector>

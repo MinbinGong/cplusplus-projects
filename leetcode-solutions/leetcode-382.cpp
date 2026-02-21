@@ -1,12 +1,13 @@
 /*
-Linked List Random Node
-
-题目描述
-给定一个单向链表，要求设计一个算法，可以随机取得其中的一个数字。
-
-题解
-不同于数组，在未遍历完链表前，我们无法知道链表的总长度。这里我们就可以使用水库采
-样：遍历一次链表，在遍历到第 m 个节点时，有 m1 的概率选择这个节点覆盖掉之前的节点选择。
+ * Linked List Random Node
+ *
+ * Given a singly linked list, return a random node's value from the linked list. Each node must have the same probability of being chosen.
+ * 
+ * Implement the Solution class:
+ * 
+ * Solution(ListNode head) Initializes the object with the head of the singly-linked list head.
+ * int getRandom() Chooses a node randomly from the list and returns its value. All the nodes of the list should be equally likely to be chosen.
+ * 
  */
 #include <random>
 using namespace std;
