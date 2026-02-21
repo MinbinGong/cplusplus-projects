@@ -1,12 +1,31 @@
 /*
-Add strings
-
-题目描述
-给定两个由数字组成的字符串，求它们相加的结果。
-
-题解
-因为相加运算是从后往前进行的，所以可以先翻转字符串，再逐位计算。这种类型的题考察
-的是细节，如进位、位数差等等。
+ * Add strings
+ *
+ * Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.
+ * 
+ * Note:
+ * The length of both num1 and num2 is < 5100.
+ * Both num1 and num2 contains only digits 0-9.
+ * Both num1 and num2 does not contain any leading zero.
+ * You must not use any built-in BigInteger library or convert the inputs to integer directly.
+ * 
+ * Example 1:
+ * Input: num1 = "11", num2 = "123"
+ * Output: "134"
+ * 
+ * Example 2:
+ * Input: num1 = "456", num2 = "77"
+ * Output: "533"
+ * 
+ * Example 3:
+ * Input: num1 = "0", num2 = "0"
+ * Output: "0"
+ * 
+ * Constraints:
+ * 1 <= num1.length, num2.length <= 5100
+ * num1 and num2 consists of only digits.
+ * num1 and num2 does not contain any leading zero except for the zero itself.
+ * 
  */
 #include <algorithm>
 #include <stack>
