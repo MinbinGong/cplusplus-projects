@@ -1,3 +1,18 @@
+/*
+ * Arithmetic Slices II - Subsequence
+ *
+ *  A sequence of numbers is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.
+ * 
+ *  For example, [1, 3, 5, 7, 9], [7, 7, 7, 7], and [3, -1, -5, -9] are arithmetic sequences.
+ *  Given an integer array nums, return the number of arithmetic subsequences of nums.
+ * 
+ *  A subsequence of an array is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements. For example, [2,5,10] is a subsequence of [1,2,1,2,4,1,5,10].
+ * 
+ *  Constraints:
+ *  1  <= nums.length <= 1000
+ *  -231 <= nums[i] <= 231 - 1
+ * 
+ */
 #include <unordered_map>
 #include <vector>
 using namespace std;

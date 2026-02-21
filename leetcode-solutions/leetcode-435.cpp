@@ -1,16 +1,28 @@
 /*
-    题目描述
-    给定多个区间，计算让这些区间互不重叠所需要移除区间的最少个数。起止相连不算重叠。
-
-    题解
-    在选择要保留区间时，区间的结尾十分重要：选择的区间结尾越小，余留给其它区间的空间
-    就越大，就越能保留更多的区间。因此，我们采取的贪心策略为，优先保留结尾小且不相交的区
-    间。
-    具体实现方法为，先把区间按照结尾的大小进行增序排序，每次选择结尾最小且和前一个选
-    择的区间不重叠的区间。我们这里使用 C++ 的 Lambda，结合 std::sort() 函数进行自定义排
-    序。
+ * Non-overlapping Intervals
+ *
+ * Given an array of intervals intervals where intervals[i] = [starti, endi], return the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.
+ * 
+ * Example 1:
+ * Input: intervals = [[1,2],[2,3],[3,4],[1,3]]
+ * Output: 1
+ * Explanation: [1,3] can be removed and the rest of the intervals are non-overlapping.
+ * 
+ * Example 2:
+ * Input: intervals = [[1,2],[1,2],[1,2]]
+ * Output: 2
+ * Explanation: You need to remove two [1,2] to make the rest of the intervals non-overlapping.
+ * 
+ * Example 3:
+ * Input: intervals = [[1,2],[2,3]]
+ * Output: 0
+ * Explanation: You don't need to remove any of the intervals since they're already non-overlapping.
+ * 
+ * Constraints:
+ * 1 <= intervals.length <= 105
+ * intervals[i].length == 2
+ * -5 * 104 <= starti < endi <= 5 * 104
  */
-
 #include <algorithm>
 #include <vector>
 using namespace std;

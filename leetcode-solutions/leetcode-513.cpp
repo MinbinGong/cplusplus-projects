@@ -3,12 +3,12 @@
  *
  * Find Bottom Left Tree Value
  *
- * 题目描述
- *     给定一个二叉树，在树的最后一行找到最左边的值。
- *
- * 题解：
- *     利用广度优先搜索，对每一层的节点进行遍历，然后取最后一层的第一个节点的值。
- *
+ * Given the root of a binary tree, return the leftmost value in the last row of the tree.
+ * 
+ * Constraints:
+ * The number of nodes in the tree is in the range [1, 104].
+ * -231 <= Node.val <= 231 - 1
+ * 
  */
 
 int findBottomLeftValue(TreeNode* root) {

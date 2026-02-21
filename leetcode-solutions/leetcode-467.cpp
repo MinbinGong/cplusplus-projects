@@ -1,8 +1,15 @@
 /*
- * cnt[i] stores the number of unique substring ending at character 'a'+i. For
- * example cnt[3] will count how many unique substrings ending with d are
- * there. The condition p[i-1]-p[i]==25 is when we encount substring like
- * .....za....
+ * Unique Substrings in Wraparound String
+ *
+ *  Consider the string s to be the infinite wraparound string of "abcdefghijklmnopqrstuvwxyz", so s will look like this: "...zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd....".
+ *
+ *  Now we have another string p. Your job is to find out how many unique non-empty substrings of p are present in s. In particular, your input is the string p and you need to output the number of different non-empty substrings of p in the string s.
+ *
+ *  Note: p consists of only lowercase English letters and the size of p might be over 10000.
+ *
+ *  Constraints:
+ *  1 <= p.length <= 10000
+ * 
  */
 #include <string>
 #include <vector>

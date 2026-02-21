@@ -1,13 +1,18 @@
 /*
-Ones and Zeros
-
-题目描述
-给定 m 个数字 0 和 n 个数字 1，以及一些由 0-1 构成的字符串，求利用这些数字最多可以构
-成多少个给定的字符串，字符串只可以构成一次。
-
-题解
-这是一个多维费用的 0-1 背包问题，有两个背包大小，0 的数量和 1 的数量。我们在这里直
-接展示三维空间压缩到二维后的写法。
+ * Ones and Zeros
+ *
+ *  You are given an array of binary strings strs and two integers m and n.
+ *
+ *  Return the size of the largest subset of strs such that there are at most m 0's and n 1's in the subset.
+ *
+ *  A set x is a subset of a set y if all elements of x are also elements of y.
+ *
+ *  Constraints:
+ *  1 <= strs.length <= 600
+ *  1 <= strs[i].length <= 100
+ *  strs[i] consists of only digits '0' and '1'.
+ *  1 <= m, n <= 100
+ * 
  */
 #include <string>
 #include <utility>

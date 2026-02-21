@@ -1,17 +1,15 @@
 /*
-题目描述
-有一群孩子和一堆饼干，每个孩子有一个饥饿度，每个饼干都有一个大小。每个孩子只能吃
-最多一个饼干，且只有饼干的大小大于孩子的饥饿度时，这个孩子才能吃饱。求解最多有多少孩
-子可以吃饱。
-
-题解
-因为饥饿度最小的孩子最容易吃饱，所以我们先考虑这个孩子。为了尽量使得剩下的饼干可
-以满足饥饿度更大的孩子，所以我们应该把大于等于这个孩子饥饿度的、且大小最小的饼干给这
-个孩子。满足了这个孩子之后，我们采取同样的策略，考虑剩下孩子里饥饿度最小的孩子，直到
-没有满足条件的饼干存在。
-简而言之，这里的贪心策略是，给剩余孩子里最小饥饿度的孩子分配最小的能饱腹的饼干。
-至于具体实现，因为我们需要获得大小关系，一个便捷的方法就是把孩子和饼干分别排序。
-这样我们就可以从饥饿度最小的孩子和大小最小的饼干出发，计算有多少个对子可以满足条件。
+ * Assign Cookies
+ *
+ * Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie.
+ *
+ * Each child i has a greed factor g[i], which is the minimum size of a cookie that the child will be content with; and each cookie j has a size s[j]. If s[j] >= g[i], we can assign the cookie j to the child i, and the child i will be content. Your goal is to maximize the number of your content children and output the maximum number.
+ *
+ * Constraints:
+ * 1 <= g.length <= 3 * 104
+ * 0 <= s.length <= 3 * 104
+ * 1 <= g[i], s[j] <= 231 - 1
+ * 
  */
 #include <algorithm>
 #include <vector>

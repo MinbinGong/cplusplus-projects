@@ -1,11 +1,13 @@
 /*
-Hamming Distance
-
-题目描述
-给定两个十进制数字，求它们二进制表示的汉明距离（Hamming distance，即不同位的个数）
-
-题解
-对两个数进行按位异或操作，统计有多少个 1 即可。
+ * Hamming Distance
+ *
+ * The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+ *
+ * Given two integers x and y, return the Hamming distance between them.
+ *
+ * Constraints:
+ * 0 <= x, y <= 231 - 1
+ * 
  */
 int hammingDistance(int x, int y) {
   int diff = x ^ y;

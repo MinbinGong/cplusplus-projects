@@ -1,3 +1,12 @@
+/*
+ * K-th Smallest in Lexicographical Order
+ *
+ * Given two integers n and k, return the kth lexicographically smallest integer in the range [1, n].
+ * 
+ * Constraints:
+ * 1 <= k <= n <= 109
+ * 
+ */
 #include <algorithm>
 using namespace std;
 

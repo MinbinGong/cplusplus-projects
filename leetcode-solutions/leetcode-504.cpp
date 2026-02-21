@@ -1,12 +1,11 @@
 /*
-Base 7
-
-题目描述
-给定一个十进制整数，求它在七进制下的表示。
-
-题解
-进制转换类型的题，通常是利用除法和取模（mod）来进行计算，同时也要注意一些细节，如
-负数和零。如果输出是数字类型而非字符串，则也需要考虑是否会超出整数上下界
+ * Base 7
+ *
+ * Given an integer num, return a string of its base 7 representation.
+ * 
+ * Constraints:
+ * -107 <= num <= 107
+ * 
  */
 #include <string>
 using namespace std;
