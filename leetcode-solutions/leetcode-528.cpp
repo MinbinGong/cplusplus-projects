@@ -1,18 +1,28 @@
 /*
-  Random Pick with Weight
-
-  题目描述
-  给定一个数组，数组每个位置的值表示该位置的权重，要求按照权重的概率去随机采样。
-
-  题解
-  我们可以先使用 partial_sum 求前缀和（即到每个位置为止之前所有数字的和）
-  ，这个结果
-  对于正整数数组是单调递增的。每当需要采样时，我们可以先随机产生一个数字，然后使用二分
-  法查找其在前缀和中的位置，以模拟加权采样的过程。这里的二分法可以用 lower_bound 实现。
-  以样例为例，
-  权重数组 [1,3] 的前缀和为 [1,4]。
-  如果我们随机生成的数字为 1，那么 lower_bound
-  返回的位置为 0；如果我们随机生成的数字是 2、3、4，那么 lower_bound 返回的位置为 1。
+ * Random Pick with Weight
+ *
+ * Given an array w of positive integers, where w[i] describes the weight of index i, write a function pickIndex which randomly picks an index in proportion to its weight.
+ * 
+ * Note:
+ * 1 <= w.length <= 10000
+ * 1 <= w[i] <= 10^5
+ * pickIndex will be called at most 10000 times.
+ * 
+ * Example 1:
+ * Input: 
+ * ["Solution","pickIndex"]
+ * [[[1]],[]]
+ * Output: [null,0]
+ * 
+ * Example 2:
+ * Input: 
+ * ["Solution","pickIndex","pickIndex","pickIndex","pickIndex","pickIndex"]
+ * [[[1,3]],[],[],[],[],[]]
+ * Output: [null,0,1,1,1,0]
+ * 
+ * Explanation of Input Syntax:
+ * The input is two lists: the subroutines called and their arguments. Solution's constructor has one argument, the array w. pickIndex has no arguments. Arguments are always wrapped with a list, even if there aren't any.
+ * 
  */
 #include <algorithm>
 #include <numeric>

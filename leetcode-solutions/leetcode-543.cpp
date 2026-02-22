@@ -1,14 +1,19 @@
 /*
-  Diameter of Binary tree
-
-  题目描述
-  求一个二叉树的最长直径。直径的定义是二叉树上任意两节点之间的无向距离
-
-  题解
-  同样的，我们可以利用递归来处理树。解题时要注意，在我们处理某个子树时，我们更新的
-  最长直径值和递归返回的值是不同的。这是因为待更新的最长直径值是经过该子树根节点的最长
-  直径（即两侧长度）；而函数返回值是以该子树根节点为端点的最长直径值（即一侧长度），使用
-  这样的返回值才可以通过递归更新父节点的最长直径值）
+ * 543. Diameter of Binary tree
+ * 
+ * Given a binary tree, you need to compute the length of the diameter of the tree. The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
+ * 
+ * Example:
+ * Given a binary tree 
+ *           1
+ *          / \
+ *         2   3
+ *        / \     
+ *       4   5    
+ * Return 3, which is the length of the path [4,2,1,3] or [5,2,1,3].
+ * 
+ * Note: The length of path between two nodes is represented by the number of edges between them.
+ * 
  */
 #include <algorithm>
 using namespace std;

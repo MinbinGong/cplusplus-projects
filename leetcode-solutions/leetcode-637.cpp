@@ -1,10 +1,11 @@
 /*
  * Average of Levels in Binary Tree
- * 题目描述
- *     给定一个二叉树，求每一层的节点值的平均数。
+ *
+ * Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.
  * 
- * 题解：
- *     利用广度优先搜索，对每一层的节点进行遍历，然后求和，最后求平均数。
+ * Note:
+ * The range of node's value is in the range of 32-bit signed integer.
+ * 
  */
 #include <vector>
 #include <queue>

@@ -1,38 +1,125 @@
 /*
-    题目描述
-        给定一个二维的 0-1 矩阵，如果第 (i, j) 位置是 1，则表示第 i 个人和第 j 个人是朋友。已知
-    朋友关系是可以传递的，即如果 a 是 b 的朋友，b 是 c 的朋友，那么 a 和 c 也是朋友，换言之这
-    三个人处于同一个朋友圈之内。求一共有多少个朋友圈。
-
-    题解
-        对于题目 695，图的表示方法是，每个位置代表一个节点，每个节点与上下左右四个节点相
-    邻。而在这一道题里面，每一行（列）表示一个节点，它的每列（行）表示是否存在一个相邻节
-    点。因此题目 695 拥有 m × n 个节点，每个节点有 4 条边；而本题拥有 n 个节点，每个节点最多
-    有 n 条边，表示和所有人都是朋友，最少可以有 1 条边，表示自己与自己相连。当清楚了图的表
-    示方法后，这道题与题目 695 本质上是同一道题：搜索朋友圈（岛屿）的个数（最大面积）。我
-    们这里采用递归的第一种写法。
+ * Number of Provinces
+ *
+ * There are n cities. Some of them are connected, while some are not. If city a is connected directly with city b, and city b is connected directly with city c, then city a is connected indirectly with city c.
+ * A province is a group of directly or indirectly connected cities and no other cities outside of the group.
+ * You are given an n x n matrix isConnected where isConnected[i][j] = 1 if the ith city and the jth city are directly connected, and isConnected[i][j] = 0 otherwise.
+ * Return the total number of provinces.
+ * 
+ * Example 1:
+ * Input: isConnected = [[1,1,0],[1,1,0],[0,0,1]]
+ * Output: 2
+ * 
+ * Example 2:
+ * Input: isConnected = [[1,0,0],[0,1,0],[0,0,1]]
+ * Output: 3
+ * 
+ * Note:
+ * 1 <= n <= 200
+ * n == isConnected.length
+ * n == isConnected[i].length
+ * isConnected[i][j] is 1 or 0.
+ * isConnected[i][i] == 1
+ * isConnected[i][j] == isConnected[j][i]
+ * 
  */
 #include <vector>
+#include <functional>
+#include <queue>
 using namespace std;
 
-void dfs(vector<vector<int>>& friends, int i, vector<bool>& visited) {
-  visited[i] = true;
-  for (int k = 0; k < friends.size(); ++k) {
-    if (friends[i][k] == 1 && !visited[k]) {
-      dfs(friends, k, visited);
+class Solution1 {
+public:
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int n = isConnected.size();
+        vector<bool> visited(n, false);
+        int provinces = 0;
+        
+        function<void(int)> dfs = [&](int i) {
+            visited[i] = true;
+            for (int j = 0; j < n; ++j) {
+                if (isConnected[i][j] && !visited[j]) {
+                    dfs(j);
+                }
+            }
+        };
+        
+        for (int i = 0; i < n; ++i) {
+            if (!visited[i]) {
+                dfs(i);
+                provinces++;
+            }
+        }
+        return provinces;
     }
-  }
-}
+};
 
-int findCircleNum(vector<vector<int>>& friends) {
-  int n = friends.size();
-  int count = 0;
-  vector<bool> visited(n, false);
-  for (int i = 0; i < n; ++i) {
-    if (!visited[i]) {
-      dfs(friends, i, visited);
-      ++count;
+class Solution2 {
+public:
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int n = isConnected.size();
+        vector<bool> visited(n, false);
+        int provinces = 0;
+        queue<int> q;
+        
+        for (int i = 0; i < n; ++i) {
+            if (!visited[i]) {
+                q.push(i);
+                while (!q.empty()) {
+                    int curr = q.front(); q.pop();
+                    visited[curr] = true;
+                    for (int j = 0; j < n; ++j) {
+                        if (isConnected[curr][j] && !visited[j]) {
+                            q.push(j);
+                        }
+                    }
+                }
+                provinces++;
+            }
+        }
+        return provinces;
     }
-  }
-  return count;
-}
+};
+
+class UnionFind {
+private:
+    vector<int> parent, rank;
+public:
+    UnionFind(int n) {
+        parent.resize(n);
+        rank.resize(n, 0);
+        for (int i = 0; i < n; ++i) parent[i] = i;
+    }
+    
+    int find(int x) {
+        if (parent[x] != x) parent[x] = find(parent[x]);
+        return parent[x];
+    }
+    
+    void unite(int x, int y) {
+        int rootX = find(x), rootY = find(y);
+        if (rootX != rootY) {
+            if (rank[rootX] < rank[rootY]) parent[rootX] = rootY;
+            else if (rank[rootX] > rank[rootY]) parent[rootY] = rootX;
+            else { parent[rootY] = rootX; rank[rootX]++; }
+        }
+    }
+};
+
+class Solution3 {
+public:
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int n = isConnected.size();
+        UnionFind uf(n);
+        for (int i = 0; i < n; ++i) {
+            for (int j = i + 1; j < n; ++j) {
+                if (isConnected[i][j]) uf.unite(i, j);
+            }
+        }
+        int provinces = 0;
+        for (int i = 0; i < n; ++i) {
+            if (uf.find(i) == i) provinces++;
+        }
+        return provinces;
+    }
+};

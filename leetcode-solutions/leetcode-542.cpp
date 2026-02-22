@@ -1,13 +1,35 @@
 /*
-    题目描述
-    给定一个由 0 和 1 组成的二维矩阵，求每个位置到最近的 0 的距离
-
-    题解
-    一般来说，因为这道题涉及到四个方向上的最近搜索，所以很多人的第一反应可能会是广度
-    优先搜索。但是对于一个大小 O„mn” 的二维数组，对每个位置进行四向搜索，最坏情况的时间复
-    杂度（即全是 1）会达到恐怖的 O„m2n2”。一种办法是使用一个 dp 数组做 memoization，使得广
-    度优先搜索不会重复遍历相同位置；另一种更简单的方法是，我们从左上到右下进行一次动态搜
-    索，再从右下到左上进行一次动态搜索。两次动态搜索即可完成四个方向上的查找。
+ * 542. 01 Matrix
+ *
+ * Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell.
+ * 
+ * The distance between two adjacent cells is 1.
+ * 
+ * Example 1: 
+ * Input:
+ * 0 0 0
+ * 0 1 0
+ * 0 0 0
+ * Output:
+ * 0 0 0
+ * 0 1 0
+ * 0 0 0
+ * 
+ * Example 2: 
+ * Input:
+ * 0 0 0
+ * 0 1 0
+ * 1 1 1
+ * Output:
+ * 0 0 0
+ * 0 1 0
+ * 1 2 1
+ * 
+ * Note:
+ * 1. The number of elements of the given matrix will not exceed 10,000.
+ * 2. There are at least one 0 in the given matrix.
+ * 3. The cells are adjacent in only four directions: up, down, left and right.
+ * 
  */
 #include <climits>
 #include <vector>

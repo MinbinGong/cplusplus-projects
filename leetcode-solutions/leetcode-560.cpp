@@ -1,13 +1,16 @@
 /*
-  Subarray sum equals k
-
-  题目描述
-  给定一个数组，寻找和为 k 的连续区间个数。
-
-  题解
-  本题同样是利用前缀和，不同的是这里我们使用一个哈希表 hashmap，其键是前缀和，而值是
-  该前缀和出现的次数。在我们遍历到位置 i 时，假设当前的前缀和是 psum，那么 hashmap[psum-k]
-  即为以当前位置结尾、满足条件的区间个数
+ * Subarray sum equals k
+ *
+ * Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.
+ * 
+ * Example:
+ * Input: nums = [1,1,1], k = 2
+ * Output: 2
+ * 
+ * Note:
+ * The length of the array is in range [1, 20,000].
+ * The range of numbers in the array is [-1000, 1000] and the range of the integer k is [-1e7, 1e7].
+ * 
  */
 #include <unordered_map>
 #include <vector>

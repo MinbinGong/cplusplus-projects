@@ -1,19 +1,23 @@
 /*
  * Subtree of Another Tree
- * 题目描述
- *     给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。
- *     s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。
  *
- * 题解：
- *     先判断两棵树是否相等，再判断
- *     1. 左子树是否包含 t
- *     2. 右子树是否包含 t
- *     只要满足一个条件，就返回 true。
- *     终止条件：当 t 为 NULL 时，返回 true。当 s 为 NULL 时，返回 false。
- *     递归调用：当 t 不为 NULL 时，判断 s 和 t 是否相等，然后递归调用左右子树。
- *     递归返回：返回递归调用的结果。
+ * Given two non-empty binary trees s and t, check whether tree t has exactly the same structure and node values with a subtree of s.
+ * A subtree of s is a tree consists of a node in s and all of this node's descendants. The tree s could also be considered as a subtree of itself.
+ * 
+ * Example:
+ * Input:
+ *      s = [3,4,5,1,2], t = [4,1,2]
+ * Output: True
+ * 
+ * Input:
+ *      s = [3,4,5,1,2,null,null,null,null,0]
+ * Output: False
+ * 
+ * Note:
+ * The number of nodes of the given tree s and t will be in the range [1, 2000].
+ * The number of unique node values of s and t will be in the range [1, 10000].
+ * 
  */
-
 #include <vector>
 #include <queue>
 
