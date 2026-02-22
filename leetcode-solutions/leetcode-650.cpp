@@ -1,15 +1,39 @@
 /*
-Keys Keyboard
-
-题目描述
-给定一个字母 A，已知你可以每次选择复制全部字符，或者粘贴之前复制的字符，求最少需
-要几次操作可以把字符串延展到指定长度
-
-题解
-不同于以往通过加减实现的动态规划，这里需要乘除法来计算位置，因为粘贴操作是倍数增
-加的。我们使用一个一维数组 dp，其中位置 i 表示延展到长度 i 的最少操作次数。对于每个位置
-j，如果 j 可以被 i 整除，那么长度 i 就可以由长度 j 操作得到，其操作次数等价于把一个长度为 1
-的 A 延展到长度为 i/j。因此我们可以得到递推公式 dp[i] = dp[j] + dp[i/j]。
+ * Keys Keyboard
+ * 
+ * You have a keyboard with the following keys:
+ * 
+ * Key 1: (A): Print one 'A' on screen.
+ * 
+ * Key 2: (Ctrl-A): Select the whole screen.
+ * 
+ * Key 3: (Ctrl-C): Copy selection to buffer.
+ * 
+ * Key 4: (Ctrl-V): Print buffer on screen appending it after what has already been printed.
+ * 
+ * Now, you can only press the keyboard for N times (with the above four keys), find out the maximum numbers of 'A' you can print on screen.
+ * 
+ * Example 1:
+ * 
+ * Input: N = 3
+ * Output: 3
+ * Explanation: 
+ * We can at most get 3 A's on screen by pressing following key sequence:
+ * A, A, A
+ * 
+ * Example 2:
+ * 
+ * Input: N = 7
+ * Output: 9
+ * Explanation: 
+ * We can at most get 9 A's on screen by pressing following key sequence:
+ * A, A, A, Ctrl A, Ctrl C, Ctrl V, Ctrl V
+ * 
+ * Note:
+ * 
+ * 1 <= N <= 50
+ * Answers will be in the range of 32-bit signed integer.
+ * 
 */
 #include <cmath>
 #include <vector>

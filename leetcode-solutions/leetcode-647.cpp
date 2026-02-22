@@ -1,12 +1,14 @@
 /*
-  Palindromic substrings
-
-  题目描述
-  给定一个字符，求其有多少个回文子字符串。回文的定义是左右对称。
-
-  题解
-  我们可以从字符串的每个位置开始，向左向右延长，判断存在多少以当前位置为中轴的回文
-  子字符串。
+ * Palindromic substrings
+ *
+ * Given a string, your task is to count how many palindromic substrings in this string.
+ *
+ * The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.
+ *
+ * Note:
+ *
+ * The input string length won't exceed 1000.
+ *
  */
 #include <string>
 using namespace std;
