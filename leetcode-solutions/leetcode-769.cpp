@@ -1,17 +1,32 @@
 /*
-  Max Chunks To Make Sorted
-
-  题目描述
-  给定一个含有 0 到 n 整数的数组，每个整数只出现一次，求这个数组最多可以分割成多少个
-  子数组，使得对每个子数组进行增序排序后，原数组也是增序的。
-
-  题解
-  从左往右遍历，同时记录当前的最大值，每当当前最大值等于数组位置时，我们可以多一次
-  分割。
-  为什么可以通过这个算法解决问题呢？如果当前最大值大于数组位置，则说明右边一定有小
-  于数组位置的数字，需要把它也加入待排序的子数组；又因为数组只包含不重复的 0 到 n，所以
-  当前最大值一定不会小于数组位置。所以每当当前最大值等于数组位置时，假设为 p，我们可以
-  成功完成一次分割，并且其与上一次分割位置 q 之间的值一定是 q + 1 到 p 的所有数字。
+ * Max Chunks To Make Sorted
+ *
+ * Given an array arr that is a permutation of [0, 1, ..., arr.length - 1], we split the array into some number of "chunks" (partitions), and individually sort each chunk.  After concatenating them, the result equals the sorted array.
+ * 
+ * What is the most number of chunks we could have made?
+ * 
+ * Example 1:
+ * Input: arr = [4,3,2,1,0]
+ * Output: 1
+ * Explanation:
+ * Splitting into two or more chunks will not return the required result.
+ * For example, splitting into [4, 3], [2, 1, 0] will result in [3, 4, 0, 1, 2], which isn't sorted.
+ * 
+ * Example 2:
+ * Input: arr = [1,0,2,3,4]
+ * Output: 4
+ * Explanation:
+ * We can split into two chunks, such as [1, 0], [2, 3, 4].
+ * However, splitting into [1, 0], [2], [3], [4] is the highest number of chunks possible.
+ * 
+ * Note:
+ * 1. arr will have length in range [1, 10].
+ * 2. arr[i] will be a permutation of [0, 1, ..., arr.length - 1].
+ * 3. Follow up:
+ * 3.1. What if the array is stored on disk, and the memory is limited such that you can only load at most one row of the array into the memory at once?
+ * 3.2. What if the array is so large that you can only load up a partial row into the memory at once?
+ * 3.3. What if the array is so large that you can only load up a partial column into the memory at once? 
+ * 
  */
 #include <vector>
 using namespace std;

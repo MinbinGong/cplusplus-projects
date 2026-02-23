@@ -1,12 +1,16 @@
 /*
-Is Graph Bipartite
-
-题目描述
-给定一个图，判断其是否可以二分，
-
-题解
-利用队列和广度优先搜索，我们可以对未染色的节点进行染色，并且检查是否有颜色相同的
-相邻节点存在。注意在代码中，我们用 0 表示未检查的节点，用 1 和 2 表示两种不同的颜色。
+ * Is Graph Bipartite
+ *
+ * Given an undirected graph, return true if and only if it is bipartite.
+ * 
+ * A graph is bipartite if we can split its set of nodes into two independent subsets A and B, such that every edge in the graph has one node in A and another node in B.
+ * 
+ * Note:
+ * 1. graph will have length in range [1, 100].
+ * 2. graph[i] will contain integers in range [0, graph.length - 1].
+ * 3. graph[i] will not contain i or duplicate values.
+ * 4. The graph is undirected: if any element j is in graph[i], then i will be in graph[j].
+ * 
  */
 #include <queue>
 #include <vector>
