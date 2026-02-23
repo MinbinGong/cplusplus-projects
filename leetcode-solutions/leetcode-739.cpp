@@ -1,17 +1,16 @@
 /*
-  Daily Temperatures
-
-  题目描述
-  给定每天的温度，求对于每一天需要等几天才可以等到更暖和的一天。如果该天之后不存在
-  更暖和的天气，则记为 0。
-
-  题解
-  我们可以维持一个单调递减的栈，表示每天的温度；为了方便计算天数差，我们这里存放位
-  置（即日期）而非温度本身。我们从左向右遍历温度数组，对于每个日期 p，如果 p 的温度比栈
-  顶存储位置 q 的温度高，则我们取出 q，并记录 q 需要等待的天数为 p − q；我们重复这一过程，
-  直到 p 的温度小于等于栈顶存储位置的温度（或空栈）时，我们将 p 插入栈顶，然后考虑下一天。
-  在这个过程中，栈内数组永远保持单调递减，避免了使用排序进行比较。最后若栈内剩余一些日
-  期，则说明它们之后都没有出现更暖和的日期。
+ * Daily Temperatures
+ *
+ * Given a list of daily temperatures T, return a list such that, for each day in the input,
+ * tells you how many days you would have to wait until a warmer temperature. If there is no
+ * warmer temperature, put 0 instead.
+ * 
+ * Note:
+ * 1. The length of temperatures will be in the range [1, 30000].
+ * 2. Each temperature will be an integer in the range [30, 100].
+ * 3. The temperature of each day is guaranteed to be in the range [30, 100].
+ * 4. The temperature of each day is guaranteed to be in the range [30, 100].
+ * 
  */
 #include <stack>
 #include <vector>

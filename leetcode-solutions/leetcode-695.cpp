@@ -1,12 +1,47 @@
 /*
-  题目描述
-      给定一个二维的 0-1 矩阵，其中 0 表示海洋，1 表示陆地。单独的或相邻的陆地可以形成岛
-  屿，每个格子只与其上下左右四个格子相邻。求最大的岛屿面积。
-
-  题解
-      此题是十分标准的搜索题，我们可以拿来练手深度优先搜索。一般来说，深度优先搜索类型
-  的题可以分为主函数和辅函数，主函数用于遍历所有的搜索位置，判断是否可以开始搜索，如果
-  可以即在辅函数进行搜索。辅函数则负责深度优先搜索的递归调用。
+ * Maximum Area of Island
+ * 
+ * Given a non-empty 2D array grid of 0's and 1's, an island is a group of 1's (representing land) connected 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.
+ * 
+ * Find the maximum area of an island in the given 2D array. (If there is no island, the maximum area is 0.)
+ * 
+ * Example 1:
+ * 
+ * [[0,0,1,0,0,0,0,1,0,0,0,0,0],
+ *  [0,0,0,0,0,0,0,1,1,1,0,0,0],
+ *  [0,1,1,0,1,0,0,0,0,0,0,0,0],
+ *  [0,1,0,0,1,1,0,0,1,0,1,0,0],
+ *  [0,1,0,0,1,1,0,0,1,1,1,0,0],
+ * 
+ * Example 2:
+ * 
+ * [[0,0,0,0,0,0,0,0]]
+ * 
+ * Example 3:
+ * 
+ * [[1,1,0,0,0],
+ *  [1,1,0,0,0],
+ *  [0,0,0,1,1],
+ *  [0,0,0,1,1]]
+ * 
+ * Example 4:
+ * 
+ * [[1,1,0,1,1],
+ *  [1,0,0,0,0],
+ *  [0,0,0,0,1],
+ *  [1,1,0,1,1]]
+ * 
+ * Example 5:
+ * 
+ * [[1,1,0,1,1],
+ *  [1,1,0,1,1],
+ *  [0,0,0,0,0],
+ *  [0,0,0,0,0]]
+ * 
+ * Note:
+ * 
+ * The length of each dimension in the given grid does not exceed 50.
+ * 
  */
 #include <stack>
 #include <utility>

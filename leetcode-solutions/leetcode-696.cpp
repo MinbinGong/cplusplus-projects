@@ -1,14 +1,29 @@
 /*
-  Count Binary Substrings
-
-  题目描述
-  给定一个 0-1 字符串，求有多少非空子字符串的 0 和 1 数量相同。
-
-  题解
-  从左往右遍历数组，记录和当前位置数字相同且连续的长度，以及其之前连续的不同数字的
-  长度。举例来说，对于 00110 的最后一位，我们记录的相同数字长度是 1，因为只有一个连续 0；
-  我们记录的不同数字长度是 2，因为在 0 之前有两个连续的 1。若不同数字的连续长度大于等于
-  当前数字的连续长度，则说明存在一个且只存在一个以当前数字结尾的满足条件的子字符串。
+ * Count Binary Substrings
+ * 
+ * Given a binary string, count the number of substrings that have an equal number of 0's and 1's.
+ * 
+ * Example 1:
+ * 
+ * Input: "00110011"
+ * Output: 6
+ * Explanation: There are 6 substrings that have equal number of consecutive 1's and 0's: "0011", "01", "1100", "10", "0011", and "01".
+ * 
+ * Notice that some of these substrings repeat and are counted the number of times they occur.
+ * 
+ * Also, "00110011" is not a valid substring because all the 0's (and 1's) are not grouped together.
+ * 
+ * Example 2:
+ * 
+ * Input: "10101"
+ * Output: 4
+ * Explanation: There are 4 substrings: "10", "01", "10", "01" that have equal number of consecutive 1's and 0's.
+ * 
+ * Note:
+ * 1. s.length() will be between 1 and 50,000.
+ * 2. s will only consist of "0" or "1" characters.
+ * 3. s[0] is "1" or "0".
+ * 4. s[i] is "1" or "0".
  */
 #include <string>
 using namespace std;
