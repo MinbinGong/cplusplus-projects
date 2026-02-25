@@ -36,3 +36,42 @@
  * 0 <= node.val <= n
  * The sum of all node.val is n.
  */
+#include <algorithm>
+using namespace std;
+/**
+ * Definition for a binary tree node.
+ */
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
+class Solution {
+public:
+    int distributeCoins(TreeNode* root) {
+        ans = 0;
+        dfs(root);
+        return ans;
+    }
+    
+private:
+    int ans;
+    
+    // 返回：当前节点需要从父节点接收（正数）或向父节点送出（负数）的硬币数量
+    int dfs(TreeNode* node) {
+        if (!node) return 0;
+        
+        int left = dfs(node->left);   // 左子树的硬币盈亏
+        int right = dfs(node->right); // 右子树的硬币盈亏
+        
+        // 移动次数累加：左右子树的硬币都需要经过当前节点移动
+        ans += abs(left) + abs(right);
+        
+        // 当前节点及其子树的硬币盈亏 = 当前节点硬币数 + 左子树盈亏 + 右子树盈亏 - 1（目标值）
+        return node->val + left + right - 1;
+    }
+};

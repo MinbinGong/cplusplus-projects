@@ -29,4 +29,34 @@
  * -10000 <= queries[i][0] <= 10000
  * 0 <= queries[i][1] < A.length
  */
+#include <vector>
 
+using namespace std;
+
+class Solution {
+public:
+    vector<int> sumEvenAfterQueries(vector<int>& A, vector<vector<int>>& queries) {
+        int evenSum = 0;
+        // Compute initial sum of even numbers
+        for (int x : A) {
+            if (x % 2 == 0) evenSum += x;
+        }
+
+        vector<int> result;
+        for (auto& q : queries) {
+            int val = q[0];
+            int idx = q[1];
+            int oldVal = A[idx];
+            int newVal = oldVal + val;
+
+            // Remove old value from sum if it was even
+            if (oldVal % 2 == 0) evenSum -= oldVal;
+            // Add new value to sum if it is even
+            if (newVal % 2 == 0) evenSum += newVal;
+
+            A[idx] = newVal;                // update the array
+            result.push_back(evenSum);       // store answer after this query
+        }
+        return result;
+    }
+};

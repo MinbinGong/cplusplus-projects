@@ -41,3 +41,28 @@
  * costs.length == 3
  * 1 <= costs[i] <= 1000
  */
+#include <vector>
+#include <unordered_set>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        // dp[i] = minimum cost to cover all travel days up to day i
+        vector<int> dp(366, 0); // days 0..365
+        unordered_set<int> travel(days.begin(), days.end());
+
+        for (int i = 1; i <= 365; ++i) {
+            if (travel.find(i) == travel.end()) {
+                dp[i] = dp[i - 1]; // no travel this day
+            } else {
+                int oneDay = dp[i - 1] + costs[0];
+                int sevenDay = dp[max(0, i - 7)] + costs[1];
+                int thirtyDay = dp[max(0, i - 30)] + costs[2];
+                dp[i] = min({oneDay, sevenDay, thirtyDay});
+            }
+        }
+        return dp[365];
+    }
+};

@@ -35,3 +35,32 @@
  * 1 <= nums.length <= 1000
  * 0 <= nums[i] < 2^16
  */
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int countTriplets(vector<int>& nums) {
+        const int MAX_VAL = 1 << 16;          // 2^16 = 65536
+        vector<int> cnt(MAX_VAL, 0);           // count of each AND of two numbers
+        int n = nums.size();
+
+        // Count all ordered pairs (i, j)
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                ++cnt[nums[i] & nums[j]];
+            }
+        }
+
+        int ans = 0;
+        // For each third element, add counts of all v such that (v & nums[k]) == 0
+        for (int k = 0; k < n; ++k) {
+            for (int v = 0; v < MAX_VAL; ++v) {
+                if ((v & nums[k]) == 0) {
+                    ans += cnt[v];
+                }
+            }
+        }
+        return ans;
+    }
+};

@@ -40,3 +40,59 @@
  * 1 <= grid.length * grid[0].length <= 20
  * 
  */
+#include <vector>
+
+using namespace std;
+
+class Solution {
+public:
+    int uniquePathsIII(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        int start_r, start_c;
+        int total = 0; // number of walkable cells (1, 2, and all 0's)
+
+        // locate start and count walkable cells
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (grid[i][j] != -1) ++total;
+                if (grid[i][j] == 1) {
+                    start_r = i;
+                    start_c = j;
+                }
+            }
+        }
+
+        vector<vector<bool>> visited(m, vector<bool>(n, false));
+        int ans = 0;
+        visited[start_r][start_c] = true;
+        dfs(grid, visited, start_r, start_c, 1, total, ans);
+        return ans;
+    }
+
+private:
+    void dfs(const vector<vector<int>>& grid, vector<vector<bool>>& visited,
+             int r, int c, int count, int total, int& ans) {
+        // if we have reached the end cell
+        if (grid[r][c] == 2) {
+            if (count == total) ++ans;
+            return; // cannot go further from end
+        }
+
+        // explore four neighbours
+        const int dirs[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        int m = grid.size();
+        int n = grid[0].size();
+
+        for (auto& d : dirs) {
+            int nr = r + d[0];
+            int nc = c + d[1];
+            if (nr >= 0 && nr < m && nc >= 0 && nc < n &&
+                !visited[nr][nc] && grid[nr][nc] != -1) {
+                visited[nr][nc] = true;
+                dfs(grid, visited, nr, nc, count + 1, total, ans);
+                visited[nr][nc] = false;
+            }
+        }
+    }
+};

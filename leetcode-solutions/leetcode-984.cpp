@@ -24,3 +24,32 @@
  * 0 <= B <= 100
  * It is guaranteed such an S exists for the given A and B.
  */
+#include <string>
+
+using namespace std;
+
+class Solution {
+public:
+    string strWithout3a3b(int A, int B) {
+        string ans;
+        while (A > 0 || B > 0) {
+            bool writeA;
+            int n = ans.size();
+            if (n >= 2 && ans[n-1] == ans[n-2]) {
+                // last two are same, must write the other letter
+                writeA = (ans[n-1] == 'b'); // if last two 'b', write 'a', else write 'b'
+            } else {
+                // choose the letter with larger remaining count
+                writeA = (A >= B);
+            }
+            if (writeA) {
+                ans += 'a';
+                --A;
+            } else {
+                ans += 'b';
+                --B;
+            }
+        }
+        return ans;
+    }
+};

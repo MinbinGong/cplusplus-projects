@@ -36,3 +36,33 @@
  * 0 <= K <= 10000
  * If A.length > 1, then A[0] != 0
  */
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Solution {
+public:
+    vector<int> addToArrayForm(vector<int>& A, int K) {
+        vector<int> result;
+        int i = A.size() - 1;
+        int carry = 0;
+
+        while (i >= 0 || K > 0 || carry) {
+            int sum = carry;
+            if (i >= 0) {
+                sum += A[i];
+                --i;
+            }
+            if (K > 0) {
+                sum += K % 10;
+                K /= 10;
+            }
+            result.push_back(sum % 10);
+            carry = sum / 10;
+        }
+
+        reverse(result.begin(), result.end());
+        return result;
+    }
+};

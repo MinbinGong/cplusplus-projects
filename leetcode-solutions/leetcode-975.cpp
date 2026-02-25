@@ -40,3 +40,37 @@
  * 1 <= arr.length <= 2 * 104
  * 0 <= arr[i] < 105
  */
+#include <vector>
+#include <map>
+using namespace std;
+
+class Solution {
+public:
+    int oddEvenJumps(vector<int>& A) {
+        int n = A.size();
+        if (n == 0) return 0;
+        vector<bool> odd(n, false), even(n, false);
+        odd[n-1] = even[n-1] = true;
+        map<int, int> valToIndex; // 值到索引的映射
+        valToIndex[A[n-1]] = n-1;
+        
+        int res = 1; // 最后一个位置是有效起点
+        for (int i = n-2; i >= 0; --i) {
+            int val = A[i];
+            // 奇数次跳跃：找大于等于val的最小值
+            auto it = valToIndex.lower_bound(val);
+            if (it != valToIndex.end()) {
+                odd[i] = even[it->second];
+            }
+            // 偶数次跳跃：找小于等于val的最大值
+            it = valToIndex.upper_bound(val);
+            if (it != valToIndex.begin()) {
+                --it;
+                even[i] = odd[it->second];
+            }
+            valToIndex[val] = i; // 插入当前值（覆盖重复值以确保最小索引）
+            if (odd[i]) res++;
+        }
+        return res;
+    }
+};

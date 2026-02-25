@@ -50,3 +50,42 @@
  * At most 2 * 105 calls will be made to set and get.
  * 
  */
+#include <unordered_map>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+class TimeMap {
+public:
+    /** Initialize your data structure here. */
+    TimeMap() {}
+    
+    void set(string key, string value, int timestamp) {
+        // Guarantee: timestamp is strictly increasing for the same key.
+        data[key].emplace_back(timestamp, value);
+    }
+    
+    string get(string key, int timestamp) {
+        auto it = data.find(key);
+        if (it == data.end()) return "";          // key not found
+        
+        const vector<pair<int, string>>& vec = it->second;
+        // Binary search: find the first element with timestamp > timestamp
+        auto comp = [](const pair<int, string>& p, int ts) {
+            return p.first <= ts;   // true for elements <= ts, false for > ts
+        };
+        // upper_bound with custom comparator gives first element > ts
+        auto ub = upper_bound(vec.begin(), vec.end(), timestamp,
+                              [](int val, const pair<int, string>& p) {
+                                  return val < p.first;
+                              });
+        if (ub == vec.begin()) return "";   // all timestamps > given
+        --ub;                                 // last element with timestamp <= given
+        return ub->second;
+    }
+
+private:
+    unordered_map<string, vector<pair<int, string>>> data;
+};

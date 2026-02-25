@@ -30,3 +30,35 @@
  * 1 <= nums.length <= 40000
  * 0 <= nums[i] <= 109
  */
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    int maxTurbulenceSize(vector<int>& arr) {
+        int n = arr.size();
+        if (n == 1) return 1;
+        
+        // up: 以当前元素结尾且最后一段是上升(arr[i-1] < arr[i])的湍流子数组长度
+        // down: 以当前元素结尾且最后一段是下降(arr[i-1] > arr[i])的湍流子数组长度
+        int up = 1, down = 1;
+        int max_len = 1;
+        
+        for (int i = 1; i < n; ++i) {
+            if (arr[i] > arr[i-1]) {
+                up = down + 1;  // 上升接在下降后面
+                down = 1;       // 下降序列中断
+            } else if (arr[i] < arr[i-1]) {
+                down = up + 1;  // 下降接在上升后面
+                up = 1;         // 上升序列中断
+            } else {
+                // 相等时重置
+                up = down = 1;
+            }
+            max_len = max(max_len, max(up, down));
+        }
+        
+        return max_len;
+    }
+};

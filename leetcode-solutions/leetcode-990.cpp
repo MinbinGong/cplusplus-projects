@@ -41,3 +41,46 @@
  * equations[i][2] is '='
  * 
  */
+#include <vector>
+#include <string>
+#include <functional>
+
+using namespace std;
+
+class Solution {
+public:
+    bool equationsPossible(vector<string>& equations) {
+        vector<int> parent(26);
+        for (int i = 0; i < 26; ++i) parent[i] = i;
+
+        // Find with path compression
+        function<int(int)> find = [&](int x) {
+            if (parent[x] != x)
+                parent[x] = find(parent[x]);
+            return parent[x];
+        };
+
+        // First pass: handle all equality equations
+        for (const string& eq : equations) {
+            if (eq[1] == '=') {
+                int a = eq[0] - 'a';
+                int b = eq[3] - 'a';
+                int ra = find(a);
+                int rb = find(b);
+                if (ra != rb)
+                    parent[ra] = rb;
+            }
+        }
+
+        // Second pass: check all inequality equations
+        for (const string& eq : equations) {
+            if (eq[1] == '!') {
+                int a = eq[0] - 'a';
+                int b = eq[3] - 'a';
+                if (find(a) == find(b))
+                    return false;
+            }
+        }
+        return true;
+    }
+};
