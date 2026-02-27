@@ -1,16 +1,31 @@
 /*
-    Longest Common Subsequence
-
-    题目描述
-        给定两个字符串，求它们最长的公共子序列长度。
-
-    题解
-        对于子序列问题，第二种动态规划方法是，定义一个 dp 数组，其中 dp[i] 表示到位置 i 为止
-    的子序列的性质，并不必须以 i 结尾。这样 dp 数组的最后一位结果即为题目所求，不需要再对每
-    个位置进行统计。
-        在本题中，我们可以建立一个二维数组 dp，其中 dp[i][j] 表示到第一个字符串位置 i 为止、到
-    第二个字符串位置 j 为止、最长的公共子序列长度。这样一来我们就可以很方便地分情况讨论这
-    两个位置对应的字母相同与不同的情况了。
+ * Longest Common Subsequence
+ * 
+ * Given two strings text1 and text2, return the length of their longest common subsequence.
+ * A subsequence of a string is a new string generated from the original string with some characters(can be none) deleted without changing the relative order of the remaining characters. (eg, "ace" is a subsequence of "abcde" while "aec" is not). A common subsequence of two strings is a subsequence that is common to both strings.
+ * 
+ * If there is no common subsequence, return 0.
+ * 
+ * Example 1:
+ * Input: text1 = "abcde", text2 = "ace" 
+ * Output: 3  
+ * Explanation: The longest common subsequence is "ace" and its length is 3.
+ * 
+ * Example 2:
+ * Input: text1 = "abc", text2 = "abc"
+ * Output: 3
+ * Explanation: The longest common subsequence is "abc" and its length is 3.
+ * 
+ * Example 3:
+ * Input: text1 = "abc", text2 = "def"
+ * Output: 0
+ * Explanation: There is no such common subsequence, so the result is 0.
+ * 
+ * Note:
+ * 1 <= text1.length <= 1000
+ * 1 <= text2.length <= 1000
+ * The input strings consist of lowercase English characters only.
+ * 
  */
 #include <string>
 #include <vector>
