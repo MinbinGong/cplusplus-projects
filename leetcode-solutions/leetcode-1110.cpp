@@ -1,13 +1,16 @@
 /*
-  Delete nodes and return forests
-
-  题目描述
-  给定一个整数二叉树和一些整数，求删掉这些整数对应的节点后，剩余的子树
-
-  题解
-  这道题最主要需要注意的细节是如果通过递归处理原树，以及需要在什么时候断开指针。同
-  时，为了便于寻找待删除节点，可以建立一个哈希表方便查找。笔者强烈建议读者在看完题解后，
-  自己写一遍本题，加深对于递归的理解和运用能力
+ * Delete nodes and return forests
+ * 
+ * Given the root of a binary tree, each node in the tree has a distinct value.
+ * 
+ * After deleting all nodes with a value in to_delete, we are left with a forest (a disjoint union of trees).
+ * 
+ * Return the roots of the trees in the remaining forest. You may return the result in any order.
+ * 
+ * 1 <= to_delete.length <= 1000
+ * 1 <= to_delete[i] <= 1000
+ * The number of nodes in the given tree is at most 1000.
+ * Each node has a distinct value between 1 and 1000.
  */
 #include <unordered_set>
 #include <vector>

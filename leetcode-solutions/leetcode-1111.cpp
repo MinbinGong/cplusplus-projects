@@ -1,0 +1,63 @@
+/*
+ * 1111. Maximum Nesting Depth of Two Valid Parentheses Strings
+ * 
+ * A string is a valid parentheses string (denoted VPS) if it meets one of the following:
+ * 
+ * It is an empty string "", or a single character not equal to "(" or ")",
+ * It can be written as AB (A concatenated with B), where A and B are VPS's, or
+ * It can be written as (A), where A is a VPS.
+ * We can similarly define the nesting depth depth(S) of any VPS S as follows:
+ * 
+ * depth("") = 0
+ * depth(C) = 0, where C is a string with a single character not equal to "(" or ")".
+ * depth(A + B) = max(depth(A), depth(B)), where A and B are VPS's.
+ * depth("(" + A + ")") = 1 + depth(A), where A is a VPS.
+ * 
+ * For example, "", "()()", and "()(()())" are VPS's (with nesting depths 0, 1, and 2), and ")(" and "(()" are not VPS's.
+ * 
+ * Given a VPS represented as string s, return the nesting depth of s.
+ * 
+ * 1 <= s.length <= 100
+ * s consists of digits 0-9 and characters '+', '-', '*', '/', '(', and ')'.
+ * It is guaranteed that parentheses expression s is a VPS.
+ * 
+ */
+#include <vector>
+using namespace std;
+
+class Solution1 {
+public:
+    vector<int> maxDepthAfterSplit(string seq) {
+        vector<int> result;
+        int depth = 0;
+        
+        for (char c : seq) {
+            if (c == '(') {
+                // 遇到左括号，深度加1后分配
+                depth++;
+                result.push_back(depth % 2);
+            } else {
+                // 遇到右括号，先分配再深度减1
+                result.push_back(depth % 2);
+                depth--;
+            }
+        }
+        
+        return result;
+    }
+};
+
+class Solution2 {
+public:
+    vector<int> maxDepthAfterSplit(string seq) {
+        int n = seq.length();
+        vector<int> result(n);
+        
+        for (int i = 0; i < n; i++) {
+            // 左括号根据索引奇偶性分配，右括号取反
+            result[i] = (seq[i] == '(') ? (i & 1) : ((i & 1) ^ 1);
+        }
+        
+        return result;
+    }
+};
