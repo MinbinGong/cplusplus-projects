@@ -1,7 +1,19 @@
 /*
-  Generate Parentheses
-
-  Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses
+ * Generate Parentheses
+ * Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses
+ * 
+ * Example 1:
+ * Input: n = 3
+ * Output: ["((()))","(()())","(())()","()(())","()()()"]
+ * 
+ * Example 2:
+ * Input: n = 1
+ * Output: ["()"]
+ * 
+ * Note:
+ * Each tree has at most 5000 nodes.
+ * Each node's value is between [-10^5, 10^5].
+ * 
  */
 #include <string>
 #include <vector>
