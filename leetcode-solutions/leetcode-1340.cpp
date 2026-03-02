@@ -38,6 +38,7 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
+#include <functional>
 using namespace std;
 
 class Solution {
