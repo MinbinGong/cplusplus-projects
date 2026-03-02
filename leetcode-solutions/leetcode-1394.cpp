@@ -30,6 +30,9 @@
  * 1 <= arr[i] <= 500
  * 
  */
+#include <vector>
+using namespace std;
+
 class Solution {
 public:
     int findLucky(vector<int>& arr) {
