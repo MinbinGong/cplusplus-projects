@@ -36,3 +36,41 @@
  * All idi are distinct.
  * 
  */
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> filterRestaurants(vector<vector<int>>& restaurants, int veganFriendly, int maxPrice, int maxDistance) {
+        // Filter based on criteria
+        vector<pair<int, int>> candidates; // (rating, id) for sorting
+        for (const auto& r : restaurants) {
+            int id = r[0];
+            int rating = r[1];
+            int vegan = r[2];
+            int price = r[3];
+            int distance = r[4];
+            
+            // Check vegan-friendly condition
+            if (veganFriendly == 1 && vegan == 0) continue;
+            // Check price and distance limits
+            if (price > maxPrice || distance > maxDistance) continue;
+            
+            candidates.emplace_back(rating, id);
+        }
+        
+        // Sort by rating descending, then id descending
+        sort(candidates.begin(), candidates.end(), [](const pair<int,int>& a, const pair<int,int>& b) {
+            if (a.first != b.first) return a.first > b.first;
+            return a.second > b.second;
+        });
+        
+        // Extract ids
+        vector<int> result;
+        for (const auto& p : candidates) {
+            result.push_back(p.second);
+        }
+        return result;
+    }
+};

@@ -31,3 +31,40 @@
  * 0 <= ranges[i] <= 100
  * 
  */
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int minTaps(int n, vector<int>& ranges) {
+        // Create an array that for each leftmost position stores
+        // the furthest right point reachable by any tap starting there.
+        vector<int> maxReach(n + 1, 0);
+        for (int i = 0; i <= n; ++i) {
+            int left = max(0, i - ranges[i]);
+            int right = min(n, i + ranges[i]);
+            maxReach[left] = max(maxReach[left], right);
+        }
+
+        int curEnd = 0;      // current covered rightmost position
+        int nextEnd = 0;     // furthest position we can reach from the current segment
+        int steps = 0;
+
+        for (int i = 0; i <= n; ++i) {
+            // When we move past the current coverage, we must take a new tap
+            if (i > curEnd) {
+                // If we cannot extend coverage any further, it's impossible
+                if (nextEnd <= curEnd) return -1;
+                curEnd = nextEnd;
+                ++steps;
+            }
+            // Update the furthest point we can reach from all taps seen so far
+            nextEnd = max(nextEnd, maxReach[i]);
+        }
+
+        // At the end, if curEnd < n it means we never managed to cover the garden,
+        // but the loop logic would have already returned -1 in that case.
+        // So steps is the answer.
+        return steps;
+    }
+};

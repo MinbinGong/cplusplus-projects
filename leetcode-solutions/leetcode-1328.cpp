@@ -22,3 +22,25 @@
  * palindrome consists of only lowercase English letters.
  * 
  */
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    string breakPalindrome(string palindrome) {
+        int n = palindrome.size();
+        if (n == 1) return ""; // impossible for single character
+
+        // try to change the first non-'a' character (from left) to 'a'
+        for (int i = 0; i < n / 2; ++i) {
+            if (palindrome[i] != 'a') {
+                palindrome[i] = 'a';
+                return palindrome;
+            }
+        }
+
+        // if all characters in the first half are 'a', change the last character to 'b'
+        palindrome[n - 1] = 'b';
+        return palindrome;
+    }
+};

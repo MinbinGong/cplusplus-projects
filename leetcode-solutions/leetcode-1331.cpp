@@ -28,3 +28,34 @@
  * -10^9 <= arr[i] <= 10^9
  * 
  */
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> arrayRankTransform(vector<int>& arr) {
+        if (arr.empty()) return {};
+        
+        // Create a sorted copy of the array
+        vector<int> sortedArr = arr;
+        sort(sortedArr.begin(), sortedArr.end());
+        
+        // Map each value to its rank
+        unordered_map<int, int> rankMap;
+        int rank = 1;
+        for (int i = 0; i < sortedArr.size(); ++i) {
+            if (i == 0 || sortedArr[i] != sortedArr[i-1]) {
+                rankMap[sortedArr[i]] = rank++;
+            }
+        }
+        
+        // Transform original array
+        vector<int> result(arr.size());
+        for (int i = 0; i < arr.size(); ++i) {
+            result[i] = rankMap[arr[i]];
+        }
+        return result;
+    }
+};
