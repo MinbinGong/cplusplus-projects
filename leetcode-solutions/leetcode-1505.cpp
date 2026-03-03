@@ -1,0 +1,96 @@
+/**
+ * 1505. Minimum Possible Integer After at Most K Adjacent Swaps On Digits
+ * 
+ * Given a string num representing the digits of a very large integer and an integer k.
+ * You are allowed to swap any two adjacent digits of the integer at most k times.
+ * Return the minimum integer you can obtain also as a string.
+ * 
+ * Example 1:
+ * Input: num = "4321", k = 4
+ * Output: "1342"
+ * Explanation: The steps to obtain the minimum integer from 4321 with 4 adjacent swaps are shown.
+ * 
+ * Example 2:
+ * Input: num = "100", k = 1
+ * Output: "010"
+ * Explanation: It's ok for the output to have leading zeros, but the input is guaranteed not to have any leading zeros.
+ * 
+ * Example 3:
+ * Input: num = "36789", k = 1000
+ * Output: "36789"
+ * Explanation: We can keep the number as is, and there are no swaps.
+ * 
+ * Note:
+ * 1 <= num.length <= 30000
+ * num contains digits only and doesn't have leading zeros.
+ * 1 <= k <= 10^9
+ * 
+ */
+#include <string>
+#include <vector>
+#include <deque>
+
+using namespace std;
+
+class BIT {
+    vector<int> tree;
+    int n;
+public:
+    BIT(int size) : n(size), tree(size + 1, 0) {}
+    
+    void update(int idx, int delta) {
+        idx++; // convert to 1-based
+        while (idx <= n) {
+            tree[idx] += delta;
+            idx += idx & -idx;
+        }
+    }
+    
+    int query(int idx) {
+        idx++; // convert to 1-based
+        int sum = 0;
+        while (idx > 0) {
+            sum += tree[idx];
+            idx -= idx & -idx;
+        }
+        return sum;
+    }
+    
+    int prefix(int idx) { // sum of [0, idx-1]
+        if (idx <= 0) return 0;
+        return query(idx - 1);
+    }
+};
+
+class Solution {
+public:
+    string minInteger(string num, int k) {
+        int n = num.size();
+        vector<deque<int>> pos(10);
+        for (int i = 0; i < n; ++i) {
+            pos[num[i] - '0'].push_back(i);
+        }
+        
+        BIT bit(n);
+        for (int i = 0; i < n; ++i) {
+            bit.update(i, 1);
+        }
+        
+        string res;
+        for (int step = 0; step < n; ++step) {
+            for (int d = 0; d <= 9; ++d) {
+                if (pos[d].empty()) continue;
+                int j = pos[d].front();
+                int cost = bit.prefix(j); // number of remaining digits before j
+                if (cost <= k) {
+                    res.push_back('0' + d);
+                    bit.update(j, -1);
+                    k -= cost;
+                    pos[d].pop_front();
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+};
