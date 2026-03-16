@@ -1,11 +1,24 @@
 /*
-题目描述
-在一个未排序的数组中，找到第 k 大的数字
-
-题解
-快速选择一般用于求解 k-th Element 问题，可以在 O(n) 时间复杂度，O(1) 空间复杂度完成求解工作。
-快速选择的实现和快速排序相似，不过只需要找到第 k 大的枢（pivot）即可，不需要对其左右再进行排序。
-与快速排序一样，快速选择一般需要先打乱数组，否则最坏情况下时间复杂度为 O(n2 )
+ * 215. Find the Kth Largest Element in an Array
+ *
+ * Given an integer array nums and an integer k, return the kth largest element in the array.
+ * 
+ * Note that it is the kth largest element in the sorted order, not the kth distinct element.
+ * 
+ * Can you solve it without sorting?
+ * 
+ * Example 1:
+ * Input: nums = [3,2,1,5,6,4], k = 2
+ * Output: 5
+ * 
+ * Example 2:
+ * Input: nums = [3,2,3,1,2,4,5,5,6], k = 4
+ * Output: 4
+ * 
+ * Constraints:
+ * 1 <= k <= nums.length <= 105
+ * -104 <= nums[i] <= 104
+ * 
  */
 #include <vector>
 using namespace std;
